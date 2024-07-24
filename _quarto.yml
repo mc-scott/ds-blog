@@ -1,0 +1,38 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "As-yet-undecided"
+  description: "Matthew Scott's personal website"
+  navbar:
+    title: " "
+    background: "#096367"
+    pinned: true
+    left:
+      - text: "as-yet-undecided"
+    right:
+      - text: "About"
+        file: about.qmd
+      - text: "Blog"
+        file: index.qmd
+      - text: "Projects"
+        file: projects.qmd
+      - icon: github
+        href: https://github.com/mc-scott/blog
+  page-footer:
+    left:
+    - href: https://www.quarto.org
+      text: Built with Quarto
+    right: 
+      - href: license.qmd
+        text: License
+
+format:
+  html:
+    theme: 
+      light: flatly
+      dark: darkly
+
+
+

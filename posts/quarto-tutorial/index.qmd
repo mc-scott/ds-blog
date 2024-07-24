@@ -1,0 +1,117 @@
+---
+title: "Quarto Demo"
+subtitle: "A how-to of syntax"
+author: "Matthew Scott"
+date: "2024-07-19"
+description: "The art of the possible"
+categories: [tutorial, quarto, r]
+image: "abstract-river.png"
+image-alt: "An abstract river sketch"
+code-annotations: hover
+draft: false
+code-tools: true
+---
+
+![Abstract River](abstract-river-wide.png){fig-alt="A picture I drew one time"}
+
+Click the code tools icon in the banner to see all Quarto code used in this article: `</> Code`
+
+[An example sentence - info]{.text-info}
+
+[An example sentence - success]{.text-success}
+
+[An example sentence - warning]{.text-warning}
+
+[An example sentence - danger]{.text-danger}
+
+This is a demo using panels and code chunks:
+
+::: panel-tabset
+## Python code
+
+```{python code-chunk-1}
+
+import pandas as pd
+
+# create a dataframe from a dictionary
+df = pd.DataFrame({                 # <1>
+    "Col1": [1, 2, 3, 4, 5, 6, 7],  # <1>
+    "Col2": [2, 3, 4, 5, 6, 7, 8]   # <1>
+})                                  # <1>
+
+print(df)
+```
+
+1. Annotate your code. 1) specify code-annotations 'hover' in yaml 2) highlight code with comments 3) write explainer text like this
+
+## R code
+
+```{r code-chunk-2}
+library(dplyr)
+
+# create dataframe the tidy way
+df <- tibble(
+    Col1 = c(1, 2, 3, 4, 5, 6, 7),
+    Col2 = c(2, 3, 4, 5, 6, 7, 8)
+)
+print(df)
+```
+
+:::
+
+## Link icons
+
+Other link icons you can generate using header yaml include, `info-circle`, `download`, `book`, `postcard`, `rss`. We already use the `github` and `linkedin` link icons in [about.qmd]{.text-info}.
+
+See the [info yaml](https://github.com/ibis-project/ibis/blob/main/docs/index.qmd) in the [Ibis Quarto website](https://ibis-project.org/) for examples.
+
+## Fenced divs
+
+You can add classes, attributes, and other identifiers to regions of content using divs and spans:
+
+### Borders
+
+::: {.border}
+This content can be styled with a border
+:::
+
+### Callout notes
+
+:::{.callout-note}
+Note that there are five types of callouts, including: 
+`note`, `tip`, `warning`, `caution`, and `important`.
+:::
+
+:::{.callout-tip}
+## Tip with caption
+Leave a tip in a caption box like this!
+:::
+
+:::{.callout-warning icon="false" collapse="true"}
+## Warning without icon
+This one is collapsed and has no icon
+:::
+
+:::{.callout-important appearance="simple" icon="false"}
+## Important with custom caption
+A simplified callout note
+:::
+
+## In the margin
+
+Look right
+
+::: column-margin
+Check out this [YouTube playlist](https://youtube.com/playlist?list=PLXKlQEvIRus-qu1hjc8SyElSamAcT-KaE) with great talks on blogging!
+:::
+
+## Linking internally
+
+Quite easy, just specify the relative [folder path](../../about.qmd) to get there from here: `../../about.qmd`
+
+## Embed content as HTML
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/z0UGmMOxl-c?si=Om4cZb02OX3t4Qdo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+
+</iframe>
+

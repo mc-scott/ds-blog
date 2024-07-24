@@ -1,0 +1,93 @@
+[
+  {
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "Projects",
+    "section": "",
+    "text": "NLP Tokenisation Visualiser App\n\n\nTokenisation is a foundational step in NLP but often overlooked. Modify text and tokeniser to see how the algorithms work in real time.\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome To My Blog",
+    "section": "",
+    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+  },
+  {
+    "objectID": "license.html",
+    "href": "license.html",
+    "title": "License",
+    "section": "",
+    "text": "© Copyright Matthew Scott\nThis is my personal website. Nothing here is endorsed by my employer or any organizations of which I am a part. Content on this site is provided under a Creative Commons (CC-BY) 4.0 license. You may reuse this content as long as you indicate my authorship and provide a link back to the original material. Source code of the site is provided under the MIT license and may be reused without restriction.\nAll images created using Procreate unless otherwise specified."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Matthew Scott",
+    "section": "",
+    "text": "Apprentice Data Scientist at The Pensions Regulator | Resume"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Posts",
+    "section": "",
+    "text": "You have found my personal data science focused learning blog. I post content I find useful to reinforce my learning and refer back to. You might find it useful as well. Search the filter bar or select a category.\n\n\n\n\n\n\n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nQuarto Demo\n\n\nA how-to of syntax\n\n\n\ntutorial\n\n\nquarto\n\n\nr\n\n\n\nThe art of the possible\n\n\n\n\n\n19 July 2024\n\n\nMatthew Scott\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/post-with-code/index.html",
+    "href": "posts/post-with-code/index.html",
+    "title": "Post With Code",
+    "section": "",
+    "text": "This is a post with executable code.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "projects/nlp-token-visualiser/index.html",
+    "href": "projects/nlp-token-visualiser/index.html",
+    "title": "NLP Tokenisation Visualiser App",
+    "section": "",
+    "text": "Details\n\n\n\n\n\nTitle\nLearn Natural Language Processing Concepts\n\n\nHost\nStreamlit Community Cloud\n\n\nRepo\nMy University GitHub account\n\n\nURL\nApp\n\n\nNotes\nIf the app has been dormant, it may take up to 5 mins to boot up. It’s a free hosting service after all"
+  },
+  {
+    "objectID": "posts/quarto-tutorial/index.html",
+    "href": "posts/quarto-tutorial/index.html",
+    "title": "Quarto Demo",
+    "section": "",
+    "text": "Abstract River\nClick the code tools icon in the banner to see all Quarto code used in this article: &lt;/&gt; Code\nAn example sentence - info\nAn example sentence - success\nAn example sentence - warning\nAn example sentence - danger\nThis is a demo using panels and code chunks:"
+  },
+  {
+    "objectID": "posts/quarto-tutorial/index.html#link-icons",
+    "href": "posts/quarto-tutorial/index.html#link-icons",
+    "title": "Quarto Demo",
+    "section": "Link icons",
+    "text": "Link icons\nOther link icons you can generate using header yaml include, info-circle, download, book, postcard, rss. We already use the github and linkedin link icons in about.qmd.\nSee the info yaml in the Ibis Quarto website for examples."
+  },
+  {
+    "objectID": "posts/quarto-tutorial/index.html#fenced-divs",
+    "href": "posts/quarto-tutorial/index.html#fenced-divs",
+    "title": "Quarto Demo",
+    "section": "Fenced divs",
+    "text": "Fenced divs\nYou can add classes, attributes, and other identifiers to regions of content using divs and spans:\n\nBorders\n\nThis content can be styled with a border\n\n\n\nCallout notes\n\n\n\n\n\n\nNote\n\n\n\nNote that there are five types of callouts, including: note, tip, warning, caution, and important.\n\n\n\n\n\n\n\n\nTip with caption\n\n\n\nLeave a tip in a caption box like this!\n\n\n\n\n\n\n\n\nWarning without icon\n\n\n\n\n\nThis one is collapsed and has no icon\n\n\n\n\n\n\n\n\n\nImportant with custom caption\n\n\n\nA simplified callout note"
+  },
+  {
+    "objectID": "posts/quarto-tutorial/index.html#in-the-margin",
+    "href": "posts/quarto-tutorial/index.html#in-the-margin",
+    "title": "Quarto Demo",
+    "section": "In the margin",
+    "text": "In the margin\nLook right\n\n\nCheck out this YouTube playlist with great talks on blogging!"
+  },
+  {
+    "objectID": "posts/quarto-tutorial/index.html#linking-internally",
+    "href": "posts/quarto-tutorial/index.html#linking-internally",
+    "title": "Quarto Demo",
+    "section": "Linking internally",
+    "text": "Linking internally\nQuite easy, just specify the relative folder path to get there from here: ../../about.qmd"
+  },
+  {
+    "objectID": "posts/quarto-tutorial/index.html#embed-content-as-html",
+    "href": "posts/quarto-tutorial/index.html#embed-content-as-html",
+    "title": "Quarto Demo",
+    "section": "Embed content as HTML",
+    "text": "Embed content as HTML"
+  }
+]

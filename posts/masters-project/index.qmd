@@ -1,0 +1,13 @@
+---
+title: "Sea anemones and animal behaviour"
+subtitle: "Indecision below the waves"
+author: "Matthew Scott"
+date: "2024-07-21"
+description: "Anemones are charismatic creatures and with that comes complex behaviour"
+categories: [r, modelling, statistics]
+#image: "abstract-river.png"
+#image-alt: "An abstract river sketch"
+draft: true
+---
+
+Data Science, in a way, all began for me in 2014 when I was conducting my Marine Biology Masters research project...
