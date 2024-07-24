@@ -1,0 +1,136 @@
+---
+title: "Tidyverse Essentials (`dplyr` & `tidyr`)"
+subtitle: "The grammar of data wrangling"
+author: "Matthew Scott"
+date: "2024-07-24"
+description: "Manipulating data is very important. R has a suite of packages to help you out"
+categories: [tutorial, r, tidyverse, dplyr, tidyr]
+image: "abstract-art.png"
+image-alt: "An abstract sketch using broad brush strokes"
+code-annotations: hover
+draft: false
+---
+
+![Abstract Canvas](abstract-art-wide.png){fig-alt="A picture I drew one time"}
+
+## Introduction
+
+Tidyverse is a collection of [R packages](https://www.tidyverse.org/packages/) designed for data science. All packages share an underlying design philosophy, grammar, and data structures.
+
+**Installation** This can be done using `install.packages("tidyverse")`; `library(tidyverse)` to install and import all packages.
+
+:::{.callout-tip appearance="simple" icon="true"}
+## Tip 
+Installing tidyverse will result in (usually) a lot of libraries your code isn't using being installed, which is not efficient. It is best practice (and helps your learning) to install packages individually. See below for popular tidyverse packages.
+:::
+
+### Popular Tidyverse packages
+
+* [`dplyr`](https://dplyr.tidyverse.org/) - Solve the most common data manipulation challenges (**NB** `dbplyr` allows you to use remote database tables by converting dplyr code to SQL)
+* [`readr`](https://readr.tidyverse.org/) - Read and write tabular data like csv and tsv formats. (NB there are options like `readxl`, `writexl` for working with excel files and `googlesheets4` for Google sheets)
+* [`stringr`](https://stringr.tidyverse.org/) - Set of functions designed to make working with strings as easy as possible. It also incorporates Reg Ex patterns into its syntax. Many common data cleaning and preparation tasks involve string cleaning such as detecting matches, sub-setting strings, mutating strings, ordering, ...
+* [`tidyr`](https://tidyr.tidyverse.org/) - A set of functions to help tidy data (each column is a row, each row an observation, and each cell a single value). `separate_wider_delim()`, `hoist()`, `pivot_longer()`, ...
+* [`ggplot2`](https://ggplot2.tidyverse.org/) - A declarative package for making graphics. See also [R Graphics Cookbook](https://r-graphics.org/)
+* [`purrr`](https://purrr.tidyverse.org/) - Provides a complete set of tools for working with functions and vectors. (The `map()` family can efficiently replace for loops). A good place to start learning is [here](https://r4ds.had.co.nz/iteration.html).
+
+**Note** There are more packages than this including some helpful ones: `httr`, `lubridate`, `glue`, `modelr`, `forcats`.
+
+## Installing & importing packages
+
+```{r installing}
+# installing
+install.packages("tidyverse")
+# or install specific packages
+install.packages("dplyr")
+install.packages("ggplot2")
+
+# now import them into your session
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+```
+
+## Inspecting a dataset
+
+Some packages come with dataset you can work with, or you can inspect your own data
+
+```{r inspecting}
+# open ggplot2's data dictionary for this packages internal dataset
+help("mpg")
+# load the dataset into a variable
+df <- mpg
+# see information rich summary
+glimpse(df)
+# see top n rows
+df %>% head(n=5) # <1>
+```
+1. You can also use `tail()` to see the bottom n rows
+
+## `dplyr`
+
+### `select()` & `rename()`
+
+`select([df], helper_function([col_1], [col_2]))`
+
+You can wrap the columns in helper functions:
+
+* `contains(match, ignore.case = T)` - column name contains a certain string
+* `starts_with(match, ignore.case = T)` - column names start with
+* `ends_with(match, ignore.case = T)` - column names end with
+* `matches(match, ignore.case = T)` - matches a regular expression
+* `num_range(prefix, range, ...)` - names following the pattern e.g. `num_range("Wk", 1:3)`: "Wk1", "Wk2", "Wk3"
+* `any_of()` - will select all columns available from a list
+* `all_of()` - used for strict selection. Throws an error if one of the columns named in the list aren't present in the dataframe
+* `matches()` - exactly matches a certain string
+* `where(is.numeric())` - will select all numeric columns (int or dbl). Also `is.character`, `is.factor`, `is.integer`, `is.double`
+
+`rename([new_name] = [old_name])`
+
+```{r select-example}
+# selecting column by index (position)
+
+# select columns in position 1-3
+select(df, 1:3)
+# select columns in position 1-3
+select(df, c(2, 5, 7))
+# select from the second to last column to the last column
+select(df, (ncol(df) -2) : ncol(df))
+
+# selecting columns that contain 'l' (upper or lower case) 
+# and renaming 'model' to 'type' etc.
+df %>% 
+  select(contains('l', ignore.case = TRUE)) %>% 
+  rename(type = model, cylinder = cyl)
+
+# select and rename in one call
+select(df, 
+       mnfc = manufacturer, # <1>
+       mod = model, # <1>
+       everything()) # <2>
+
+# select all numeric columns plus some extras
+mpg %>%
+  select(where(is.numeric), # <3>
+         mnfc = manufacturer, # <4>
+         mod = model) # <4>
+
+# another approach: create a vector and use this with any_of()
+numerical_cols <- c('displ', 'year', 'cyl', 'cty', 'hwy')
+numerical_df <- df %>% 
+  select(any_of(numerical_cols))
+
+# negative selections
+df %>% 
+  select(-any_of(c(model, displ, cyl))) # <5>
+```
+
+1. select and rename in one call
+2. select all remaining columns that haven't already been specified
+3. this will select all column of data type int or dbl
+4. add two additional non-numeric cols to your selection
+5. remove any of these columns that appear in the dataframe
+
+## `mutate()` & `transmute()`
+
+
+

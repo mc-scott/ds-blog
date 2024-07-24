@@ -8,6 +8,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/tidyverse-dplyr-tidyr/index.html",
       "/posts/quarto-tutorial/index.html"
     ]
   }
