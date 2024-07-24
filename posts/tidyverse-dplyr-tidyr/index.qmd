@@ -1,17 +1,26 @@
 ---
-title: "Tidyverse Essentials (`dplyr` & `tidyr`)"
+title: "Tidyverse Essentials - `dplyr`"
 subtitle: "The grammar of data wrangling"
 author: "Matthew Scott"
 date: "2024-07-24"
-description: "Manipulating data is very important. R has a suite of packages to help you out"
+description: "Data wrangling: solve the most common data manipulation challenges"
 categories: [tutorial, r, tidyverse, dplyr, tidyr]
 image: "abstract-art.png"
 image-alt: "An abstract sketch using broad brush strokes"
 code-annotations: hover
 draft: false
+toc: true
 ---
 
 ![Abstract Canvas](abstract-art-wide.png){fig-alt="A picture I drew one time"}
+```{r setup}
+#| eval: true
+#| echo: false
+
+library(dplyr)
+library(ggplot2)
+```
+
 
 ## Introduction
 
@@ -66,9 +75,7 @@ df %>% head(n=5) # <1>
 ```
 1. You can also use `tail()` to see the bottom n rows
 
-## `dplyr`
-
-### `select()` & `rename()`
+## `select()` & `rename()`
 
 `select([df], helper_function([col_1], [col_2]))`
 
@@ -99,7 +106,7 @@ select(df, (ncol(df) -2) : ncol(df))
 # selecting columns that contain 'l' (upper or lower case) 
 # and renaming 'model' to 'type' etc.
 df %>% 
-  select(contains('l', ignore.case = TRUE)) %>% 
+  select(contains('l', ignore.case = T)) %>% 
   rename(type = model, cylinder = cyl)
 
 # select and rename in one call
@@ -132,5 +139,96 @@ df %>%
 
 ## `mutate()` & `transmute()`
 
+`mutate([new_col] = [old_col(s) + logic])`
+
+* creates a new column based on the logic provided
+* you can create multiple columns at one time
+* adds the new col to the df
+
+`transmute([new_col] = [old_col(s) + logic])`
+
+* creates a new column and drops other columns (this can be useful when do machine learning and you don't want the new columns interfering with the model)
+
+Helpful functions for dealing with strings:
+
+| Functions | 
+|:------:|
+| `as.character()` | 
+| `as.date()` | 
+| `as.integer()` | 
+
+: {.striped .hover}
+
+**Note** There is also `lubridate` and `hms` packages for working with dates and times that give a lot more flexibility. `stringr` is another useful package commonly used wiht mutate to extract parts of columns.
+
+```{r}
+#| eval: true
+# create 'avg mpg' column and paste together two cols into 'car'
+# this will return the full df plus these two new cols
+mpg %>% 
+    mutate(
+         car = paste(manufacturer, model, sep = ' '),
+        `avg mpg` = (( cty + hwy ) / 2 ),
+         cty, # <1>
+        .keep = "none") %>%  # <2>
+    head(5)
 
 
+```
+1. We can specify the col name with no calc and it will get included
+2. Acts like `transmute` to keep only created columns
+
+Use `.by` to group our selection in a single expression. We return the max avg mpg for each model type:
+
+```{r}
+#| eval: true
+
+mpg %>% 
+    mutate(`avg mpg` = ((cty+hwy)/2),
+           `max avg mpg` = max(`avg mpg`),
+           .by = model,
+           .keep = "used") # <1>
+```
+1. Now we keep only columns used in our mutate verb, including those used in the calculations.
+
+### Other mutate verbs
+
+* `mutate_all()` - affects every variable
+* `mutate_if()` - affects variables selected with a predicate function
+* `mutate_at()` - affects variables selected with a character variable or vars()
+
+```{r}
+# This code:
+table_sep <- table %>%
+  separate(col = date,
+           into = c("year", "month", "dayofmonth"),
+           sep = "-") %>%
+  mutate(month = as.numeric(month), # <1>
+         dayofmonth = as.numeric(dayofmonth)) %>% # <1>
+  arrange(year, month, dayofmonth)
+
+# is the same as this:
+table_sep <- table %>%
+  separate(col = date,
+           into = c("year", "month", "dayofmonth"),
+           sep = "-") %>%
+  mutate_at(.vars = c("month", "dayofmonth"), # <2>
+            .funs = as.numeric) # <2>
+  arrange(year, month, dayofmonth)
+```
+1. Where we have to specify every column to change data type here...
+2. ...we can supply the columns in a list and only have to specify the mutate function once
+
+You can imagine if we had lots of columns to mutate, this would be much more succinct.
+
+You can mutate any column that is.character/is.numier etc.:
+
+```{r}
+#| eval: true
+
+mpg %>% 
+    mutate_if(is.character, stringr::str_to_title) %>% # <1>
+    select(1:6) %>% 
+    head(4)
+```
+1. convert all character column to title case (upper letter at start of each word)

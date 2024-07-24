@@ -8,9 +8,9 @@
 
 <meta name="author" content="Matthew Scott">
 <meta name="dcterms.date" content="2024-07-24">
-<meta name="description" content="Manipulating data is very important. R has a suite of packages to help you out">
+<meta name="description" content="Data wrangling: solve the most common data manipulation challenges">
 
-<title>As-yet-undecided - Tidyverse Essentials (dplyr &amp; tidyr)</title>
+<title>As-yet-undecided - Tidyverse Essentials - dplyr</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -108,7 +108,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -158,11 +158,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Tidyverse Essentials (<code>dplyr</code> &amp; <code>tidyr</code>)</h1>
+      <h1 class="title">Tidyverse Essentials - <code>dplyr</code></h1>
             <p class="subtitle lead">The grammar of data wrangling</p>
                   <div>
         <div class="description">
-          Manipulating data is very important. R has a suite of packages to help you out
+          Data wrangling: solve the most common data manipulation challenges
         </div>
       </div>
                           <div class="quarto-categories">
@@ -199,7 +199,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#popular-tidyverse-packages" id="toc-popular-tidyverse-packages" class="nav-link" data-scroll-target="#popular-tidyverse-packages">Popular Tidyverse packages</a></li>
+  </ul></li>
+  <li><a href="#installing-importing-packages" id="toc-installing-importing-packages" class="nav-link" data-scroll-target="#installing-importing-packages">Installing &amp; importing packages</a></li>
+  <li><a href="#inspecting-a-dataset" id="toc-inspecting-a-dataset" class="nav-link" data-scroll-target="#inspecting-a-dataset">Inspecting a dataset</a></li>
+  <li><a href="#select-rename" id="toc-select-rename" class="nav-link" data-scroll-target="#select-rename"><code>select()</code> &amp; <code>rename()</code></a></li>
+  <li><a href="#mutate-transmute" id="toc-mutate-transmute" class="nav-link" data-scroll-target="#mutate-transmute"><code>mutate()</code> &amp; <code>transmute()</code></a>
+  <ul class="collapse">
+  <li><a href="#other-mutate-verbs" id="toc-other-mutate-verbs" class="nav-link" data-scroll-target="#other-mutate-verbs">Other mutate verbs</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
@@ -207,6 +225,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="abstract-art-wide.png" class="img-fluid figure-img" alt="A picture I drew one time"></p>
+<figcaption>Abstract Canvas</figcaption>
+</figure>
+</div>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>Tidyverse is a collection of <a href="https://www.tidyverse.org/packages/">R packages</a> designed for data science. All packages share an underlying design philosophy, grammar, and data structures.</p>
@@ -274,10 +298,8 @@ Tip
 </div>
 </div>
 </section>
-<section id="dplyr" class="level2">
-<h2 class="anchored" data-anchor-id="dplyr"><code>dplyr</code></h2>
-<section id="select-rename" class="level3">
-<h3 class="anchored" data-anchor-id="select-rename"><code>select()</code> &amp; <code>rename()</code></h3>
+<section id="select-rename" class="level2">
+<h2 class="anchored" data-anchor-id="select-rename"><code>select()</code> &amp; <code>rename()</code></h2>
 <p><code>select([df], helper_function([col_1], [col_2]))</code></p>
 <p>You can wrap the columns in helper functions:</p>
 <ul>
@@ -305,7 +327,7 @@ Tip
 <span id="annotated-cell-3-10"><a href="#annotated-cell-3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># selecting columns that contain 'l' (upper or lower case) </span></span>
 <span id="annotated-cell-3-11"><a href="#annotated-cell-3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># and renaming 'model' to 'type' etc.</span></span>
 <span id="annotated-cell-3-12"><a href="#annotated-cell-3-12" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
-<span id="annotated-cell-3-13"><a href="#annotated-cell-3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">'l'</span>, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="annotated-cell-3-13"><a href="#annotated-cell-3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">'l'</span>, <span class="at">ignore.case =</span> T)) <span class="sc">%&gt;%</span> </span>
 <span id="annotated-cell-3-14"><a href="#annotated-cell-3-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">type =</span> model, <span class="at">cylinder =</span> cyl)</span>
 <span id="annotated-cell-3-15"><a href="#annotated-cell-3-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="annotated-cell-3-16"><a href="#annotated-cell-3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># select and rename in one call</span></span>
@@ -344,13 +366,174 @@ Tip
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="25,26" data-code-annotation="4">add tow additional non-numeric cols to your selection</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="25,26" data-code-annotation="4">add two additional non-numeric cols to your selection</span>
 </dd>
 <dt data-target-cell="annotated-cell-3" data-target-annotation="5">5</dt>
 <dd>
 <span data-code-cell="annotated-cell-3" data-code-lines="35" data-code-annotation="5">remove any of these columns that appear in the dataframe</span>
 </dd>
 </dl>
+</div>
+</div>
+</section>
+<section id="mutate-transmute" class="level2">
+<h2 class="anchored" data-anchor-id="mutate-transmute"><code>mutate()</code> &amp; <code>transmute()</code></h2>
+<p><code>mutate([new_col] = [old_col(s) + logic])</code></p>
+<ul>
+<li>creates a new column based on the logic provided</li>
+<li>you can create multiple columns at one time</li>
+<li>adds the new col to the df</li>
+</ul>
+<p><code>transmute([new_col] = [old_col(s) + logic])</code></p>
+<ul>
+<li>creates a new column and drops other columns (this can be useful when do machine learning and you don’t want the new columns interfering with the model)</li>
+</ul>
+<p>Helpful functions for dealing with strings:</p>
+<table class="table-striped table-hover caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Functions</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>as.character()</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>as.date()</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>as.integer()</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note</strong> There is also <code>lubridate</code> and <code>hms</code> packages for working with dates and times that give a lot more flexibility. <code>stringr</code> is another useful package commonly used wiht mutate to extract parts of columns.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create 'avg mpg' column and paste together two cols into 'car'</span></span>
+<span id="annotated-cell-4-2"><a href="#annotated-cell-4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># this will return the full df plus these two new cols</span></span>
+<span id="annotated-cell-4-3"><a href="#annotated-cell-4-3" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">%&gt;%</span> </span>
+<span id="annotated-cell-4-4"><a href="#annotated-cell-4-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="annotated-cell-4-5"><a href="#annotated-cell-4-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">car =</span> <span class="fu">paste</span>(manufacturer, model, <span class="at">sep =</span> <span class="st">' '</span>),</span>
+<span id="annotated-cell-4-6"><a href="#annotated-cell-4-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">avg mpg</span><span class="st">`</span> <span class="ot">=</span> (( cty <span class="sc">+</span> hwy ) <span class="sc">/</span> <span class="dv">2</span> ),</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1">1</button><span id="annotated-cell-4-7" class="code-annotation-target"><a href="#annotated-cell-4-7" aria-hidden="true" tabindex="-1"></a>         cty,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="2">2</button><span id="annotated-cell-4-8" class="code-annotation-target"><a href="#annotated-cell-4-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">.keep =</span> <span class="st">"none"</span>) <span class="sc">%&gt;%</span></span>
+<span id="annotated-cell-4-9"><a href="#annotated-cell-4-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">5</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="7" data-code-annotation="1">We can specify the col name with no calc and it will get included</span>
+</dd>
+<dt data-target-cell="annotated-cell-4" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-4" data-code-lines="8" data-code-annotation="2">Acts like <code>transmute</code> to keep only created columns</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+    cty car     `avg mpg`
+  &lt;int&gt; &lt;chr&gt;       &lt;dbl&gt;
+1    18 audi a4      23.5
+2    21 audi a4      25  
+3    20 audi a4      25.5
+4    21 audi a4      25.5
+5    16 audi a4      21  </code></pre>
+</div>
+</div>
+<p>Use <code>.by</code> to group our selection in a single expression. We return the max avg mpg for each model type:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-5"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-5-1"><a href="#annotated-cell-5-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">%&gt;%</span> </span>
+<span id="annotated-cell-5-2"><a href="#annotated-cell-5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="st">`</span><span class="at">avg mpg</span><span class="st">`</span> <span class="ot">=</span> ((cty<span class="sc">+</span>hwy)<span class="sc">/</span><span class="dv">2</span>),</span>
+<span id="annotated-cell-5-3"><a href="#annotated-cell-5-3" aria-hidden="true" tabindex="-1"></a>           <span class="st">`</span><span class="at">max avg mpg</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">max</span>(<span class="st">`</span><span class="at">avg mpg</span><span class="st">`</span>),</span>
+<span id="annotated-cell-5-4"><a href="#annotated-cell-5-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">.by =</span> model,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1">1</button><span id="annotated-cell-5-5" class="code-annotation-target"><a href="#annotated-cell-5-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">.keep =</span> <span class="st">"used"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-5" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="5" data-code-annotation="1">Now we keep only columns used in our mutate verb, including those used in the calculations.</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 234 × 5
+   model        cty   hwy `avg mpg` `max avg mpg`
+   &lt;chr&gt;      &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;         &lt;dbl&gt;
+ 1 a4            18    29      23.5          25.5
+ 2 a4            21    29      25            25.5
+ 3 a4            20    31      25.5          25.5
+ 4 a4            21    30      25.5          25.5
+ 5 a4            16    26      21            25.5
+ 6 a4            18    26      22            25.5
+ 7 a4            18    27      22.5          25.5
+ 8 a4 quattro    18    26      22            24  
+ 9 a4 quattro    16    25      20.5          24  
+10 a4 quattro    20    28      24            24  
+# ℹ 224 more rows</code></pre>
+</div>
+</div>
+<section id="other-mutate-verbs" class="level3">
+<h3 class="anchored" data-anchor-id="other-mutate-verbs">Other mutate verbs</h3>
+<ul>
+<li><code>mutate_all()</code> - affects every variable</li>
+<li><code>mutate_if()</code> - affects variables selected with a predicate function</li>
+<li><code>mutate_at()</code> - affects variables selected with a character variable or vars()</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-6"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-6-1"><a href="#annotated-cell-6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This code:</span></span>
+<span id="annotated-cell-6-2"><a href="#annotated-cell-6-2" aria-hidden="true" tabindex="-1"></a>table_sep <span class="ot">&lt;-</span> table <span class="sc">%&gt;%</span></span>
+<span id="annotated-cell-6-3"><a href="#annotated-cell-6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(<span class="at">col =</span> date,</span>
+<span id="annotated-cell-6-4"><a href="#annotated-cell-6-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"year"</span>, <span class="st">"month"</span>, <span class="st">"dayofmonth"</span>),</span>
+<span id="annotated-cell-6-5"><a href="#annotated-cell-6-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">sep =</span> <span class="st">"-"</span>) <span class="sc">%&gt;%</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="1">1</button><span id="annotated-cell-6-6" class="code-annotation-target"><a href="#annotated-cell-6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">as.numeric</span>(month),</span>
+<span id="annotated-cell-6-7"><a href="#annotated-cell-6-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">dayofmonth =</span> <span class="fu">as.numeric</span>(dayofmonth)) <span class="sc">%&gt;%</span></span>
+<span id="annotated-cell-6-8"><a href="#annotated-cell-6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(year, month, dayofmonth)</span>
+<span id="annotated-cell-6-9"><a href="#annotated-cell-6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-6-10"><a href="#annotated-cell-6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># is the same as this:</span></span>
+<span id="annotated-cell-6-11"><a href="#annotated-cell-6-11" aria-hidden="true" tabindex="-1"></a>table_sep <span class="ot">&lt;-</span> table <span class="sc">%&gt;%</span></span>
+<span id="annotated-cell-6-12"><a href="#annotated-cell-6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(<span class="at">col =</span> date,</span>
+<span id="annotated-cell-6-13"><a href="#annotated-cell-6-13" aria-hidden="true" tabindex="-1"></a>           <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"year"</span>, <span class="st">"month"</span>, <span class="st">"dayofmonth"</span>),</span>
+<span id="annotated-cell-6-14"><a href="#annotated-cell-6-14" aria-hidden="true" tabindex="-1"></a>           <span class="at">sep =</span> <span class="st">"-"</span>) <span class="sc">%&gt;%</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="2">2</button><span id="annotated-cell-6-15" class="code-annotation-target"><a href="#annotated-cell-6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(<span class="at">.vars =</span> <span class="fu">c</span>(<span class="st">"month"</span>, <span class="st">"dayofmonth"</span>),</span>
+<span id="annotated-cell-6-16"><a href="#annotated-cell-6-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">.funs =</span> as.numeric)</span>
+<span id="annotated-cell-6-17"><a href="#annotated-cell-6-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(year, month, dayofmonth)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-6" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="6,7" data-code-annotation="1">Where we have to specify every column to change data type here…</span>
+</dd>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-6" data-code-lines="15,16" data-code-annotation="2">…we can supply the columns in a list and only have to specify the mutate function once</span>
+</dd>
+</dl>
+</div>
+</div>
+<p>You can imagine if we had lots of columns to mutate, this would be much more succinct</p>
+<p>You can mutate any column that is.character/is.numier etc.:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-7"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-7-1"><a href="#annotated-cell-7-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">%&gt;%</span> </span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-7" data-target-annotation="1">1</button><span id="annotated-cell-7-2" class="code-annotation-target"><a href="#annotated-cell-7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate_if</span>(is.character, stringr<span class="sc">::</span>str_to_title) <span class="sc">%&gt;%</span></span>
+<span id="annotated-cell-7-3"><a href="#annotated-cell-7-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>) <span class="sc">%&gt;%</span> </span>
+<span id="annotated-cell-7-4"><a href="#annotated-cell-7-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">4</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-7" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-7" data-code-lines="2" data-code-annotation="1">convert all character column to title case (upper letter at start of each word)</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 6
+  manufacturer model displ  year   cyl trans     
+  &lt;chr&gt;        &lt;chr&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;     
+1 Audi         A4      1.8  1999     4 Auto(L5)  
+2 Audi         A4      1.8  1999     4 Manual(M5)
+3 Audi         A4      2    2008     4 Manual(M6)
+4 Audi         A4      2    2008     4 Auto(Av)  </code></pre>
 </div>
 </div>
 
