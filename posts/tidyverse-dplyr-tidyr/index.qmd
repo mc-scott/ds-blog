@@ -4,7 +4,7 @@ subtitle: "The grammar of data wrangling"
 author: "Matthew Scott"
 date: "2024-07-24"
 description: "Data wrangling: solve the most common data manipulation challenges"
-categories: [tutorial, r, tidyverse, dplyr, tidyr]
+categories: [tutorial, r, tidyverse, dplyr, intro]
 image: "abstract-art.png"
 image-alt: "An abstract sketch using broad brush strokes"
 code-annotations: hover
@@ -135,7 +135,7 @@ df %>%
 2. select all remaining columns that haven't already been specified
 3. this will select all column of data type int or dbl
 4. add two additional non-numeric cols to your selection
-5. remove any of these columns that appear in the dataframe
+5. remove any of these columns that appear in the data frame
 
 ## `mutate()` & `transmute()`
 
@@ -224,7 +224,7 @@ mpg %>%
 
 
 ```
-1. if NaN present, replace it with NA and this clean the column
+1. if NaN present, replace it with NA to help clean the column
 
 
 ### Other mutate verbs
@@ -257,7 +257,12 @@ table_sep <- table %>%
 
 You can imagine if we had lots of columns to mutate, this would be much more succinct.
 
-You can mutate any column that is.character/is.numier etc.:
+:::{.callout-note appearance="simple" icon="true"}
+## Note 
+It is generally preferred to use `across()` instead of the above verbs. See [Column-wise operations](https://dplyr.tidyverse.org/articles/colwise.html) for a detailed explanation of this.
+:::
+
+You can mutate any column that is.character/is.numeric...:
 
 ```{r}
 #| eval: true
@@ -267,5 +272,107 @@ mpg %>%
     select(is.character) %>% 
     head(4)
 ```
-1. convert all character column to title case (upper case at start of each word)
+1. convert all character columns to title case (upper case at start of each word)
 
+### `across()`
+
+`across` works very well with `summarise()` & `mutate()`.
+
+```{r}
+#| eval: true
+
+mpg %>% 
+    summarise(across(where(is.character), n_distinct)) # <1>
+```
+1. `across()` is used to apply the summary, `n_distint()`, across the selected columns - in this case all character columns
+
+## `filter()` & `slice()`
+
+### `filter()` 
+Used to extract or create a subset of rows based on logical operators
+- it will produce a new table
+
+Logical operators to use with `filter()`:
+
+| Operator | Meaning
+|:----:| :----:
+| `==` | equal to
+| `!=` | not equal to
+| `<` | less than
+| `>` | greater than
+| `<=` | less than or equal to
+| `>=` | greater than or equal to
+| `!` | not
+| `is.na()` | is NA
+| `!is.na()` | is not NA
+| `%in%` | is in (a vector)
+| `|` | or
+| `&` | and
+| `xor()` | exclusive or - 'one or the other but not both'
+
+: {.striped .hover}
+
+Filtering a table:
+
+```{r}
+#| eval: true
+
+# this is the same as '&'
+mpg %>% 
+    filter(manufacturer == "audi",
+           year == 1999) %>%  # <1>
+    head()
+
+```
+1. notice we can also reference variables
+
+### `slice()` 
+Used to select certain rows of the table based on row position
+
+Related slice functions:
+
+- `slice_head()`
+- `slice_tail()`
+- `slice_sample()`
+- `slice_max()`
+- `slice_min()`
+
+```{r}
+# select rows 10-20
+slice(df, 10:20)
+
+# slice top 10 rows
+slice_head(df, n = 10)
+
+# select bottom rows
+slice_tail(df, prop = .1) # <1>
+
+# select 10 rows at random from df
+slice_sample(df, 10)
+# select rows at random based on proportion of df
+slice_sample(df, prop = .1)
+
+df %>% slice_max(hwy, n = 10) # <2>
+df %>% slice_min(hwy, prop = .1) # <2>
+```
+1. select the bottom 10% of the df
+2. order by the selected column and select the top/bottom rows
+
+:::{.callout-note appearance="simple" icon="true"}
+## `slice_sample()` Note 
+slice-sample can be done in two main ways, by taking the sampled rows 'out' of the data frame (so when subsequent sample slices are made, they cannot be chosen again), or by 'replacing' the sample (so in subsequent sample slices the same rows can be chosen again).
+
+This is done using the `replace =` argument:
+
+- `df %>% slice_sample(prop = .1, replace = True)`
+- `df %>% slice_sample(prop = .1, replace = False)`
+
+`replace = False` is the default.
+:::
+
+- You can set a seed for reproducibility. Using the same seed will yield the same random selection each time, useful for code reviews where your results need to be reproduced.
+
+```{r}
+# use base r for this
+set.seed(200)
+```

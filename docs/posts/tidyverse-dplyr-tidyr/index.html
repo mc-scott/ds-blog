@@ -170,7 +170,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
                 <div class="quarto-category">r</div>
                 <div class="quarto-category">tidyverse</div>
                 <div class="quarto-category">dplyr</div>
-                <div class="quarto-category">tidyr</div>
               </div>
                   </div>
   </div>
@@ -215,6 +214,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#common-usage" id="toc-common-usage" class="nav-link" data-scroll-target="#common-usage">Common usage</a></li>
   <li><a href="#other-mutate-verbs" id="toc-other-mutate-verbs" class="nav-link" data-scroll-target="#other-mutate-verbs">Other mutate verbs</a></li>
+  <li><a href="#across" id="toc-across" class="nav-link" data-scroll-target="#across"><code>across()</code></a></li>
+  </ul></li>
+  <li><a href="#filter-slice" id="toc-filter-slice" class="nav-link" data-scroll-target="#filter-slice"><code>filter()</code> &amp; <code>slice()</code></a>
+  <ul class="collapse">
+  <li><a href="#filter" id="toc-filter" class="nav-link" data-scroll-target="#filter"><code>filter()</code></a></li>
+  <li><a href="#slice" id="toc-slice" class="nav-link" data-scroll-target="#slice"><code>slice()</code></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -508,7 +513,7 @@ Tip
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-6" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-6" data-code-lines="20" data-code-annotation="1">if NaN present, replace it with NA and this clean the column</span>
+<span data-code-cell="annotated-cell-6" data-code-lines="20" data-code-annotation="1">if NaN present, replace it with NA to help clean the column</span>
 </dd>
 </dl>
 </div>
@@ -553,7 +558,20 @@ Tip
 </div>
 </div>
 <p>You can imagine if we had lots of columns to mutate, this would be much more succinct.</p>
-<p>You can mutate any column that is.character/is.numier etc.:</p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It is generally preferred to use <code>across()</code> instead of the above verbs. See <a href="https://dplyr.tidyverse.org/articles/colwise.html">Column-wise operations</a> for a detailed explanation of this.</p>
+</div>
+</div>
+<p>You can mutate any column that is.character/is.numeric…:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="annotated-cell-8"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-8-1"><a href="#annotated-cell-8-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">%&gt;%</span> </span>
 <button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1">1</button><span id="annotated-cell-8-2" class="code-annotation-target"><a href="#annotated-cell-8-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate_if</span>(is.character, stringr<span class="sc">::</span>str_to_title) <span class="sc">%&gt;%</span></span>
@@ -563,7 +581,7 @@ Tip
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-8" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-8" data-code-lines="2" data-code-annotation="1">convert all character column to title case (upper case at start of each word)</span>
+<span data-code-cell="annotated-cell-8" data-code-lines="2" data-code-annotation="1">convert all character columns to title case (upper case at start of each word)</span>
 </dd>
 </dl>
 </div>
@@ -576,6 +594,187 @@ Tip
 3 Audi         A4    Manual(M6) F     P     Compact
 4 Audi         A4    Auto(Av)   F     P     Compact</code></pre>
 </div>
+</div>
+</section>
+<section id="across" class="level3">
+<h3 class="anchored" data-anchor-id="across"><code>across()</code></h3>
+<p><code>across</code> works very well with <code>summarise()</code> &amp; <code>mutate()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-9"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-9-1"><a href="#annotated-cell-9-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">%&gt;%</span> </span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="1">1</button><span id="annotated-cell-9-2" class="code-annotation-target"><a href="#annotated-cell-9-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), n_distinct))</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-9" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-9" data-code-lines="2" data-code-annotation="1"><code>across()</code> is used to apply the summary, <code>n_distint()</code>, across the selected columns - in this case all character columns</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 6
+  manufacturer model trans   drv    fl class
+         &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+1           15    38    10     3     5     7</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="filter-slice" class="level2">
+<h2 class="anchored" data-anchor-id="filter-slice"><code>filter()</code> &amp; <code>slice()</code></h2>
+<section id="filter" class="level3">
+<h3 class="anchored" data-anchor-id="filter"><code>filter()</code></h3>
+<p>Used to extract or create a subset of rows based on logical operators - it will produce a new table</p>
+<p>Logical operators to use with <code>filter()</code>:</p>
+<table class="table-striped table-hover caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Operator</th>
+<th style="text-align: center;">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>==</code></td>
+<td style="text-align: center;">equal to</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>!=</code></td>
+<td style="text-align: center;">not equal to</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>&lt;</code></td>
+<td style="text-align: center;">less than</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>&gt;</code></td>
+<td style="text-align: center;">greater than</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>&lt;=</code></td>
+<td style="text-align: center;">less than or equal to</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>&gt;=</code></td>
+<td style="text-align: center;">greater than or equal to</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>!</code></td>
+<td style="text-align: center;">not</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>is.na()</code></td>
+<td style="text-align: center;">is NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>!is.na()</code></td>
+<td style="text-align: center;">is not NA</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>%in%</code></td>
+<td style="text-align: center;">is in (a vector)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>|</code></td>
+<td style="text-align: center;">or</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>&amp;</code></td>
+<td style="text-align: center;">and</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>xor()</code></td>
+<td style="text-align: center;">exclusive or - ‘one or the other but not both’</td>
+</tr>
+</tbody>
+</table>
+<p>filtering a table:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-10"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-10-1"><a href="#annotated-cell-10-1" aria-hidden="true" tabindex="-1"></a>year <span class="ot">&lt;-</span> <span class="dv">1999</span></span>
+<span id="annotated-cell-10-2"><a href="#annotated-cell-10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-10-3"><a href="#annotated-cell-10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># this is the same as '&amp;'</span></span>
+<span id="annotated-cell-10-4"><a href="#annotated-cell-10-4" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">%&gt;%</span> </span>
+<span id="annotated-cell-10-5"><a href="#annotated-cell-10-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(manufacturer <span class="sc">==</span> <span class="st">"audi"</span>,</span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-10" data-target-annotation="1">1</button><span id="annotated-cell-10-6" class="code-annotation-target"><a href="#annotated-cell-10-6" aria-hidden="true" tabindex="-1"></a>           year <span class="sc">==</span> <span class="dv">1999</span>) <span class="sc">%&gt;%</span></span>
+<span id="annotated-cell-10-7"><a href="#annotated-cell-10-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-10" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-10" data-code-lines="6" data-code-annotation="1">notice we can also reference variables</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 11
+  manufacturer model      displ  year   cyl trans  drv     cty   hwy fl    class
+  &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;  &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+1 audi         a4           1.8  1999     4 auto(… f        18    29 p     comp…
+2 audi         a4           1.8  1999     4 manua… f        21    29 p     comp…
+3 audi         a4           2.8  1999     6 auto(… f        16    26 p     comp…
+4 audi         a4           2.8  1999     6 manua… f        18    26 p     comp…
+5 audi         a4 quattro   1.8  1999     4 manua… 4        18    26 p     comp…
+6 audi         a4 quattro   1.8  1999     4 auto(… 4        16    25 p     comp…</code></pre>
+</div>
+</div>
+</section>
+<section id="slice" class="level3">
+<h3 class="anchored" data-anchor-id="slice"><code>slice()</code></h3>
+<p>Used to select certain rows of the table based on row position</p>
+<p>Related slice functions: - <code>slice_head()</code> - <code>slice_tail()</code> - <code>slice_sample()</code> - <code>slice_max()</code> - <code>slice_min()</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-11"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-11-1"><a href="#annotated-cell-11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select rows 10-20</span></span>
+<span id="annotated-cell-11-2"><a href="#annotated-cell-11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">slice</span>(df, <span class="dv">10</span><span class="sc">:</span><span class="dv">20</span>)</span>
+<span id="annotated-cell-11-3"><a href="#annotated-cell-11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-11-4"><a href="#annotated-cell-11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># slice top 10 rows</span></span>
+<span id="annotated-cell-11-5"><a href="#annotated-cell-11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_head</span>(df, <span class="at">n =</span> <span class="dv">10</span>)</span>
+<span id="annotated-cell-11-6"><a href="#annotated-cell-11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-11-7"><a href="#annotated-cell-11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># select bottom rows</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="1">1</button><span id="annotated-cell-11-8" class="code-annotation-target"><a href="#annotated-cell-11-8" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_tail</span>(df, <span class="at">prop =</span> .<span class="dv">1</span>)</span>
+<span id="annotated-cell-11-9"><a href="#annotated-cell-11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-11-10"><a href="#annotated-cell-11-10" aria-hidden="true" tabindex="-1"></a><span class="co"># select 10 rows at random from df</span></span>
+<span id="annotated-cell-11-11"><a href="#annotated-cell-11-11" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_sample</span>(df, <span class="dv">10</span>)</span>
+<span id="annotated-cell-11-12"><a href="#annotated-cell-11-12" aria-hidden="true" tabindex="-1"></a><span class="co"># select rows at random based on proportion of df</span></span>
+<span id="annotated-cell-11-13"><a href="#annotated-cell-11-13" aria-hidden="true" tabindex="-1"></a><span class="fu">slice_sample</span>(df, <span class="at">prop =</span> .<span class="dv">1</span>)</span>
+<span id="annotated-cell-11-14"><a href="#annotated-cell-11-14" aria-hidden="true" tabindex="-1"></a></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-11" data-target-annotation="2">2</button><span id="annotated-cell-11-15" class="code-annotation-target"><a href="#annotated-cell-11-15" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">slice_max</span>(hwy, <span class="at">n =</span> <span class="dv">10</span>)</span>
+<span id="annotated-cell-11-16"><a href="#annotated-cell-11-16" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">slice_min</span>(hwy, <span class="at">prop =</span> .<span class="dv">1</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-11" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="8" data-code-annotation="1">select the bottom 10% of the df</span>
+</dd>
+<dt data-target-cell="annotated-cell-11" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-11" data-code-lines="15,16" data-code-annotation="2">order by the selected column and select the top/bottom rows</span>
+</dd>
+</dl>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<code>slice_sample()</code> Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>slice-sample can be done in two main ways, by taking the sampled rows ‘out’ of the data frame (so when subsequent sample slices are made, they cannot be chosen again), or by ‘replacing’ the sample (so in subsequent sample slices the same rows can be chosen again).</p>
+<p>This is done using the <code>replace =</code> argument:</p>
+<ul>
+<li><code>df %&gt;% slice_sample(prop = .1, replace = True)</code></li>
+<li><code>df %&gt;% slice_sample(prop = .1, replace = False)</code></li>
+</ul>
+<p><code>replace = False</code> is the default.</p>
+</div>
+</div>
+<ul>
+<li>You can set a seed for reproducibility. Using the same seed will yield the same random selection each time, useful for code reviews where your results need to be reproduced.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">200</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
