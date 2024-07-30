@@ -5,12 +5,14 @@ author: "Matthew Scott"
 date: "2024-07-20"
 description: "Tidyverse is a collection of R packages designed for data science"
 categories: [tutorial, r, tidyverse, intro]
-#image: "abstract-art.png"
-#image-alt: "An abstract sketch using broad brush strokes"
+image: "abstract-brush-strokes.png"
+image-alt: "Two red brush strokes blurred by an oil brush"
 code-annotations: hover
 draft: false
 toc: true
 ---
+
+![Red brush strokes](abstract-brush-strokes-wide.png){fig-alt="A picture I drew one time"}
 
 ## Tidyverse
 

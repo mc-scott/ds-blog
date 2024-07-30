@@ -6,13 +6,13 @@ date: "2024-07-24"
 description: "Data wrangling: solve the most common data manipulation challenges"
 categories: [tutorial, r, tidyverse, dplyr, intro]
 image: "abstract-art.png"
-image-alt: "An abstract sketch using broad brush strokes"
+image-alt: "An abstract sketch who's colours bleed into the canvas"
 code-annotations: hover
 draft: false
 toc: true
 ---
 
-![Abstract Canvas](abstract-art-wide.png){fig-alt="A picture I drew one time"}
+![Abstract Canvas](abstract-art-wide.png){fig-alt="A cropped version of the "}
 ```{r setup}
 #| eval: true
 #| echo: false
