@@ -19,7 +19,7 @@ website:
       - text: "Projects"
         file: projects.qmd
       - icon: github
-        href: https://github.com/mc-scott/blog
+        href: https://github.com/mc-scott/ds-blog
   page-footer:
     left:
     - href: https://www.quarto.org
@@ -33,6 +33,3 @@ format:
     theme: 
       light: flatly
       dark: darkly
-
-
-
