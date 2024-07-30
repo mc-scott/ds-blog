@@ -21,61 +21,25 @@ library(dplyr)
 library(ggplot2)
 ```
 
-
 ## Introduction
 
-Tidyverse is a collection of [R packages](https://www.tidyverse.org/packages/) designed for data science. All packages share an underlying design philosophy, grammar, and data structures.
+dplyr helps manipulate datasets. That is, it can be used to change their shape - the number of rows, columns, as well as verbs to create new columns.
 
-**Installation** This can be done using `install.packages("tidyverse")`; `library(tidyverse)` to install and import all packages.
+### Dataset used in this tutorial
 
-:::{.callout-tip appearance="simple" icon="true"}
-## Tip 
-Installing tidyverse will result in (usually) a lot of libraries your code isn't using being installed, which is not efficient. It is best practice (and helps your learning) to install packages individually. See below for popular tidyverse packages.
-:::
+We will use the `mpg` data set in this tutorial and run through a lot of the common syntax used to manipulate a table.
 
-### Popular Tidyverse packages
+```{r}
+#| eval: true
 
-* [`dplyr`](https://dplyr.tidyverse.org/) - Solve the most common data manipulation challenges (**NB** `dbplyr` allows you to use remote database tables by converting dplyr code to SQL)
-* [`readr`](https://readr.tidyverse.org/) - Read and write tabular data like csv and tsv formats. (NB there are options like `readxl`, `writexl` for working with excel files and `googlesheets4` for Google sheets)
-* [`stringr`](https://stringr.tidyverse.org/) - Set of functions designed to make working with strings as easy as possible. It also incorporates Reg Ex patterns into its syntax. Many common data cleaning and preparation tasks involve string cleaning such as detecting matches, sub-setting strings, mutating strings, ordering, ...
-* [`tidyr`](https://tidyr.tidyverse.org/) - A set of functions to help tidy data (each column is a row, each row an observation, and each cell a single value). `separate_wider_delim()`, `hoist()`, `pivot_longer()`, ...
-* [`ggplot2`](https://ggplot2.tidyverse.org/) - A declarative package for making graphics. See also [R Graphics Cookbook](https://r-graphics.org/)
-* [`purrr`](https://purrr.tidyverse.org/) - Provides a complete set of tools for working with functions and vectors. (The `map()` family can efficiently replace for loops). A good place to start learning is [here](https://r4ds.had.co.nz/iteration.html).
-
-**Note** There are more packages than this including some helpful ones: `httr`, `lubridate`, `glue`, `modelr`, `forcats`.
-
-## Installing & importing packages
-
-```{r installing}
-# installing
-install.packages("tidyverse")
-# or install specific packages
-install.packages("dplyr")
-install.packages("ggplot2")
-
-# now import them into your session
-library(tidyverse)
-library(dplyr)
 library(ggplot2)
+glimpse(mpg) # <1>
 ```
-
-## Inspecting a dataset
-
-Some packages come with dataset you can work with, or you can inspect your own data
-
-```{r inspecting}
-# open ggplot2's data dictionary for this packages internal dataset
-help("mpg")
-# load the dataset into a variable
-df <- mpg
-# see information rich summary
-glimpse(df)
-# see top n rows
-df %>% head(n=5) # <1>
-```
-1. You can also use `tail()` to see the bottom n rows
+1. We can see the column names, their datatype (inside `< >`) and example data in a list-like format. We also get information on the number of rows and columns, the 'shape'
 
 ## `select()` & `rename()`
+
+Choose which columns to include or exclude.
 
 `select([df], helper_function([col_1], [col_2]))`
 
@@ -139,6 +103,8 @@ df %>%
 
 ## `mutate()` & `transmute()`
 
+Create new columns from existing ones.
+
 `mutate([new_col] = [old_col(s) + logic])`
 
 * creates a new column based on the logic provided
@@ -159,7 +125,7 @@ Helpful functions for dealing with strings:
 
 : {.striped .hover}
 
-**Note** There is also `lubridate` and `hms` packages for working with dates and times that give a lot more flexibility. `stringr` is another useful package commonly used wiht mutate to extract parts of columns.
+**Note** There is also `lubridate` and `hms` packages for working with dates and times that give a lot more flexibility. `stringr` is another useful package commonly used with mutate to extract parts of string columns.
 
 ```{r}
 #| eval: true

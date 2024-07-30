@@ -1,0 +1,84 @@
+---
+title: "Introduction to the tidyverse"
+subtitle: "Data Science flavoured R"
+author: "Matthew Scott"
+date: "2024-07-20"
+description: "Tidyverse is a collection of R packages designed for data science"
+categories: [tutorial, r, tidyverse, intro]
+#image: "abstract-art.png"
+#image-alt: "An abstract sketch using broad brush strokes"
+code-annotations: hover
+draft: false
+toc: true
+---
+
+## Tidyverse
+
+Tidyverse is a collection of [R packages](https://www.tidyverse.org/packages/) designed for data science. All packages share an underlying design philosophy, grammar, and data structures.
+
+**Installation** This can be done using  1) `install.packages("tidyverse")`; 2) `library(tidyverse)` to install and import all packages.
+
+:::{.callout-tip appearance="simple" icon="true"}
+## Tip 
+Installing tidyverse will result in (usually) a lot of libraries your code isn't using being installed, which is not efficient. It is best practice (and helps your learning) to install packages individually. See below for popular tidyverse packages.
+:::
+
+### Popular Tidyverse packages
+
+* [`dplyr`](https://dplyr.tidyverse.org/) - Solve the most common data manipulation challenges (**NB** `dbplyr` allows you to use remote database tables by converting dplyr code to SQL)
+* [`readr`](https://readr.tidyverse.org/) - Read and write tabular data like csv and tsv formats. (**NB** there are options like `readxl`, `writexl` for working with excel files and `googlesheets4` for Google sheets)
+* [`stringr`](https://stringr.tidyverse.org/) - Set of functions designed to make working with strings as easy as possible. It also incorporates Reg Ex patterns into its syntax. Many common data cleaning and preparation tasks involve string cleaning such as detecting matches, sub-setting strings, mutating strings, ordering, ...
+* [`tidyr`](https://tidyr.tidyverse.org/) - A set of functions to help tidy data (each column is a row, each row an observation, and each cell a single value). `separate_wider_delim()`, `hoist()`, `pivot_longer()`, ...
+* [`ggplot2`](https://ggplot2.tidyverse.org/) - A declarative package for making graphics. See also [R Graphics Cookbook](https://r-graphics.org/)
+* [`purrr`](https://purrr.tidyverse.org/) - Provides a complete set of tools for working with functions and vectors. (The `map()` family can efficiently replace for loops). A good place to start learning is [here](https://r4ds.had.co.nz/iteration.html).
+
+**Note** There are more packages than this. Some other helpful ones to know about include: `httr`, `lubridate`, `glue`, `modelr`, `forcats`.
+
+## Installing & importing packages
+
+```{r installing}
+# installing
+install.packages("tidyverse")
+# or install specific packages
+install.packages("dplyr")
+install.packages("ggplot2")
+
+# now import them into your session
+library(tidyverse)
+library(dplyr)
+library(ggplot2)
+```
+
+## Inspecting a dataset
+
+An essential first step in any data analytical task is inspecting your data visually. Some packages come with dataset you can work with so you'll want to see what they look like, or you can inspect your own data.
+
+### Toy datasets
+
+It is useful to use toy datasets which come included when you install and import the relevant package. Some examples are:
+
+- [`mpg`](https://ggplot2.tidyverse.org/reference/mpg.html) from ggplot2
+- [`starwars`](https://dplyr.tidyverse.org/reference/starwars.html) from dplyr
+- [`storms`](https://dplyr.tidyverse.org/reference/storms.html) from dplyr
+- [`band_members`](https://dplyr.tidyverse.org/reference/band_members.html) from dplyr (a small dataset, it contains three tables useful for demonstrating joins)
+
+```{r inspecting}
+#| eval: true
+
+library(dplyr) # <1>
+
+# open ggplot2's data dictionary for this packages internal dataset
+# help("mpg")
+
+# load the dataset into a variable
+df <- ggplot2::mpg # <2>
+
+# see information rich summary
+# glimpse(df)
+
+# see top n rows
+df %>% head(n = 5) # <3>
+```
+1. We need this package so we can access the `%>%` 'pipe' operator
+2. this notation tells R to look in the `ggplot2` package for the dataset `mpg`
+3. You can also use `tail()` to see the bottom n rows. Use `head()` to default to the top 6 rows.
