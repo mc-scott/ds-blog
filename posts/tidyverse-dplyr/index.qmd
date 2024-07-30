@@ -69,7 +69,7 @@ select(df, (ncol(df) -2) : ncol(df))
 
 # selecting columns that contain 'l' (upper or lower case) 
 # and renaming 'model' to 'type' etc.
-df %>% 
+df %>%  
   select(contains('l', ignore.case = T)) %>% 
   rename(type = model, cylinder = cyl)
 
