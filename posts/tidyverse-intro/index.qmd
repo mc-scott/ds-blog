@@ -78,6 +78,10 @@ df <- ggplot2::mpg # <2>
 # see information rich summary
 # glimpse(df)
 
+# see dimension of object 
+# (number of rows and columns)
+# dim(df)
+
 # see top n rows
 df %>% head(n = 5) # <3>
 ```

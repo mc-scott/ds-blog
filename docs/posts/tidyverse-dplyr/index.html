@@ -179,6 +179,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#filter" id="toc-filter" class="nav-link" data-scroll-target="#filter"><code>filter()</code></a></li>
   <li><a href="#slice" id="toc-slice" class="nav-link" data-scroll-target="#slice"><code>slice()</code></a></li>
   </ul></li>
+  <li><a href="#arrange" id="toc-arrange" class="nav-link" data-scroll-target="#arrange"><code>arrange()</code></a></li>
+  <li><a href="#distinct" id="toc-distinct" class="nav-link" data-scroll-target="#distinct"><code>distinct()</code></a></li>
   </ul>
 </nav>
     </div>
@@ -231,7 +233,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="abstract-art-wide.png" class="img-fluid figure-img" alt="A picture I drew one time"></p>
+<p><img src="abstract-art-wide.png" class="img-fluid figure-img" alt="A cropped version of the main image"></p>
 <figcaption>Abstract Canvas</figcaption>
 </figure>
 </div>
@@ -299,7 +301,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <span id="annotated-cell-2-9"><a href="#annotated-cell-2-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="annotated-cell-2-10"><a href="#annotated-cell-2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># selecting columns that contain 'l' (upper or lower case) </span></span>
 <span id="annotated-cell-2-11"><a href="#annotated-cell-2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># and renaming 'model' to 'type' etc.</span></span>
-<span id="annotated-cell-2-12"><a href="#annotated-cell-2-12" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="annotated-cell-2-12"><a href="#annotated-cell-2-12" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span>  </span>
 <span id="annotated-cell-2-13"><a href="#annotated-cell-2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">'l'</span>, <span class="at">ignore.case =</span> T)) <span class="sc">%&gt;%</span> </span>
 <span id="annotated-cell-2-14"><a href="#annotated-cell-2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">type =</span> model, <span class="at">cylinder =</span> cyl)</span>
 <span id="annotated-cell-2-15"><a href="#annotated-cell-2-15" aria-hidden="true" tabindex="-1"></a></span>
@@ -750,9 +752,102 @@ Note
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use base r for this</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">200</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-
-
 </section>
+</section>
+<section id="arrange" class="level2">
+<h2 class="anchored" data-anchor-id="arrange"><code>arrange()</code></h2>
+<p><code>arrange([data], desc([column_a], [column_b], ...))</code></p>
+<ul>
+<li>Sort rows by columns or values that you define</li>
+<li>Analogous to ORDER BY in SQL syntax</li>
+<li>Can wrap columns in <code>desc()</code> to arrange in descending order</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># arrange by year asc</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(df, year)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#  arrange by year desc</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(df, <span class="fu">desc</span>(year))</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># arrange by multiple columns</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(df, <span class="fu">desc</span>(cyl), displ) </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># or using the pipe</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(year))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="distinct" class="level2">
+<h2 class="anchored" data-anchor-id="distinct"><code>distinct()</code></h2>
+<p><code>distinct([df], [col_a], [col_b], ...)</code></p>
+<ul>
+<li>Removes rows with duplicate values</li>
+<li>Specify columns in distinct to select only those column</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-13"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-13-1"><a href="#annotated-cell-13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># will create a table where the combination </span></span>
+<span id="annotated-cell-13-2"><a href="#annotated-cell-13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># of manufacturer and model is distinct</span></span>
+<span id="annotated-cell-13-3"><a href="#annotated-cell-13-3" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">%&gt;%</span> </span>
+<span id="annotated-cell-13-4"><a href="#annotated-cell-13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(manufacturer, model) <span class="sc">%&gt;%</span> </span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="1">1</button><span id="annotated-cell-13-5" class="code-annotation-target"><a href="#annotated-cell-13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>()</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-13" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-lines="5" data-code-annotation="1">Because no columns are specified, <code>distinct</code> returns all columns</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 38 × 2
+   manufacturer model             
+   &lt;chr&gt;        &lt;chr&gt;             
+ 1 audi         a4                
+ 2 audi         a4 quattro        
+ 3 audi         a6 quattro        
+ 4 chevrolet    c1500 suburban 2wd
+ 5 chevrolet    corvette          
+ 6 chevrolet    k1500 tahoe 4wd   
+ 7 chevrolet    malibu            
+ 8 dodge        caravan 2wd       
+ 9 dodge        dakota pickup 4wd 
+10 dodge        durango 4wd       
+# ℹ 28 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-14"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-14-1"><a href="#annotated-cell-14-1" aria-hidden="true" tabindex="-1"></a>mpg <span class="sc">%&gt;%</span> </span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="1">1</button><span id="annotated-cell-14-2" class="code-annotation-target"><a href="#annotated-cell-14-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(model) <span class="sc">%&gt;%</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="2">2</button><span id="annotated-cell-14-3" class="code-annotation-target"><a href="#annotated-cell-14-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">distinct</span>(manufacturer, <span class="at">.keep_all =</span> T)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-14" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-14" data-code-lines="2" data-code-annotation="1">distinct will respect <code>group_by</code> and return distinct values for each group</span>
+</dd>
+<dt data-target-cell="annotated-cell-14" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-14" data-code-lines="3" data-code-annotation="2"><code>keep_all</code> will keep the first row of values</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 38 × 11
+# Groups:   model [38]
+   manufacturer model      displ  year   cyl trans drv     cty   hwy fl    class
+   &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+ 1 audi         a4           1.8  1999     4 auto… f        18    29 p     comp…
+ 2 audi         a4 quattro   1.8  1999     4 manu… 4        18    26 p     comp…
+ 3 audi         a6 quattro   2.8  1999     6 auto… 4        15    24 p     mids…
+ 4 chevrolet    c1500 sub…   5.3  2008     8 auto… r        14    20 r     suv  
+ 5 chevrolet    corvette     5.7  1999     8 manu… r        16    26 p     2sea…
+ 6 chevrolet    k1500 tah…   5.3  2008     8 auto… 4        14    19 r     suv  
+ 7 chevrolet    malibu       2.4  1999     4 auto… f        19    27 r     mids…
+ 8 dodge        caravan 2…   2.4  1999     4 auto… f        18    24 r     mini…
+ 9 dodge        dakota pi…   3.7  2008     6 manu… 4        15    19 r     pick…
+10 dodge        durango 4…   3.9  1999     6 auto… 4        13    17 r     suv  
+# ℹ 28 more rows</code></pre>
+</div>
+</div>
+
+
 </section>
 
 </main> <!-- /main -->

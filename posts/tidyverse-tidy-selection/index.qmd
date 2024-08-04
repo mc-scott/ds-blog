@@ -1,0 +1,176 @@
+---
+title: "Tidy selection"
+subtitle: "A powerful tool when working with columns"
+author: "Matthew Scott"
+date: "2024-08-10"
+description: "Make programming with the tidyverse easier"
+categories: [r, tidyverse, dplyr]
+#image: "abstract-river.png"
+#image-alt: "An abstract river sketch"
+code-annotations: hover
+toc: true
+draft: true
+execute: 
+  eval: true
+---
+
+```{r setup}
+#| echo: false
+
+library(dplyr)
+library(tidyr)
+```
+
+## Introduction
+
+Tidy selection is a principle that makes it easier to work with columns in a  dataset. Behind the principle is the `tidyselect` package. This package is used by `dplyr` and `tidyr` and means you don't have to use an exact column name to select it, you can use it's **name**, **position** or **type**.
+
+Tidy select can be used with `select()`, `rename()`, `relocate()`, `across()`, `pull()`, `where()`, `any_of()`, and `all_of()` in the dplyr package.
+
+What does this mean for your programming?
+
+Let's use the `starwars` dataset for these examples. Expand the info box below to see the dataset:
+
+:::{.callout-note icon="true" collapse="true"}
+## Starwars dataset
+
+```{r dataset}
+glimpse(starwars)
+```
+:::
+
+## Selecting by name
+
+### This can be done with the exact col name:
+```{r}
+starwars %>% select(name, height, mass) %>% head(3)
+    
+```
+
+### Or inexactly with the use of helper functions:
+::: panel-tabset
+## `starts_with()`
+The column start with character(s)
+```{r}
+starwars %>% 
+    select(starts_with("S", ignore.case = T)) %>% 
+    head(3)
+```
+## `ends_with()`
+Ends with an exact suffix
+
+```{r}
+starwars %>% select(ends_with("s")) %>% head(3)
+```
+
+## `contains()`
+Contains a literal string
+
+```{r}
+starwars %>% select(contains("color")) %>% head(3)
+```
+
+## `matches()`
+Matches a regular expression or a `stringr()` pattern
+
+```{r}
+starwars %>% 
+    select(matches("[s]{2}")) %>% # <1>
+    head(3)
+```
+1. will match where 's' appears twice in a row
+:::
+
+## Use of boolean operators
+
+Tidy selection allows you to use Boolean operators (`&`, `|`) to specify columns as well:
+
+```{r}
+starwars %>% 
+    select(ends_with("color") & 
+           !starts_with("h")) %>% # <1>
+    head(3)
+```
+1. use of `!` as 'not'. Columns that end_with 'color' and don't start with 'h'
+
+## Position
+You don't have to use name, you can use the position of the column in the dataframe:
+
+```{r}
+starwars %>% 
+    select(1, 3, 4:7) %>% # <1>
+    head(3)
+```
+1. select the first, third, and cols 4, 5, 6, 7
+
+You can also use `last_col()` which will automatically find the last column in the dataframe. (This saves you having to work out the length of the dataframe):
+```{r}
+#| eval: false
+
+# this:
+starwars %>% select(1, length(starwars))
+
+# is the same as this:
+starwars %>% select(1, last_col())
+```
+
+## Type
+Tidyselect means you can specify columns based on their datatype as well:
+
+```{r}
+starwars %>% 
+    select(name, where(is.list)) %>% # <1>
+    head(3)
+```
+1. Use `where()` to make it more explicit what you're selecting (although not mandatory)
+
+In this case we can use the columns data type to ensure every numeric column is a double (maybe we need this for machine learning purposes):
+```{r}
+starwars %>% 
+    select(name, where(is.numeric)) %>% 
+    mutate_if(is.integer, as.double) %>%  # <1>
+    head(3)
+```
+1. If we have any integer columns slected by `is.numeric`, ensure they are mutated to doubles with `as.double`
+
+## Using environment variables or function variables with tidyverse
+This is related to the data masking property that tidy evaluation employs, rather than its tidy select properties, but it still useful to know when extending tidy selection.
+
+### With environment variables
+In order to use a variable specified in the global environment (these are the variables you've assigned earlier in your script), you need to add the `!!` or `.env$` syntax around the variable to tell tidyselect to look outside of the dataframe variable
+
+```{r}
+cols <- c("homeworld", "sex", "eye_color")
+
+starwars %>% select(!!cols) %>% head(3)
+```
+
+### In functions
+You need to 'embrace' (`{{{ var }}}`) your tidyselect syntax when it is provided as an argument to a function:
+```{r}
+#' Select all characters that appear on the
+#' given homeworld and supply their numeric
+#' stats.
+#' Only return rows where all numeric columns 
+#' aren't NA.
+starwars_toptrumps <- function(df = starwars, homeworld){
+    df %>% 
+        select(name, homeworld, where(is.numeric)) %>% 
+        filter(homeworld == {{homeworld}}) %>% # <1>
+        tidyr::drop_na(where(is.numeric)) # <2>
+}
+
+starwars_toptrumps(homeworld = "Naboo") # <3>
+```
+1. Specify the use of a function argument in filter
+2. Use tidyr function to check all numeric columns and only return rows that don't include NA using `drop_na()`
+3. Call function and feed a 'homeworld' into the filter argument of the function
+
+## References
+
+1. [Programming with dplyr](https://dplyr.tidyverse.org/articles/programming.html)
+2. [Technical description of tidyselect](https://tidyselect.r-lib.org/articles/syntax.html)
+3. [Argument type: data masking](https://tidyselect.r-lib.org/articles/syntax.html)
+
+
+

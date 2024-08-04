@@ -12,7 +12,7 @@ draft: false
 toc: true
 ---
 
-![Abstract Canvas](abstract-art-wide.png){fig-alt="A cropped version of the "}
+![Abstract Canvas](abstract-art-wide.png){fig-alt="A cropped version of the main image"}
 ```{r setup}
 #| eval: true
 #| echo: false
@@ -53,6 +53,7 @@ You can wrap the columns in helper functions:
 * `any_of()` - will select all columns available from a list
 * `all_of()` - used for strict selection. Throws an error if one of the columns named in the list aren't present in the dataframe
 * `matches()` - exactly matches a certain string
+* `everything()` - every other column not specified already
 * `where(is.numeric())` - will select all numeric columns (int or dbl). Also `is.character`, `is.factor`, `is.integer`, `is.double`
 
 `rename([new_name] = [old_name])`
@@ -268,6 +269,7 @@ Logical operators to use with `filter()`:
 | `>` | greater than
 | `<=` | less than or equal to
 | `>=` | greater than or equal to
+| `between()` | between two values (inclusive)
 | `!` | not
 | `is.na()` | is NA
 | `!is.na()` | is not NA
@@ -286,11 +288,10 @@ Filtering a table:
 # this is the same as '&'
 mpg %>% 
     filter(manufacturer == "audi",
-           year == 1999) %>%  # <1>
+           year == 1999) %>%
     head()
 
 ```
-1. notice we can also reference variables
 
 ### `slice()` 
 Used to select certain rows of the table based on row position
@@ -342,3 +343,53 @@ This is done using the `replace =` argument:
 # use base r for this
 set.seed(200)
 ```
+
+## `arrange()`
+
+`arrange([data], desc([column_a], [column_b], ...))`
+
+- Sort rows by columns or values that you define
+- Analogous to ORDER BY in SQL syntax
+- Can wrap columns in `desc()` to arrange in descending order
+
+```{r}
+# arrange by year asc
+arrange(df, year)
+#  arrange by year desc
+arrange(df, desc(year))
+# arrange by multiple columns
+arrange(df, desc(cyl), displ) 
+
+# or using the pipe
+df %>% arrange(desc(year))
+```
+
+## `distinct()`
+`distinct([df], [col_a], [col_b], ...)`
+
+- Removes rows with duplicate values
+- Specify columns in distinct to select only those column
+
+```{r}
+#| eval: true
+
+# will create a table where the combination 
+# of manufacturer and model is distinct
+mpg %>% 
+  select(manufacturer, model) %>% 
+  distinct() # <1>
+```
+1. Because no columns are specified, `distinct` returns all columns
+
+```{r}
+#| eval: true
+mpg %>% 
+    group_by(model) %>% # <1>
+    distinct(manufacturer, .keep_all = T) %>%  # <2>
+    head()
+```
+1. distinct will respect `group_by` and return distinct values for each group
+2. `keep_all` will keep the first row of values from all other columns
+
+
+

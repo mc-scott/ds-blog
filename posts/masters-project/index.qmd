@@ -1,9 +1,9 @@
 ---
 title: "Sea anemones and animal behaviour"
-subtitle: "Indecision below the waves"
+subtitle: "Analysis below the waves"
 author: "Matthew Scott"
-date: "2024-07-21"
-description: "Anemones are charismatic creatures and with that comes complex behaviour"
+date: "2024-08-10"
+description: "Anemones are charismatic creatures and with that comes complex behaviour to analyse"
 categories: [r, modelling, statistics]
 #image: "abstract-river.png"
 #image-alt: "An abstract river sketch"
