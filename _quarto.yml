@@ -6,11 +6,11 @@ website:
   title: "As-yet-undecided"
   description: "Matthew Scott's personal website"
   navbar:
-    title: " "
+    title: "As-yet-undecided"
     background: "#096367"
     pinned: true
-    left:
-      - text: "as-yet-undecided"
+    #left:
+    #  - text: "Some text here"
     right:
       - text: "About"
         file: about.qmd
@@ -30,10 +30,10 @@ website:
 
 format:
   html:
-    code-overflow: wrap
+    #code-overflow: wrap
     highlight-style: atom-one
     code-block-bg: true
     code-block-border-left: "#096367"
     theme: 
       light: flatly
-      dark: darkly
+      #dark: darkly # add a second dark theme & toggle
