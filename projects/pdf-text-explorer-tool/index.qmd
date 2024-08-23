@@ -3,7 +3,7 @@ title: "PDF Text Explorer Tool"
 #subtitle: "Explore different tokenisation algorithms"
 #author: "Matthew Scott"
 #date: "2024-07-04"
-description: "Upload a PDF file to the app to see summary stats and create a bespoke concordance analysis and word frequency table."
+description: "Upload a PDF file to the app to see summary stats and create a bespoke concordance analysis and word frequency tables."
 #categories: [project, app, streamlit]
 image: "pdf-text-explorer-preview.png"
 image-alt: "A preview of the PDF explorer app"

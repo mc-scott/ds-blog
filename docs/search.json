@@ -4,7 +4,7 @@
     "href": "projects.html",
     "title": "Projects",
     "section": "",
-    "text": "NLP Tokenisation Visualiser App\n\n\nTokenisation is a foundational step in NLP but often overlooked. Modify the tokeniser and enter bespoke text to see how the algorithms split text under the hood.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPDF Text Explorer Tool\n\n\nUpload a PDF file to the app to see summary stats and create a bespoke concordance analysis and word frequency table.\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Welcome to the Projects page! I have posted some projects who’s completeness I feel gives them a public-facing spot here. I usually keep public projects that are in progress on my personal GitHub, if you’d like to explore them you click the GitHub icon in the top right and navigate around the repos.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNLP Tokenisation Visualiser App\n\n\nTokenisation is a foundational step in NLP but often overlooked. Modify the tokeniser and enter bespoke text to see how the algorithms split text under the hood.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPDF Text Explorer Tool\n\n\nUpload a PDF file to the app to see summary stats and create a bespoke concordance analysis and word frequency tables.\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "projects/nlp-token-visualiser/index.html",
