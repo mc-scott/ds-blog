@@ -1,0 +1,19 @@
+---
+title: "PDF Text Explorer Tool"
+#subtitle: "Explore different tokenisation algorithms"
+#author: "Matthew Scott"
+#date: "2024-07-04"
+description: "Upload a PDF file to the app to see summary stats and create a bespoke concordance analysis and word frequency table."
+#categories: [project, app, streamlit]
+image: "pdf-text-explorer-preview.png"
+image-alt: "A preview of the PDF explorer app"
+
+---
+
+| Details  |           |
+|----------|-----------|
+| Title    | **PDF Text Explorer Tool**   |
+| Host     | `Streamlit Community Cloud`   |
+| Repo     | [GitHub](https://github.com/mc-scott/pdf-text-explorer) |
+| URL      | [App](https://nlp-doc-search-tool.streamlit.app/)     |
+| Notes    | If the app has been dormant, it may take a second to boot up. It's a free hosting service after all!  |

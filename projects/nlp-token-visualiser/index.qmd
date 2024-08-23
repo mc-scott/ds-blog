@@ -3,17 +3,17 @@ title: "NLP Tokenisation Visualiser App"
 #subtitle: "Explore different tokenisation algorithms"
 #author: "Matthew Scott"
 #date: "2024-07-04"
-description: "Tokenisation is a foundational step in NLP but often overlooked. Modify text and tokeniser to see how the algorithms work in real time."
+description: "Tokenisation is a foundational step in NLP but often overlooked. Modify the tokeniser and enter bespoke text to see how the algorithms split text under the hood."
 #categories: [project, app, streamlit]
 image: "tokeniser-preview.png"
 image-alt: "A preview of the tokenisation app"
 
 ---
 
-| Details  |                                                                                           |
-|----------|-------------------------------------------------------------------------------------------|
-| Title    | **Learn Natural Language Processing Concepts**                                            |
-| Host     | `Streamlit Community Cloud`                                                               |
+| Details  |   |
+|----------|------|
+| Title    | **Learn Natural Language Processing Concepts**  |
+| Host     | `Streamlit Community Cloud`  |
 | Repo     | [My University GitHub account](https://github.com/m-scott-1/summative-1/blob/main/app.py) |
-| URL      | [App](https://summative-1.streamlit.app/)                                                 |
-| Notes    | If the app has been dormant, it may take up to 5 mins to boot up. It's a free hosting service after all           |
+| URL      | [App](https://summative-1.streamlit.app/)  |
+| Notes    | If the app has been dormant, it may take up to 5 mins to boot up. It's a free hosting service after all! |

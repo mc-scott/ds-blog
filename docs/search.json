@@ -4,7 +4,154 @@
     "href": "projects.html",
     "title": "Projects",
     "section": "",
-    "text": "NLP Tokenisation Visualiser App\n\n\nTokenisation is a foundational step in NLP but often overlooked. Modify text and tokeniser to see how the algorithms work in real time.\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "NLP Tokenisation Visualiser App\n\n\nTokenisation is a foundational step in NLP but often overlooked. Modify the tokeniser and enter bespoke text to see how the algorithms split text under the hood.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPDF Text Explorer Tool\n\n\nUpload a PDF file to the app to see summary stats and create a bespoke concordance analysis and word frequency table.\n\n\n\n\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "projects/nlp-token-visualiser/index.html",
+    "href": "projects/nlp-token-visualiser/index.html",
+    "title": "NLP Tokenisation Visualiser App",
+    "section": "",
+    "text": "Details\n\n\n\n\n\nTitle\nLearn Natural Language Processing Concepts\n\n\nHost\nStreamlit Community Cloud\n\n\nRepo\nMy University GitHub account\n\n\nURL\nApp\n\n\nNotes\nIf the app has been dormant, it may take up to 5 mins to boot up. It’s a free hosting service after all!"
+  },
+  {
+    "objectID": "posts/tidyverse-intro/index.html",
+    "href": "posts/tidyverse-intro/index.html",
+    "title": "Introduction to the tidyverse",
+    "section": "",
+    "text": "Red brush strokes"
+  },
+  {
+    "objectID": "posts/tidyverse-intro/index.html#tidyverse",
+    "href": "posts/tidyverse-intro/index.html#tidyverse",
+    "title": "Introduction to the tidyverse",
+    "section": "Tidyverse",
+    "text": "Tidyverse\nTidyverse is a collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures.\nInstallation This can be done using 1) install.packages(\"tidyverse\"); 2) library(tidyverse) to install and import all packages.\n\n\n\n\n\n\nTip\n\n\n\nInstalling tidyverse will result in (usually) a lot of libraries your code isn’t using being installed, which is not efficient. It is best practice (and helps your learning) to install packages individually. See below for popular tidyverse packages.\n\n\n\nPopular Tidyverse packages\n\ndplyr - Solve the most common data manipulation challenges (NB dbplyr allows you to use remote database tables by converting dplyr code to SQL)\nreadr - Read and write tabular data like csv and tsv formats. (NB there are options like readxl, writexl for working with excel files and googlesheets4 for Google sheets)\nstringr - Set of functions designed to make working with strings as easy as possible. It also incorporates Reg Ex patterns into its syntax. Many common data cleaning and preparation tasks involve string cleaning such as detecting matches, sub-setting strings, mutating strings, ordering, …\ntidyr - A set of functions to help tidy data (each column is a row, each row an observation, and each cell a single value). separate_wider_delim(), hoist(), pivot_longer(), …\nggplot2 - A declarative package for making graphics. See also R Graphics Cookbook\npurrr - Provides a complete set of tools for working with functions and vectors. (The map() family can efficiently replace for loops). A good place to start learning is here.\n\nNote There are more packages than this. Some other helpful ones to know about include: httr, lubridate, glue, modelr, forcats."
+  },
+  {
+    "objectID": "posts/tidyverse-intro/index.html#installing-importing-packages",
+    "href": "posts/tidyverse-intro/index.html#installing-importing-packages",
+    "title": "Introduction to the tidyverse",
+    "section": "Installing & importing packages",
+    "text": "Installing & importing packages\n\n# installing\ninstall.packages(\"tidyverse\")\n# or install specific packages\ninstall.packages(\"dplyr\")\ninstall.packages(\"ggplot2\")\n\n# now import them into your session\nlibrary(tidyverse)\nlibrary(dplyr)\nlibrary(ggplot2)"
+  },
+  {
+    "objectID": "posts/tidyverse-intro/index.html#inspecting-a-dataset",
+    "href": "posts/tidyverse-intro/index.html#inspecting-a-dataset",
+    "title": "Introduction to the tidyverse",
+    "section": "Inspecting a dataset",
+    "text": "Inspecting a dataset\nAn essential first step in any data analytical task is inspecting your data visually. Some packages come with dataset you can work with so you’ll want to see what they look like, or you can inspect your own data.\n\nToy datasets\nIt is useful to use toy datasets which come included when you install and import the relevant package. Some examples are:\n\nmpg from ggplot2\nstarwars from dplyr\nstorms from dplyr\nband_members from dplyr (a small dataset, it contains three tables useful for demonstrating joins)\n\n\n1library(dplyr)\n\n# open ggplot2's data dictionary for this packages internal dataset\n# help(\"mpg\")\n\n# load the dataset into a variable\n2df &lt;- ggplot2::mpg\n\n# see information rich summary\n# glimpse(df)\n\n# see top n rows\n3df %&gt;% head(n = 5)\n\n\n1\n\nWe need this package so we can access the %&gt;% ‘pipe’ operator\n\n2\n\nthis notation tells R to look in the ggplot2 package for the dataset mpg\n\n3\n\nYou can also use tail() to see the bottom n rows. Use head() to default to the top 6 rows.\n\n\n\n\n# A tibble: 5 × 11\n  manufacturer model displ  year   cyl trans      drv     cty   hwy fl    class \n  &lt;chr&gt;        &lt;chr&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;      &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; \n1 audi         a4      1.8  1999     4 auto(l5)   f        18    29 p     compa…\n2 audi         a4      1.8  1999     4 manual(m5) f        21    29 p     compa…\n3 audi         a4      2    2008     4 manual(m6) f        20    31 p     compa…\n4 audi         a4      2    2008     4 auto(av)   f        21    30 p     compa…\n5 audi         a4      2.8  1999     6 auto(l5)   f        16    26 p     compa…"
+  },
+  {
+    "objectID": "posts/quarto-tutorial/index.html",
+    "href": "posts/quarto-tutorial/index.html",
+    "title": "Quarto Demo",
+    "section": "",
+    "text": "Abstract River\nClick the code tools icon in the banner to see all Quarto code used in this article: &lt;/&gt; Code\nAn example sentence - info\nAn example sentence - success\nAn example sentence - warning\nAn example sentence - danger\nThis is a demo using panels and code chunks:"
+  },
+  {
+    "objectID": "posts/quarto-tutorial/index.html#link-icons",
+    "href": "posts/quarto-tutorial/index.html#link-icons",
+    "title": "Quarto Demo",
+    "section": "Link icons",
+    "text": "Link icons\nOther link icons you can generate using header yaml include, info-circle, download, book, postcard, rss. We already use the github and linkedin link icons in about.qmd.\nSee the info yaml in the Ibis Quarto website for examples."
+  },
+  {
+    "objectID": "posts/quarto-tutorial/index.html#fenced-divs",
+    "href": "posts/quarto-tutorial/index.html#fenced-divs",
+    "title": "Quarto Demo",
+    "section": "Fenced divs",
+    "text": "Fenced divs\nYou can add classes, attributes, and other identifiers to regions of content using divs and spans:\n\nBorders\n\nThis content can be styled with a border\n\n\n\nCallout notes\n\n\n\n\n\n\nNote\n\n\n\nNote that there are five types of callouts, including: note, tip, warning, caution, and important.\n\n\n\n\n\n\n\n\nTip with caption\n\n\n\nLeave a tip in a caption box like this!\n\n\n\n\n\n\n\n\nWarning without icon\n\n\n\n\n\nThis one is collapsed and has no icon\n\n\n\n\n\n\n\n\n\nImportant with custom caption\n\n\n\nA simplified callout note"
+  },
+  {
+    "objectID": "posts/quarto-tutorial/index.html#in-the-margin",
+    "href": "posts/quarto-tutorial/index.html#in-the-margin",
+    "title": "Quarto Demo",
+    "section": "In the margin",
+    "text": "In the margin\nLook right\n\n\nCheck out this YouTube playlist with great talks on blogging!"
+  },
+  {
+    "objectID": "posts/quarto-tutorial/index.html#linking-internally",
+    "href": "posts/quarto-tutorial/index.html#linking-internally",
+    "title": "Quarto Demo",
+    "section": "Linking internally",
+    "text": "Linking internally\nQuite easy, just specify the relative folder path to get there from here: ../../about.qmd"
+  },
+  {
+    "objectID": "posts/quarto-tutorial/index.html#embed-content-as-html",
+    "href": "posts/quarto-tutorial/index.html#embed-content-as-html",
+    "title": "Quarto Demo",
+    "section": "Embed content as HTML",
+    "text": "Embed content as HTML"
+  },
+  {
+    "objectID": "license.html",
+    "href": "license.html",
+    "title": "License",
+    "section": "",
+    "text": "© Copyright Matthew Scott\nThis is my personal website. Nothing here is endorsed by my employer or any organizations of which I am a part. Content on this site is provided under a Creative Commons (CC-BY) 4.0 license. You may reuse this content as long as you indicate my authorship and provide a link back to the original material. Source code of the site is provided under the MIT license and may be reused without restriction.\nAll images created using Procreate unless otherwise specified."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Matthew Scott",
+    "section": "",
+    "text": "Apprentice Data Scientist at The Pensions Regulator | Resume"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Posts",
+    "section": "",
+    "text": "You have found my personal data science focused learning blog. I post content I find useful to reinforce my learning and refer back to. You might find it useful as well. Search the filter bar or select a category.\n\n\n\n\n\n\n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nTidy selection\n\n\nA powerful tool when working with columns\n\n\n\nr\n\n\ntidyverse\n\n\ndplyr\n\n\n\nMake programming with the tidyverse easier\n\n\n\n\n\n10 August 2024\n\n\nMatthew Scott\n\n\n\n\n\n\n\n\n\n\n\n\nTidyverse Essentials - dplyr\n\n\nThe grammar of data wrangling\n\n\n\ntutorial\n\n\nr\n\n\ntidyverse\n\n\ndplyr\n\n\nintro\n\n\n\nData wrangling: solve the most common data manipulation challenges\n\n\n\n\n\n24 July 2024\n\n\nMatthew Scott\n\n\n\n\n\n\n\n\n\n\n\n\nIntroduction to the tidyverse\n\n\nData Science flavoured R\n\n\n\ntutorial\n\n\nr\n\n\ntidyverse\n\n\nintro\n\n\n\nTidyverse is a collection of R packages designed for data science\n\n\n\n\n\n20 July 2024\n\n\nMatthew Scott\n\n\n\n\n\n\n\n\n\n\n\n\nQuarto Demo\n\n\nA how-to of syntax\n\n\n\ntutorial\n\n\nquarto\n\n\nr\n\n\n\nThe art of the possible\n\n\n\n\n\n19 July 2024\n\n\nMatthew Scott\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/tidyverse-dplyr/index.html",
+    "href": "posts/tidyverse-dplyr/index.html",
+    "title": "Tidyverse Essentials - dplyr",
+    "section": "",
+    "text": "Abstract Canvas"
+  },
+  {
+    "objectID": "posts/tidyverse-dplyr/index.html#introduction",
+    "href": "posts/tidyverse-dplyr/index.html#introduction",
+    "title": "Tidyverse Essentials - dplyr",
+    "section": "Introduction",
+    "text": "Introduction\ndplyr helps manipulate datasets. That is, it can be used to change their shape - the number of rows, columns, as well as verbs to create new columns.\n\nDataset used in this tutorial\nWe will use the mpg data set in this tutorial and run through a lot of the common syntax used to manipulate a table.\n\nlibrary(ggplot2)\n1glimpse(mpg)\n\n\n1\n\nWe can see the column names, their datatype (inside &lt; &gt;) and example data in a list-like format. We also get information on the number of rows and columns, the ‘shape’\n\n\n\n\nRows: 234\nColumns: 11\n$ manufacturer &lt;chr&gt; \"audi\", \"audi\", \"audi\", \"audi\", \"audi\", \"audi\", \"audi\", \"…\n$ model        &lt;chr&gt; \"a4\", \"a4\", \"a4\", \"a4\", \"a4\", \"a4\", \"a4\", \"a4 quattro\", \"…\n$ displ        &lt;dbl&gt; 1.8, 1.8, 2.0, 2.0, 2.8, 2.8, 3.1, 1.8, 1.8, 2.0, 2.0, 2.…\n$ year         &lt;int&gt; 1999, 1999, 2008, 2008, 1999, 1999, 2008, 1999, 1999, 200…\n$ cyl          &lt;int&gt; 4, 4, 4, 4, 6, 6, 6, 4, 4, 4, 4, 6, 6, 6, 6, 6, 6, 8, 8, …\n$ trans        &lt;chr&gt; \"auto(l5)\", \"manual(m5)\", \"manual(m6)\", \"auto(av)\", \"auto…\n$ drv          &lt;chr&gt; \"f\", \"f\", \"f\", \"f\", \"f\", \"f\", \"f\", \"4\", \"4\", \"4\", \"4\", \"4…\n$ cty          &lt;int&gt; 18, 21, 20, 21, 16, 18, 18, 18, 16, 20, 19, 15, 17, 17, 1…\n$ hwy          &lt;int&gt; 29, 29, 31, 30, 26, 26, 27, 26, 25, 28, 27, 25, 25, 25, 2…\n$ fl           &lt;chr&gt; \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p…\n$ class        &lt;chr&gt; \"compact\", \"compact\", \"compact\", \"compact\", \"compact\", \"c…"
+  },
+  {
+    "objectID": "posts/tidyverse-dplyr/index.html#select-rename",
+    "href": "posts/tidyverse-dplyr/index.html#select-rename",
+    "title": "Tidyverse Essentials - dplyr",
+    "section": "select() & rename()",
+    "text": "select() & rename()\nChoose which columns to include or exclude.\nselect([df], helper_function([col_1], [col_2]))\nYou can wrap the columns in helper functions:\n\ncontains(match, ignore.case = T) - column name contains a certain string\nstarts_with(match, ignore.case = T) - column names start with\nends_with(match, ignore.case = T) - column names end with\nmatches(match, ignore.case = T) - matches a regular expression\nnum_range(prefix, range, ...) - names following the pattern e.g. num_range(\"Wk\", 1:3): “Wk1”, “Wk2”, “Wk3”\nany_of() - will select all columns available from a list\nall_of() - used for strict selection. Throws an error if one of the columns named in the list aren’t present in the dataframe\nmatches() - exactly matches a certain string\nwhere(is.numeric()) - will select all numeric columns (int or dbl). Also is.character, is.factor, is.integer, is.double\n\nrename([new_name] = [old_name])\n\n# selecting column by index (position)\n\n# select columns in position 1-3\nselect(df, 1:3)\n# select columns in position 1-3\nselect(df, c(2, 5, 7))\n# select from the second to last column to the last column\nselect(df, (ncol(df) -2) : ncol(df))\n\n# selecting columns that contain 'l' (upper or lower case) \n# and renaming 'model' to 'type' etc.\ndf %&gt;%  \n  select(contains('l', ignore.case = T)) %&gt;% \n  rename(type = model, cylinder = cyl)\n\n# select and rename in one call\nselect(df, \n1       mnfc = manufacturer,\n       mod = model,\n2       everything())\n\n# select all numeric columns plus some extras\nmpg %&gt;%\n3  select(where(is.numeric),\n4         mnfc = manufacturer,\n         mod = model)\n\n# another approach: create a vector and use this with any_of()\nnumerical_cols &lt;- c('displ', 'year', 'cyl', 'cty', 'hwy')\nnumerical_df &lt;- df %&gt;% \n  select(any_of(numerical_cols))\n\n# negative selections\ndf %&gt;% \n5  select(-any_of(c(model, displ, cyl)))\n\n\n1\n\nselect and rename in one call\n\n2\n\nselect all remaining columns that haven’t already been specified\n\n3\n\nthis will select all column of data type int or dbl\n\n4\n\nadd two additional non-numeric cols to your selection\n\n5\n\nremove any of these columns that appear in the data frame"
+  },
+  {
+    "objectID": "posts/tidyverse-dplyr/index.html#mutate-transmute",
+    "href": "posts/tidyverse-dplyr/index.html#mutate-transmute",
+    "title": "Tidyverse Essentials - dplyr",
+    "section": "mutate() & transmute()",
+    "text": "mutate() & transmute()\nCreate new columns from existing ones.\nmutate([new_col] = [old_col(s) + logic])\n\ncreates a new column based on the logic provided\nyou can create multiple columns at one time\nadds the new col to the df\n\ntransmute([new_col] = [old_col(s) + logic])\n\ncreates a new column and drops other columns (this can be useful when do machine learning and you don’t want the new columns interfering with the model)\n\nHelpful functions for dealing with strings:\n\n\n\nFunctions\n\n\n\n\nas.character()\n\n\nas.date()\n\n\nas.integer()\n\n\n\nNote There is also lubridate and hms packages for working with dates and times that give a lot more flexibility. stringr is another useful package commonly used with mutate to extract parts of string columns.\n\n# create 'avg mpg' column and paste together two cols into 'car'\n# this will return the full df plus these two new cols\nmpg %&gt;% \n    mutate(\n         car = paste(manufacturer, model, sep = ' '),\n        `avg mpg` = (( cty + hwy ) / 2 ),\n1         cty,\n2        .keep = \"none\") %&gt;%\n    head(5)\n\n\n1\n\nWe can specify the col name with no calc and it will get included\n\n2\n\nActs like transmute to keep only created columns\n\n\n\n\n# A tibble: 5 × 3\n    cty car     `avg mpg`\n  &lt;int&gt; &lt;chr&gt;       &lt;dbl&gt;\n1    18 audi a4      23.5\n2    21 audi a4      25  \n3    20 audi a4      25.5\n4    21 audi a4      25.5\n5    16 audi a4      21  \n\n\nUse .by to group our selection in a single expression. We return the max avg mpg for each model type:\n\nmpg %&gt;% \n    mutate(`avg mpg` = ((cty+hwy)/2),\n           `max avg mpg` = max(`avg mpg`),\n           .by = model,\n1           .keep = \"used\")\n\n\n1\n\nNow we keep only columns used in our mutate verb, including those used in the calculations.\n\n\n\n\n# A tibble: 234 × 5\n   model        cty   hwy `avg mpg` `max avg mpg`\n   &lt;chr&gt;      &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;         &lt;dbl&gt;\n 1 a4            18    29      23.5          25.5\n 2 a4            21    29      25            25.5\n 3 a4            20    31      25.5          25.5\n 4 a4            21    30      25.5          25.5\n 5 a4            16    26      21            25.5\n 6 a4            18    26      22            25.5\n 7 a4            18    27      22.5          25.5\n 8 a4 quattro    18    26      22            24  \n 9 a4 quattro    16    25      20.5          24  \n10 a4 quattro    20    28      24            24  \n# ℹ 224 more rows\n\n\n\nCommon usage\nReplace existing columns with mutated version of themselves, either by converting the data type or cleaning the column of NAs. Create new columns with mutate.\n\ncase_when()\ncase_match()\nif_else()\nna_if()\n\n\n# mutate with case_when\nmpg %&gt;% \n    mutate(\n        \"hwy_bins\" = case_when(\n            hwy &lt; 20 ~ \"low\",\n            between(hwy, 20, 30) ~ \"medium\",\n            hwy &gt; 30 ~ \"high\",\n            TRUE ~ NA_character_\n            ))\n\n# mutate with if_else\nmpg %&gt;% \n    mutate(\n        \"is_offroad\" = if_else(\n            drv == \"4\", \"Y\", \"N\"\n        ))\n\n# mutate with na_if() to replace values with NA\nmpg %&gt;% \n1    mutate(year = na_if(year, NaN))\n\n\n1\n\nif NaN present, replace it with NA to help clean the column\n\n\n\n\n\n\nOther mutate verbs\n\nmutate_all() - affects every variable\nmutate_if() - affects variables selected with a predicate function\nmutate_at() - affects variables selected with a character variable or vars()\n\n\n# This code:\ntable_sep &lt;- table %&gt;%\n  separate(col = date,\n           into = c(\"year\", \"month\", \"dayofmonth\"),\n           sep = \"-\") %&gt;%\n1  mutate(month = as.numeric(month),\n         dayofmonth = as.numeric(dayofmonth)) %&gt;%\n  arrange(year, month, dayofmonth)\n\n# is the same as this:\ntable_sep &lt;- table %&gt;%\n  separate(col = date,\n           into = c(\"year\", \"month\", \"dayofmonth\"),\n           sep = \"-\") %&gt;%\n2  mutate_at(.vars = c(\"month\", \"dayofmonth\"),\n            .funs = as.numeric)\n  arrange(year, month, dayofmonth)\n\n\n1\n\nWhere we have to specify every column to change data type here…\n\n2\n\n…we can supply the columns in a list and only have to specify the mutate function once\n\n\n\n\nYou can imagine if we had lots of columns to mutate, this would be much more succinct.\n\n\n\n\n\n\nNote\n\n\n\nIt is generally preferred to use across() instead of the above verbs. See Column-wise operations for a detailed explanation of this.\n\n\nYou can mutate any column that is.character/is.numeric…:\n\nmpg %&gt;% \n1    mutate_if(is.character, stringr::str_to_title) %&gt;%\n    select(is.character) %&gt;% \n    head(4)\n\n\n1\n\nconvert all character columns to title case (upper case at start of each word)\n\n\n\n\n# A tibble: 4 × 6\n  manufacturer model trans      drv   fl    class  \n  &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  \n1 Audi         A4    Auto(L5)   F     P     Compact\n2 Audi         A4    Manual(M5) F     P     Compact\n3 Audi         A4    Manual(M6) F     P     Compact\n4 Audi         A4    Auto(Av)   F     P     Compact\n\n\n\n\nacross()\nacross works very well with summarise() & mutate().\n\nmpg %&gt;% \n1    summarise(across(where(is.character), n_distinct))\n\n\n1\n\nacross() is used to apply the summary, n_distint(), across the selected columns - in this case all character columns\n\n\n\n\n# A tibble: 1 × 6\n  manufacturer model trans   drv    fl class\n         &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;\n1           15    38    10     3     5     7"
+  },
+  {
+    "objectID": "posts/tidyverse-dplyr/index.html#filter-slice",
+    "href": "posts/tidyverse-dplyr/index.html#filter-slice",
+    "title": "Tidyverse Essentials - dplyr",
+    "section": "filter() & slice()",
+    "text": "filter() & slice()\n\nfilter()\nUsed to extract or create a subset of rows based on logical operators - it will produce a new table\nLogical operators to use with filter():\n\n\n\nOperator\nMeaning\n\n\n\n\n==\nequal to\n\n\n!=\nnot equal to\n\n\n&lt;\nless than\n\n\n&gt;\ngreater than\n\n\n&lt;=\nless than or equal to\n\n\n&gt;=\ngreater than or equal to\n\n\n!\nnot\n\n\nis.na()\nis NA\n\n\n!is.na()\nis not NA\n\n\n%in%\nis in (a vector)\n\n\n|\nor\n\n\n&\nand\n\n\nxor()\nexclusive or - ‘one or the other but not both’\n\n\n\nFiltering a table:\n\n# this is the same as '&'\nmpg %&gt;% \n    filter(manufacturer == \"audi\",\n1           year == 1999) %&gt;%\n    head()\n\n\n1\n\nnotice we can also reference variables\n\n\n\n\n# A tibble: 6 × 11\n  manufacturer model      displ  year   cyl trans  drv     cty   hwy fl    class\n  &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;  &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;\n1 audi         a4           1.8  1999     4 auto(… f        18    29 p     comp…\n2 audi         a4           1.8  1999     4 manua… f        21    29 p     comp…\n3 audi         a4           2.8  1999     6 auto(… f        16    26 p     comp…\n4 audi         a4           2.8  1999     6 manua… f        18    26 p     comp…\n5 audi         a4 quattro   1.8  1999     4 manua… 4        18    26 p     comp…\n6 audi         a4 quattro   1.8  1999     4 auto(… 4        16    25 p     comp…\n\n\n\n\nslice()\nUsed to select certain rows of the table based on row position\nRelated slice functions:\n\nslice_head()\nslice_tail()\nslice_sample()\nslice_max()\nslice_min()\n\n\n# select rows 10-20\nslice(df, 10:20)\n\n# slice top 10 rows\nslice_head(df, n = 10)\n\n# select bottom rows\n1slice_tail(df, prop = .1)\n\n# select 10 rows at random from df\nslice_sample(df, 10)\n# select rows at random based on proportion of df\nslice_sample(df, prop = .1)\n\n2df %&gt;% slice_max(hwy, n = 10)\ndf %&gt;% slice_min(hwy, prop = .1)\n\n\n1\n\nselect the bottom 10% of the df\n\n2\n\norder by the selected column and select the top/bottom rows\n\n\n\n\n\n\n\n\n\n\nslice_sample() Note\n\n\n\nslice-sample can be done in two main ways, by taking the sampled rows ‘out’ of the data frame (so when subsequent sample slices are made, they cannot be chosen again), or by ‘replacing’ the sample (so in subsequent sample slices the same rows can be chosen again).\nThis is done using the replace = argument:\n\ndf %&gt;% slice_sample(prop = .1, replace = True)\ndf %&gt;% slice_sample(prop = .1, replace = False)\n\nreplace = False is the default.\n\n\n\nYou can set a seed for reproducibility. Using the same seed will yield the same random selection each time, useful for code reviews where your results need to be reproduced.\n\n\n# use base r for this\nset.seed(200)"
+  },
+  {
+    "objectID": "posts/tidyverse-dplyr/index.html#arrange",
+    "href": "posts/tidyverse-dplyr/index.html#arrange",
+    "title": "Tidyverse Essentials - dplyr",
+    "section": "arrange()",
+    "text": "arrange()\narrange([data], desc([column_a], [column_b], ...))\n\nSort rows by columns or values that you define\nAnalogous to ORDER BY in SQL syntax\nCan wrap columns in desc() to arrange in descending order\n\n\n# arrange by year asc\narrange(df, year)\n#  arrange by year desc\narrange(df, desc(year))\n# arrange by multiple columns\narrange(df, desc(cyl), displ) \n\n# or using the pipe\ndf %&gt;% arrange(desc(year))"
+  },
+  {
+    "objectID": "posts/tidyverse-dplyr/index.html#distinct",
+    "href": "posts/tidyverse-dplyr/index.html#distinct",
+    "title": "Tidyverse Essentials - dplyr",
+    "section": "distinct()",
+    "text": "distinct()\ndistinct([df], [col_a], [col_b], ...)\n\nRemoves rows with duplicate values\nSpecify columns in distinct to select only those column\n\n\n# will create a table where the combination \n# of manufacturer and model is distinct\nmpg %&gt;% \n  select(manufacturer, model) %&gt;% \n1  distinct()\n\n\n1\n\nBecause no columns are specified, distinct returns all columns\n\n\n\n\n# A tibble: 38 × 2\n   manufacturer model             \n   &lt;chr&gt;        &lt;chr&gt;             \n 1 audi         a4                \n 2 audi         a4 quattro        \n 3 audi         a6 quattro        \n 4 chevrolet    c1500 suburban 2wd\n 5 chevrolet    corvette          \n 6 chevrolet    k1500 tahoe 4wd   \n 7 chevrolet    malibu            \n 8 dodge        caravan 2wd       \n 9 dodge        dakota pickup 4wd \n10 dodge        durango 4wd       \n# ℹ 28 more rows\n\n\n\nmpg %&gt;% \n1    group_by(model) %&gt;%\n2    distinct(manufacturer, .keep_all = T)\n\n\n1\n\ndistinct will respect group_by and return distinct values for each group\n\n2\n\nkeep_all will keep the first row of values\n\n\n\n\n# A tibble: 38 × 11\n# Groups:   model [38]\n   manufacturer model      displ  year   cyl trans drv     cty   hwy fl    class\n   &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;\n 1 audi         a4           1.8  1999     4 auto… f        18    29 p     comp…\n 2 audi         a4 quattro   1.8  1999     4 manu… 4        18    26 p     comp…\n 3 audi         a6 quattro   2.8  1999     6 auto… 4        15    24 p     mids…\n 4 chevrolet    c1500 sub…   5.3  2008     8 auto… r        14    20 r     suv  \n 5 chevrolet    corvette     5.7  1999     8 manu… r        16    26 p     2sea…\n 6 chevrolet    k1500 tah…   5.3  2008     8 auto… 4        14    19 r     suv  \n 7 chevrolet    malibu       2.4  1999     4 auto… f        19    27 r     mids…\n 8 dodge        caravan 2…   2.4  1999     4 auto… f        18    24 r     mini…\n 9 dodge        dakota pi…   3.7  2008     6 manu… 4        15    19 r     pick…\n10 dodge        durango 4…   3.9  1999     6 auto… 4        13    17 r     suv  \n# ℹ 28 more rows"
   },
   {
     "objectID": "posts/tidyverse-tidy-selection/index.html",
@@ -63,150 +210,10 @@
     "text": "References\n\nProgramming with dplyr\nTechnical description of tidyselect\nArgument type: data masking"
   },
   {
-    "objectID": "posts/tidyverse-dplyr/index.html",
-    "href": "posts/tidyverse-dplyr/index.html",
-    "title": "Tidyverse Essentials - dplyr",
+    "objectID": "projects/pdf-text-explorer-tool/index.html",
+    "href": "projects/pdf-text-explorer-tool/index.html",
+    "title": "PDF Text Explorer Tool",
     "section": "",
-    "text": "Abstract Canvas"
-  },
-  {
-    "objectID": "posts/tidyverse-dplyr/index.html#introduction",
-    "href": "posts/tidyverse-dplyr/index.html#introduction",
-    "title": "Tidyverse Essentials - dplyr",
-    "section": "Introduction",
-    "text": "Introduction\ndplyr helps manipulate datasets. That is, it can be used to change their shape - the number of rows, columns, as well as verbs to create new columns.\n\nDataset used in this tutorial\nWe will use the mpg data set in this tutorial and run through a lot of the common syntax used to manipulate a table.\n\nlibrary(ggplot2)\n1glimpse(mpg)\n\n\n1\n\nWe can see the column names, their datatype (inside &lt; &gt;) and example data in a list-like format. We also get information on the number of rows and columns, the ‘shape’\n\n\n\n\nRows: 234\nColumns: 11\n$ manufacturer &lt;chr&gt; \"audi\", \"audi\", \"audi\", \"audi\", \"audi\", \"audi\", \"audi\", \"…\n$ model        &lt;chr&gt; \"a4\", \"a4\", \"a4\", \"a4\", \"a4\", \"a4\", \"a4\", \"a4 quattro\", \"…\n$ displ        &lt;dbl&gt; 1.8, 1.8, 2.0, 2.0, 2.8, 2.8, 3.1, 1.8, 1.8, 2.0, 2.0, 2.…\n$ year         &lt;int&gt; 1999, 1999, 2008, 2008, 1999, 1999, 2008, 1999, 1999, 200…\n$ cyl          &lt;int&gt; 4, 4, 4, 4, 6, 6, 6, 4, 4, 4, 4, 6, 6, 6, 6, 6, 6, 8, 8, …\n$ trans        &lt;chr&gt; \"auto(l5)\", \"manual(m5)\", \"manual(m6)\", \"auto(av)\", \"auto…\n$ drv          &lt;chr&gt; \"f\", \"f\", \"f\", \"f\", \"f\", \"f\", \"f\", \"4\", \"4\", \"4\", \"4\", \"4…\n$ cty          &lt;int&gt; 18, 21, 20, 21, 16, 18, 18, 18, 16, 20, 19, 15, 17, 17, 1…\n$ hwy          &lt;int&gt; 29, 29, 31, 30, 26, 26, 27, 26, 25, 28, 27, 25, 25, 25, 2…\n$ fl           &lt;chr&gt; \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p\", \"p…\n$ class        &lt;chr&gt; \"compact\", \"compact\", \"compact\", \"compact\", \"compact\", \"c…"
-  },
-  {
-    "objectID": "posts/tidyverse-dplyr/index.html#select-rename",
-    "href": "posts/tidyverse-dplyr/index.html#select-rename",
-    "title": "Tidyverse Essentials - dplyr",
-    "section": "select() & rename()",
-    "text": "select() & rename()\nChoose which columns to include or exclude.\nselect([df], helper_function([col_1], [col_2]))\nYou can wrap the columns in helper functions:\n\ncontains(match, ignore.case = T) - column name contains a certain string\nstarts_with(match, ignore.case = T) - column names start with\nends_with(match, ignore.case = T) - column names end with\nmatches(match, ignore.case = T) - matches a regular expression\nnum_range(prefix, range, ...) - names following the pattern e.g. num_range(\"Wk\", 1:3): “Wk1”, “Wk2”, “Wk3”\nany_of() - will select all columns available from a list\nall_of() - used for strict selection. Throws an error if one of the columns named in the list aren’t present in the dataframe\nmatches() - exactly matches a certain string\nwhere(is.numeric()) - will select all numeric columns (int or dbl). Also is.character, is.factor, is.integer, is.double\n\nrename([new_name] = [old_name])\n\n# selecting column by index (position)\n\n# select columns in position 1-3\nselect(df, 1:3)\n# select columns in position 1-3\nselect(df, c(2, 5, 7))\n# select from the second to last column to the last column\nselect(df, (ncol(df) -2) : ncol(df))\n\n# selecting columns that contain 'l' (upper or lower case) \n# and renaming 'model' to 'type' etc.\ndf %&gt;%  \n  select(contains('l', ignore.case = T)) %&gt;% \n  rename(type = model, cylinder = cyl)\n\n# select and rename in one call\nselect(df, \n1       mnfc = manufacturer,\n       mod = model,\n2       everything())\n\n# select all numeric columns plus some extras\nmpg %&gt;%\n3  select(where(is.numeric),\n4         mnfc = manufacturer,\n         mod = model)\n\n# another approach: create a vector and use this with any_of()\nnumerical_cols &lt;- c('displ', 'year', 'cyl', 'cty', 'hwy')\nnumerical_df &lt;- df %&gt;% \n  select(any_of(numerical_cols))\n\n# negative selections\ndf %&gt;% \n5  select(-any_of(c(model, displ, cyl)))\n\n\n1\n\nselect and rename in one call\n\n2\n\nselect all remaining columns that haven’t already been specified\n\n3\n\nthis will select all column of data type int or dbl\n\n4\n\nadd two additional non-numeric cols to your selection\n\n5\n\nremove any of these columns that appear in the data frame"
-  },
-  {
-    "objectID": "posts/tidyverse-dplyr/index.html#mutate-transmute",
-    "href": "posts/tidyverse-dplyr/index.html#mutate-transmute",
-    "title": "Tidyverse Essentials - dplyr",
-    "section": "mutate() & transmute()",
-    "text": "mutate() & transmute()\nCreate new columns from existing ones.\nmutate([new_col] = [old_col(s) + logic])\n\ncreates a new column based on the logic provided\nyou can create multiple columns at one time\nadds the new col to the df\n\ntransmute([new_col] = [old_col(s) + logic])\n\ncreates a new column and drops other columns (this can be useful when do machine learning and you don’t want the new columns interfering with the model)\n\nHelpful functions for dealing with strings:\n\n\n\nFunctions\n\n\n\n\nas.character()\n\n\nas.date()\n\n\nas.integer()\n\n\n\nNote There is also lubridate and hms packages for working with dates and times that give a lot more flexibility. stringr is another useful package commonly used with mutate to extract parts of string columns.\n\n# create 'avg mpg' column and paste together two cols into 'car'\n# this will return the full df plus these two new cols\nmpg %&gt;% \n    mutate(\n         car = paste(manufacturer, model, sep = ' '),\n        `avg mpg` = (( cty + hwy ) / 2 ),\n1         cty,\n2        .keep = \"none\") %&gt;%\n    head(5)\n\n\n1\n\nWe can specify the col name with no calc and it will get included\n\n2\n\nActs like transmute to keep only created columns\n\n\n\n\n# A tibble: 5 × 3\n    cty car     `avg mpg`\n  &lt;int&gt; &lt;chr&gt;       &lt;dbl&gt;\n1    18 audi a4      23.5\n2    21 audi a4      25  \n3    20 audi a4      25.5\n4    21 audi a4      25.5\n5    16 audi a4      21  \n\n\nUse .by to group our selection in a single expression. We return the max avg mpg for each model type:\n\nmpg %&gt;% \n    mutate(`avg mpg` = ((cty+hwy)/2),\n           `max avg mpg` = max(`avg mpg`),\n           .by = model,\n1           .keep = \"used\")\n\n\n1\n\nNow we keep only columns used in our mutate verb, including those used in the calculations.\n\n\n\n\n# A tibble: 234 × 5\n   model        cty   hwy `avg mpg` `max avg mpg`\n   &lt;chr&gt;      &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;         &lt;dbl&gt;\n 1 a4            18    29      23.5          25.5\n 2 a4            21    29      25            25.5\n 3 a4            20    31      25.5          25.5\n 4 a4            21    30      25.5          25.5\n 5 a4            16    26      21            25.5\n 6 a4            18    26      22            25.5\n 7 a4            18    27      22.5          25.5\n 8 a4 quattro    18    26      22            24  \n 9 a4 quattro    16    25      20.5          24  \n10 a4 quattro    20    28      24            24  \n# ℹ 224 more rows\n\n\n\nCommon usage\nReplace existing columns with mutated version of themselves, either by converting the data type or cleaning the column of NAs. Create new columns with mutate.\n\ncase_when()\ncase_match()\nif_else()\nna_if()\n\n\n# mutate with case_when\nmpg %&gt;% \n    mutate(\n        \"hwy_bins\" = case_when(\n            hwy &lt; 20 ~ \"low\",\n            between(hwy, 20, 30) ~ \"medium\",\n            hwy &gt; 30 ~ \"high\",\n            TRUE ~ NA_character_\n            ))\n\n# mutate with if_else\nmpg %&gt;% \n    mutate(\n        \"is_offroad\" = if_else(\n            drv == \"4\", \"Y\", \"N\"\n        ))\n\n# mutate with na_if() to replace values with NA\nmpg %&gt;% \n1    mutate(year = na_if(year, NaN))\n\n\n1\n\nif NaN present, replace it with NA to help clean the column\n\n\n\n\n\n\nOther mutate verbs\n\nmutate_all() - affects every variable\nmutate_if() - affects variables selected with a predicate function\nmutate_at() - affects variables selected with a character variable or vars()\n\n\n# This code:\ntable_sep &lt;- table %&gt;%\n  separate(col = date,\n           into = c(\"year\", \"month\", \"dayofmonth\"),\n           sep = \"-\") %&gt;%\n1  mutate(month = as.numeric(month),\n         dayofmonth = as.numeric(dayofmonth)) %&gt;%\n  arrange(year, month, dayofmonth)\n\n# is the same as this:\ntable_sep &lt;- table %&gt;%\n  separate(col = date,\n           into = c(\"year\", \"month\", \"dayofmonth\"),\n           sep = \"-\") %&gt;%\n2  mutate_at(.vars = c(\"month\", \"dayofmonth\"),\n            .funs = as.numeric)\n  arrange(year, month, dayofmonth)\n\n\n1\n\nWhere we have to specify every column to change data type here…\n\n2\n\n…we can supply the columns in a list and only have to specify the mutate function once\n\n\n\n\nYou can imagine if we had lots of columns to mutate, this would be much more succinct.\n\n\n\n\n\n\nNote\n\n\n\nIt is generally preferred to use across() instead of the above verbs. See Column-wise operations for a detailed explanation of this.\n\n\nYou can mutate any column that is.character/is.numeric…:\n\nmpg %&gt;% \n1    mutate_if(is.character, stringr::str_to_title) %&gt;%\n    select(is.character) %&gt;% \n    head(4)\n\n\n1\n\nconvert all character columns to title case (upper case at start of each word)\n\n\n\n\n# A tibble: 4 × 6\n  manufacturer model trans      drv   fl    class  \n  &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  \n1 Audi         A4    Auto(L5)   F     P     Compact\n2 Audi         A4    Manual(M5) F     P     Compact\n3 Audi         A4    Manual(M6) F     P     Compact\n4 Audi         A4    Auto(Av)   F     P     Compact\n\n\n\n\nacross()\nacross works very well with summarise() & mutate().\n\nmpg %&gt;% \n1    summarise(across(where(is.character), n_distinct))\n\n\n1\n\nacross() is used to apply the summary, n_distint(), across the selected columns - in this case all character columns\n\n\n\n\n# A tibble: 1 × 6\n  manufacturer model trans   drv    fl class\n         &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;\n1           15    38    10     3     5     7"
-  },
-  {
-    "objectID": "posts/tidyverse-dplyr/index.html#filter-slice",
-    "href": "posts/tidyverse-dplyr/index.html#filter-slice",
-    "title": "Tidyverse Essentials - dplyr",
-    "section": "filter() & slice()",
-    "text": "filter() & slice()\n\nfilter()\nUsed to extract or create a subset of rows based on logical operators - it will produce a new table\nLogical operators to use with filter():\n\n\n\nOperator\nMeaning\n\n\n\n\n==\nequal to\n\n\n!=\nnot equal to\n\n\n&lt;\nless than\n\n\n&gt;\ngreater than\n\n\n&lt;=\nless than or equal to\n\n\n&gt;=\ngreater than or equal to\n\n\n!\nnot\n\n\nis.na()\nis NA\n\n\n!is.na()\nis not NA\n\n\n%in%\nis in (a vector)\n\n\n|\nor\n\n\n&\nand\n\n\nxor()\nexclusive or - ‘one or the other but not both’\n\n\n\nFiltering a table:\n\n# this is the same as '&'\nmpg %&gt;% \n    filter(manufacturer == \"audi\",\n1           year == 1999) %&gt;%\n    head()\n\n\n1\n\nnotice we can also reference variables\n\n\n\n\n# A tibble: 6 × 11\n  manufacturer model      displ  year   cyl trans  drv     cty   hwy fl    class\n  &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;  &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;\n1 audi         a4           1.8  1999     4 auto(… f        18    29 p     comp…\n2 audi         a4           1.8  1999     4 manua… f        21    29 p     comp…\n3 audi         a4           2.8  1999     6 auto(… f        16    26 p     comp…\n4 audi         a4           2.8  1999     6 manua… f        18    26 p     comp…\n5 audi         a4 quattro   1.8  1999     4 manua… 4        18    26 p     comp…\n6 audi         a4 quattro   1.8  1999     4 auto(… 4        16    25 p     comp…\n\n\n\n\nslice()\nUsed to select certain rows of the table based on row position\nRelated slice functions:\n\nslice_head()\nslice_tail()\nslice_sample()\nslice_max()\nslice_min()\n\n\n# select rows 10-20\nslice(df, 10:20)\n\n# slice top 10 rows\nslice_head(df, n = 10)\n\n# select bottom rows\n1slice_tail(df, prop = .1)\n\n# select 10 rows at random from df\nslice_sample(df, 10)\n# select rows at random based on proportion of df\nslice_sample(df, prop = .1)\n\n2df %&gt;% slice_max(hwy, n = 10)\ndf %&gt;% slice_min(hwy, prop = .1)\n\n\n1\n\nselect the bottom 10% of the df\n\n2\n\norder by the selected column and select the top/bottom rows\n\n\n\n\n\n\n\n\n\n\nslice_sample() Note\n\n\n\nslice-sample can be done in two main ways, by taking the sampled rows ‘out’ of the data frame (so when subsequent sample slices are made, they cannot be chosen again), or by ‘replacing’ the sample (so in subsequent sample slices the same rows can be chosen again).\nThis is done using the replace = argument:\n\ndf %&gt;% slice_sample(prop = .1, replace = True)\ndf %&gt;% slice_sample(prop = .1, replace = False)\n\nreplace = False is the default.\n\n\n\nYou can set a seed for reproducibility. Using the same seed will yield the same random selection each time, useful for code reviews where your results need to be reproduced.\n\n\n# use base r for this\nset.seed(200)"
-  },
-  {
-    "objectID": "posts/tidyverse-dplyr/index.html#arrange",
-    "href": "posts/tidyverse-dplyr/index.html#arrange",
-    "title": "Tidyverse Essentials - dplyr",
-    "section": "arrange()",
-    "text": "arrange()\narrange([data], desc([column_a], [column_b], ...))\n\nSort rows by columns or values that you define\nAnalogous to ORDER BY in SQL syntax\nCan wrap columns in desc() to arrange in descending order\n\n\n# arrange by year asc\narrange(df, year)\n#  arrange by year desc\narrange(df, desc(year))\n# arrange by multiple columns\narrange(df, desc(cyl), displ) \n\n# or using the pipe\ndf %&gt;% arrange(desc(year))"
-  },
-  {
-    "objectID": "posts/tidyverse-dplyr/index.html#distinct",
-    "href": "posts/tidyverse-dplyr/index.html#distinct",
-    "title": "Tidyverse Essentials - dplyr",
-    "section": "distinct()",
-    "text": "distinct()\ndistinct([df], [col_a], [col_b], ...)\n\nRemoves rows with duplicate values\nSpecify columns in distinct to select only those column\n\n\n# will create a table where the combination \n# of manufacturer and model is distinct\nmpg %&gt;% \n  select(manufacturer, model) %&gt;% \n1  distinct()\n\n\n1\n\nBecause no columns are specified, distinct returns all columns\n\n\n\n\n# A tibble: 38 × 2\n   manufacturer model             \n   &lt;chr&gt;        &lt;chr&gt;             \n 1 audi         a4                \n 2 audi         a4 quattro        \n 3 audi         a6 quattro        \n 4 chevrolet    c1500 suburban 2wd\n 5 chevrolet    corvette          \n 6 chevrolet    k1500 tahoe 4wd   \n 7 chevrolet    malibu            \n 8 dodge        caravan 2wd       \n 9 dodge        dakota pickup 4wd \n10 dodge        durango 4wd       \n# ℹ 28 more rows\n\n\n\nmpg %&gt;% \n1    group_by(model) %&gt;%\n2    distinct(manufacturer, .keep_all = T)\n\n\n1\n\ndistinct will respect group_by and return distinct values for each group\n\n2\n\nkeep_all will keep the first row of values\n\n\n\n\n# A tibble: 38 × 11\n# Groups:   model [38]\n   manufacturer model      displ  year   cyl trans drv     cty   hwy fl    class\n   &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;\n 1 audi         a4           1.8  1999     4 auto… f        18    29 p     comp…\n 2 audi         a4 quattro   1.8  1999     4 manu… 4        18    26 p     comp…\n 3 audi         a6 quattro   2.8  1999     6 auto… 4        15    24 p     mids…\n 4 chevrolet    c1500 sub…   5.3  2008     8 auto… r        14    20 r     suv  \n 5 chevrolet    corvette     5.7  1999     8 manu… r        16    26 p     2sea…\n 6 chevrolet    k1500 tah…   5.3  2008     8 auto… 4        14    19 r     suv  \n 7 chevrolet    malibu       2.4  1999     4 auto… f        19    27 r     mids…\n 8 dodge        caravan 2…   2.4  1999     4 auto… f        18    24 r     mini…\n 9 dodge        dakota pi…   3.7  2008     6 manu… 4        15    19 r     pick…\n10 dodge        durango 4…   3.9  1999     6 auto… 4        13    17 r     suv  \n# ℹ 28 more rows"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Posts",
-    "section": "",
-    "text": "You have found my personal data science focused learning blog. I post content I find useful to reinforce my learning and refer back to. You might find it useful as well. Search the filter bar or select a category.\n\n\n\n\n\n\n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nTidy selection\n\n\nA powerful tool when working with columns\n\n\n\nr\n\n\ntidyverse\n\n\ndplyr\n\n\n\nMake programming with the tidyverse easier\n\n\n\n\n\n10 August 2024\n\n\nMatthew Scott\n\n\n\n\n\n\n\n\n\n\n\n\nTidyverse Essentials - dplyr\n\n\nThe grammar of data wrangling\n\n\n\ntutorial\n\n\nr\n\n\ntidyverse\n\n\ndplyr\n\n\nintro\n\n\n\nData wrangling: solve the most common data manipulation challenges\n\n\n\n\n\n24 July 2024\n\n\nMatthew Scott\n\n\n\n\n\n\n\n\n\n\n\n\nIntroduction to the tidyverse\n\n\nData Science flavoured R\n\n\n\ntutorial\n\n\nr\n\n\ntidyverse\n\n\nintro\n\n\n\nTidyverse is a collection of R packages designed for data science\n\n\n\n\n\n20 July 2024\n\n\nMatthew Scott\n\n\n\n\n\n\n\n\n\n\n\n\nQuarto Demo\n\n\nA how-to of syntax\n\n\n\ntutorial\n\n\nquarto\n\n\nr\n\n\n\nThe art of the possible\n\n\n\n\n\n19 July 2024\n\n\nMatthew Scott\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "Matthew Scott",
-    "section": "",
-    "text": "Apprentice Data Scientist at The Pensions Regulator | Resume"
-  },
-  {
-    "objectID": "license.html",
-    "href": "license.html",
-    "title": "License",
-    "section": "",
-    "text": "© Copyright Matthew Scott\nThis is my personal website. Nothing here is endorsed by my employer or any organizations of which I am a part. Content on this site is provided under a Creative Commons (CC-BY) 4.0 license. You may reuse this content as long as you indicate my authorship and provide a link back to the original material. Source code of the site is provided under the MIT license and may be reused without restriction.\nAll images created using Procreate unless otherwise specified."
-  },
-  {
-    "objectID": "posts/quarto-tutorial/index.html",
-    "href": "posts/quarto-tutorial/index.html",
-    "title": "Quarto Demo",
-    "section": "",
-    "text": "Abstract River\nClick the code tools icon in the banner to see all Quarto code used in this article: &lt;/&gt; Code\nAn example sentence - info\nAn example sentence - success\nAn example sentence - warning\nAn example sentence - danger\nThis is a demo using panels and code chunks:"
-  },
-  {
-    "objectID": "posts/quarto-tutorial/index.html#link-icons",
-    "href": "posts/quarto-tutorial/index.html#link-icons",
-    "title": "Quarto Demo",
-    "section": "Link icons",
-    "text": "Link icons\nOther link icons you can generate using header yaml include, info-circle, download, book, postcard, rss. We already use the github and linkedin link icons in about.qmd.\nSee the info yaml in the Ibis Quarto website for examples."
-  },
-  {
-    "objectID": "posts/quarto-tutorial/index.html#fenced-divs",
-    "href": "posts/quarto-tutorial/index.html#fenced-divs",
-    "title": "Quarto Demo",
-    "section": "Fenced divs",
-    "text": "Fenced divs\nYou can add classes, attributes, and other identifiers to regions of content using divs and spans:\n\nBorders\n\nThis content can be styled with a border\n\n\n\nCallout notes\n\n\n\n\n\n\nNote\n\n\n\nNote that there are five types of callouts, including: note, tip, warning, caution, and important.\n\n\n\n\n\n\n\n\nTip with caption\n\n\n\nLeave a tip in a caption box like this!\n\n\n\n\n\n\n\n\nWarning without icon\n\n\n\n\n\nThis one is collapsed and has no icon\n\n\n\n\n\n\n\n\n\nImportant with custom caption\n\n\n\nA simplified callout note"
-  },
-  {
-    "objectID": "posts/quarto-tutorial/index.html#in-the-margin",
-    "href": "posts/quarto-tutorial/index.html#in-the-margin",
-    "title": "Quarto Demo",
-    "section": "In the margin",
-    "text": "In the margin\nLook right\n\n\nCheck out this YouTube playlist with great talks on blogging!"
-  },
-  {
-    "objectID": "posts/quarto-tutorial/index.html#linking-internally",
-    "href": "posts/quarto-tutorial/index.html#linking-internally",
-    "title": "Quarto Demo",
-    "section": "Linking internally",
-    "text": "Linking internally\nQuite easy, just specify the relative folder path to get there from here: ../../about.qmd"
-  },
-  {
-    "objectID": "posts/quarto-tutorial/index.html#embed-content-as-html",
-    "href": "posts/quarto-tutorial/index.html#embed-content-as-html",
-    "title": "Quarto Demo",
-    "section": "Embed content as HTML",
-    "text": "Embed content as HTML"
-  },
-  {
-    "objectID": "posts/tidyverse-intro/index.html",
-    "href": "posts/tidyverse-intro/index.html",
-    "title": "Introduction to the tidyverse",
-    "section": "",
-    "text": "Red brush strokes"
-  },
-  {
-    "objectID": "posts/tidyverse-intro/index.html#tidyverse",
-    "href": "posts/tidyverse-intro/index.html#tidyverse",
-    "title": "Introduction to the tidyverse",
-    "section": "Tidyverse",
-    "text": "Tidyverse\nTidyverse is a collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures.\nInstallation This can be done using 1) install.packages(\"tidyverse\"); 2) library(tidyverse) to install and import all packages.\n\n\n\n\n\n\nTip\n\n\n\nInstalling tidyverse will result in (usually) a lot of libraries your code isn’t using being installed, which is not efficient. It is best practice (and helps your learning) to install packages individually. See below for popular tidyverse packages.\n\n\n\nPopular Tidyverse packages\n\ndplyr - Solve the most common data manipulation challenges (NB dbplyr allows you to use remote database tables by converting dplyr code to SQL)\nreadr - Read and write tabular data like csv and tsv formats. (NB there are options like readxl, writexl for working with excel files and googlesheets4 for Google sheets)\nstringr - Set of functions designed to make working with strings as easy as possible. It also incorporates Reg Ex patterns into its syntax. Many common data cleaning and preparation tasks involve string cleaning such as detecting matches, sub-setting strings, mutating strings, ordering, …\ntidyr - A set of functions to help tidy data (each column is a row, each row an observation, and each cell a single value). separate_wider_delim(), hoist(), pivot_longer(), …\nggplot2 - A declarative package for making graphics. See also R Graphics Cookbook\npurrr - Provides a complete set of tools for working with functions and vectors. (The map() family can efficiently replace for loops). A good place to start learning is here.\n\nNote There are more packages than this. Some other helpful ones to know about include: httr, lubridate, glue, modelr, forcats."
-  },
-  {
-    "objectID": "posts/tidyverse-intro/index.html#installing-importing-packages",
-    "href": "posts/tidyverse-intro/index.html#installing-importing-packages",
-    "title": "Introduction to the tidyverse",
-    "section": "Installing & importing packages",
-    "text": "Installing & importing packages\n\n# installing\ninstall.packages(\"tidyverse\")\n# or install specific packages\ninstall.packages(\"dplyr\")\ninstall.packages(\"ggplot2\")\n\n# now import them into your session\nlibrary(tidyverse)\nlibrary(dplyr)\nlibrary(ggplot2)"
-  },
-  {
-    "objectID": "posts/tidyverse-intro/index.html#inspecting-a-dataset",
-    "href": "posts/tidyverse-intro/index.html#inspecting-a-dataset",
-    "title": "Introduction to the tidyverse",
-    "section": "Inspecting a dataset",
-    "text": "Inspecting a dataset\nAn essential first step in any data analytical task is inspecting your data visually. Some packages come with dataset you can work with so you’ll want to see what they look like, or you can inspect your own data.\n\nToy datasets\nIt is useful to use toy datasets which come included when you install and import the relevant package. Some examples are:\n\nmpg from ggplot2\nstarwars from dplyr\nstorms from dplyr\nband_members from dplyr (a small dataset, it contains three tables useful for demonstrating joins)\n\n\n1library(dplyr)\n\n# open ggplot2's data dictionary for this packages internal dataset\n# help(\"mpg\")\n\n# load the dataset into a variable\n2df &lt;- ggplot2::mpg\n\n# see information rich summary\n# glimpse(df)\n\n# see top n rows\n3df %&gt;% head(n = 5)\n\n\n1\n\nWe need this package so we can access the %&gt;% ‘pipe’ operator\n\n2\n\nthis notation tells R to look in the ggplot2 package for the dataset mpg\n\n3\n\nYou can also use tail() to see the bottom n rows. Use head() to default to the top 6 rows.\n\n\n\n\n# A tibble: 5 × 11\n  manufacturer model displ  year   cyl trans      drv     cty   hwy fl    class \n  &lt;chr&gt;        &lt;chr&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;      &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; \n1 audi         a4      1.8  1999     4 auto(l5)   f        18    29 p     compa…\n2 audi         a4      1.8  1999     4 manual(m5) f        21    29 p     compa…\n3 audi         a4      2    2008     4 manual(m6) f        20    31 p     compa…\n4 audi         a4      2    2008     4 auto(av)   f        21    30 p     compa…\n5 audi         a4      2.8  1999     6 auto(l5)   f        16    26 p     compa…"
-  },
-  {
-    "objectID": "projects/nlp-token-visualiser/index.html",
-    "href": "projects/nlp-token-visualiser/index.html",
-    "title": "NLP Tokenisation Visualiser App",
-    "section": "",
-    "text": "Details\n\n\n\n\n\nTitle\nLearn Natural Language Processing Concepts\n\n\nHost\nStreamlit Community Cloud\n\n\nRepo\nMy University GitHub account\n\n\nURL\nApp\n\n\nNotes\nIf the app has been dormant, it may take up to 5 mins to boot up. It’s a free hosting service after all"
+    "text": "Details\n\n\n\n\n\nTitle\nPDF Text Explorer Tool\n\n\nHost\nStreamlit Community Cloud\n\n\nRepo\nGitHub\n\n\nURL\nApp\n\n\nNotes\nIf the app has been dormant, it may take a second to boot up. It’s a free hosting service after all!"
   }
 ]
