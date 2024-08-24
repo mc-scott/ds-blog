@@ -25,13 +25,13 @@ library(tidyr)
 
 ## Introduction
 
-Tidy selection is a principle that makes it easier to work with columns in a  dataset. Behind the principle is the `tidyselect` package. This package is used by `dplyr` and `tidyr` and means you don't have to use an exact column name to select it, you can use it's [**name**, **position**]{.text-info} or [**type**]{.text-info}.
+Tidy selection is a principle that makes it easier to work with columns in a  dataset. Behind the principle is the `tidyselect` package. This package is used by `dplyr` and `tidyr` and means you don't have to use an exact column name to select it, you can use it's [**name**, **position**]{.text-warning} or [**type**]{.text-warning}.
 
 Tidy select can be used with `select()`, `rename()`, `relocate()`, `across()`, `pull()`, `where()`, `any_of()`, and `all_of()` in the dplyr package.
 
 What does this mean for your programming?
 
-Let's use the `starwars` dataset for these examples. Expand the info box below to see the dataset:
+Let's use the `starwars` dataset to see how these helper functions can be useful. Expand the info box below to see the dataset:
 
 :::{.callout-note icon="true" collapse="true"}
 ## Starwars dataset
@@ -43,13 +43,17 @@ glimpse(starwars)
 
 ## Selecting by name
 
-### This can be done with the exact col name:
+**This can be done with the exact col name:**
+
 ```{r}
 starwars %>% select(name, height, mass) %>% head(3)
     
 ```
 
-### Or inexactly with the use of helper functions:
+**Or inexactly with the use of [helper functions]{.text-warning}:**
+
+*Note: See more helper function options in my [dplyr essentials blog](../tidyverse-dplyr/index.qmd#select-rename)*
+
 ::: panel-tabset
 ## `starts_with()`
 The column start with character(s)
@@ -73,7 +77,7 @@ starwars %>% select(contains("color")) %>% head(3)
 ```
 
 ## `matches()`
-Matches a regular expression or a `stringr()` pattern
+Matches a regular expression or a **stringr** [pattern](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf)
 
 ```{r}
 starwars %>% 
@@ -93,7 +97,7 @@ starwars %>%
            !starts_with("h")) %>% # <1>
     head(3)
 ```
-1. use of `!` as 'not'. Columns that end_with 'color' and don't start with 'h'
+1. use of `!` as 'not'. Columns that end_with 'color' and don't start with 'h'. This excludes the column 'hair_color'
 
 ## Position
 You don't have to use name, you can use the position of the column in the dataframe:
@@ -113,8 +117,9 @@ You can also use `last_col()` which will automatically find the last column in t
 starwars %>% select(1, length(starwars))
 
 # is the same as this:
-starwars %>% select(1, last_col())
+starwars %>% select(1, last_col()) # <1>
 ```
+1. This is more explicit - it's meaning is easier to infer from plain English
 
 ## Type
 Tidyselect means you can specify columns based on their datatype as well:
