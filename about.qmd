@@ -15,4 +15,4 @@ about:
 
 ---
 
-Apprentice Data Scientist at [The Pensions Regulator](https://www.thepensionsregulator.gov.uk/) | [Resume](https://docs.google.com/document/d/14LdUnrUElDGV4oRPm1XhLopn4xDBkNzA/edit?usp=sharing&ouid=101040870507726315794&rtpof=true&sd=true)
+Junior Data Scientist at [The Pensions Regulator](https://www.thepensionsregulator.gov.uk/) | [Resume](https://docs.google.com/document/d/14LdUnrUElDGV4oRPm1XhLopn4xDBkNzA/edit?usp=sharing&ouid=101040870507726315794&rtpof=true&sd=true)
