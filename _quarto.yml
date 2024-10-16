@@ -4,7 +4,7 @@ project:
 
 website:
   title: "As-yet-undecided"
-  description: "Matthew Scott's personal website"
+  description: "Matthew Scott's personal website. Undecided on the content."
   navbar:
     title: "As-yet-undecided"
     background: "#096367"
@@ -30,7 +30,7 @@ website:
 
 format:
   html:
-    #code-overflow: wrap
+    #code-overflow: wrap # this doesn't seem to render correctly
     highlight-style: atom-one
     code-block-bg: true
     code-block-border-left: "#096367"

@@ -1,0 +1,22 @@
+---
+title: "Post ideas"
+subtitle: "Implementing data science"
+author: "Matthew Scott"
+date: ""
+description: ""
+#categories: []
+#image: "abstract-river.png"
+#image-alt: "An abstract river sketch"
+draft: true
+---
+
+## The rise-and-fall of data products
+Ideally you're looking for the rise-and-rise of your data projects but this is far from an inevitability, and in fact you're more likely to see a new project fail then succeed in a business context [ref on % of DS projects that fail].
+
+## NLP timeline
+- [A review of the neural history of NLP, 2018](https://www.ruder.io/a-review-of-the-recent-history-of-nlp/)
+- [Why can computers understand natural language?](supplements/why-can-comuters-understand-natural-language.pdf)
+
+## Modular Jounralism
+- [Modular Journalism](https://modularjournalism.com/)
+- [How the Guardian approaches quote extraction with NLP](https://explosion.ai/blog/guardian)
