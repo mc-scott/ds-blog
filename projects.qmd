@@ -8,3 +8,5 @@ listing:
     grid-columns: 2
     image-height: 100%
 ---
+
+Welcome to my Projects page. I have posted some projects who's completeness I feel gives them a public-facing spot here. I usually keep public projects that are in progress on my personal GitHub, if you'd like to explore them you can get to my personal GitHub from the 'About' section of the app.

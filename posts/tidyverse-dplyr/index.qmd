@@ -6,7 +6,7 @@ date: "2024-07-24"
 description: "Data wrangling: solve the most common data manipulation challenges"
 categories: [tutorial, r, tidyverse, dplyr, intro]
 image: "abstract-art.png"
-image-alt: "An abstract sketch who's colours bleed into the canvas"
+image-alt: "An abstract sketch whos colours bleed into the canvas"
 code-annotations: hover
 draft: false
 toc: true
@@ -27,7 +27,10 @@ dplyr helps manipulate datasets. That is, it can be used to change their shape -
 
 ### Dataset used in this tutorial
 
-We will use the `mpg` data set in this tutorial and run through a lot of the common syntax used to manipulate a table.
+We will use the `mpg` dataset from [**ggplot2**]{.text-warning} in this tutorial and run through a lot of the common syntax used to manipulate a table.
+
+:::{.callout-note icon="true" collapse="true"}
+## mpg
 
 ```{r}
 #| eval: true
@@ -36,6 +39,7 @@ library(ggplot2)
 glimpse(mpg) # <1>
 ```
 1. We can see the column names, their datatype (inside `< >`) and example data in a list-like format. We also get information on the number of rows and columns, the 'shape'
+:::
 
 ## `select()` & `rename()`
 
