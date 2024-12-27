@@ -14,6 +14,8 @@ code-tools: true
 
 ![Abstract River](abstract-river-wide.png){fig-alt="A picture I drew one time"}
 
+*Last Modified: `r format(Sys.Date(), "%B %d, %Y")`*
+
 Click the code tools icon in the banner to see all Quarto code used in this article: `</> Code`
 
 [An example sentence - info]{.text-info}
@@ -63,7 +65,12 @@ print(df)
 
 Other link icons you can generate using header yaml include, `info-circle`, `download`, `book`, `postcard`, `rss`. We already use the `github` and `linkedin` link icons in [about.qmd]{.text-info}.
 
-See the [info yaml](https://github.com/ibis-project/ibis/blob/main/docs/index.qmd) in the [Ibis Quarto website](https://ibis-project.org/) for examples.
+See the [info yaml](https://github.com/ibis-project/ibis/blob/main/docs/index.qmd){target="_blank"} in the [Ibis Quarto website](https://ibis-project.org/){target="_blank"} for examples.
+
+:::{.callout-tip}
+## Icons
+You should be able to use any of the standard [Bootstrap 5 icons](https://icons.getbootstrap.com/){target="_blank"}. And there are a lot of them! See the [Quarto docs](https://quarto.org/docs/websites/website-navigation.html#top-navigation){target="_blank"} for details of how to implement this.
+:::
 
 ## Fenced divs
 
@@ -102,12 +109,12 @@ A simplified callout note
 Look right
 
 ::: column-margin
-Check out this [YouTube playlist](https://youtube.com/playlist?list=PLXKlQEvIRus-qu1hjc8SyElSamAcT-KaE) with great talks on blogging!
+Check out this [YouTube playlist](https://youtube.com/playlist?list=PLXKlQEvIRus-qu1hjc8SyElSamAcT-KaE){target="_blank"} with great talks on blogging!
 :::
 
 ## Linking internally
 
-Quite easy, just specify the relative [folder path](../../about.qmd) to get there from here: `../../about.qmd`
+Quite easy, just specify the relative [folder path](../../about.qmd){target="_blank"} to get there from here: `../../about.qmd`
 
 ## Embed content as HTML
 

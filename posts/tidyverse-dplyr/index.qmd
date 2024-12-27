@@ -230,7 +230,7 @@ You can imagine if we had lots of columns to mutate, this would be much more suc
 
 :::{.callout-note appearance="simple" icon="true"}
 ## Note 
-It is generally preferred to use `across()` instead of the above verbs. See [Column-wise operations](https://dplyr.tidyverse.org/articles/colwise.html) for a detailed explanation of this.
+It is generally preferred to use `across()` instead of the above verbs. See [Column-wise operations](https://dplyr.tidyverse.org/articles/colwise.html){target="_blank"} for a detailed explanation of this.
 :::
 
 You can mutate any column that is.character/is.numeric...:

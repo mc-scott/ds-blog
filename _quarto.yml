@@ -5,6 +5,7 @@ project:
 website:
   title: "As-yet-undecided"
   description: "Matthew Scott's personal website. Undecided on the content."
+  reader-mode: true
   navbar:
     title: "As-yet-undecided"
     background: "#096367"

@@ -23,6 +23,8 @@ library(dplyr)
 library(tidyr)
 ```
 
+*Last Modified: `r format(Sys.Date(), "%B %d, %Y")`*
+
 ## Introduction
 
 Tidy selection is a principle that makes it easier to work with columns in a  dataset. Behind the principle is the `tidyselect` package [@technicaltidyselectND]. This package is used by `dplyr` and `tidyr` and means you don't have to use an exact column name to select it, you can use it's [**name**, **position**]{.text-warning} or [**type**]{.text-warning}.
@@ -52,7 +54,7 @@ starwars %>% select(name, height, mass) %>% head(3)
 
 **Or inexactly with the use of [helper functions]{.text-warning}:**
 
-For example, `starts_with()` or `contains()`. *Note: See more helper function options in my [dplyr essentials blog](../tidyverse-dplyr/index.qmd#select-rename)*
+For example, `starts_with()` or `contains()`. *Note: See more helper function options in my [dplyr essentials blog](../tidyverse-dplyr/index.qmd#select-rename){target="_blank"}*
 
 ::: panel-tabset
 ## `starts_with()`
@@ -77,7 +79,7 @@ starwars %>% select(contains("color")) %>% head(3)
 ```
 
 ## `matches()`
-Matches a regular expression or a **stringr** [pattern](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf)
+Matches a regular expression or a **stringr** [pattern](https://github.com/rstudio/cheatsheets/blob/main/strings.pdf){target="_blank"}
 
 ```{r}
 starwars %>% 
@@ -172,12 +174,6 @@ starwars_toptrumps(homeworld = "Naboo") # <3>
 1. Specify the use of a function argument in filter
 2. Use tidyr function to check all numeric columns and only return rows that don't include NA using `drop_na()`
 3. Call function and feed a 'homeworld' into the filter argument of the function
-
-## Further Reading
-
-1. [Programming with dplyr](https://dplyr.tidyverse.org/articles/programming.html)
-2. [Technical description of tidyselect](https://tidyselect.r-lib.org/articles/syntax.html)
-3. [Argument type: data masking](https://tidyselect.r-lib.org/articles/syntax.html)
 
 # References
 

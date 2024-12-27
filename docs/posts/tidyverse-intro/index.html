@@ -143,6 +143,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -222,7 +227,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="tidyverse" class="level2">
 <h2 class="anchored" data-anchor-id="tidyverse">Tidyverse</h2>
-<p>Tidyverse is a collection of <a href="https://www.tidyverse.org/packages/">R packages</a> designed for data science. All packages share an underlying design philosophy, grammar, and data structures.</p>
+<p>Tidyverse is a collection of <a href="https://www.tidyverse.org/packages/" target="_blank">R packages</a> designed for data science. All packages share an underlying design philosophy, grammar, and data structures.</p>
 <p><strong>Installation</strong> This can be done using 1) <code>install.packages("tidyverse")</code>; 2) <code>library(tidyverse)</code> to install and import all packages.</p>
 <div class="callout callout-style-simple callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -240,12 +245,12 @@ Tip
 <section id="popular-tidyverse-packages" class="level3">
 <h3 class="anchored" data-anchor-id="popular-tidyverse-packages">Popular Tidyverse packages</h3>
 <ul>
-<li><a href="https://dplyr.tidyverse.org/"><code>dplyr</code></a> - Solve the most common data manipulation challenges (<strong>NB</strong> <code>dbplyr</code> allows you to use remote database tables by converting dplyr code to SQL)</li>
-<li><a href="https://readr.tidyverse.org/"><code>readr</code></a> - Read and write tabular data like csv and tsv formats. (<strong>NB</strong> there are options like <code>readxl</code>, <code>writexl</code> for working with excel files and <code>googlesheets4</code> for Google sheets)</li>
-<li><a href="https://stringr.tidyverse.org/"><code>stringr</code></a> - Set of functions designed to make working with strings as easy as possible. It also incorporates Reg Ex patterns into its syntax. Many common data cleaning and preparation tasks involve string cleaning such as detecting matches, sub-setting strings, mutating strings, ordering, …</li>
-<li><a href="https://tidyr.tidyverse.org/"><code>tidyr</code></a> - A set of functions to help tidy data (each column is a row, each row an observation, and each cell a single value). <code>separate_wider_delim()</code>, <code>hoist()</code>, <code>pivot_longer()</code>, …</li>
-<li><a href="https://ggplot2.tidyverse.org/"><code>ggplot2</code></a> - A declarative package for making graphics. See also <a href="https://r-graphics.org/">R Graphics Cookbook</a></li>
-<li><a href="https://purrr.tidyverse.org/"><code>purrr</code></a> - Provides a complete set of tools for working with functions and vectors. (The <code>map()</code> family can efficiently replace for loops). A good place to start learning is <a href="https://r4ds.had.co.nz/iteration.html">here</a>.</li>
+<li><a href="https://dplyr.tidyverse.org/" target="_blank"><code>dplyr</code></a> - Solve the most common data manipulation challenges (<strong>NB</strong> <code>dbplyr</code> allows you to use remote database tables by converting dplyr code to SQL)</li>
+<li><a href="https://readr.tidyverse.org/" target="_blank"><code>readr</code></a> - Read and write tabular data like csv and tsv formats. (<strong>NB</strong> there are options like <code>readxl</code>, <code>writexl</code> for working with excel files and <code>googlesheets4</code> for Google sheets)</li>
+<li><a href="https://stringr.tidyverse.org/" target="_blank"><code>stringr</code></a> - Set of functions designed to make working with strings as easy as possible. It also incorporates Reg Ex patterns into its syntax. Many common data cleaning and preparation tasks involve string cleaning such as detecting matches, sub-setting strings, mutating strings, ordering, …</li>
+<li><a href="https://tidyr.tidyverse.org/" target="_blank"><code>tidyr</code></a> - A set of functions to help tidy data (each column is a row, each row an observation, and each cell a single value). <code>separate_wider_delim()</code>, <code>hoist()</code>, <code>pivot_longer()</code>, …</li>
+<li><a href="https://ggplot2.tidyverse.org/" target="_blank"><code>ggplot2</code></a> - A declarative package for making graphics. See also <a href="https://r-graphics.org/" target="_blank">R Graphics Cookbook</a></li>
+<li><a href="https://purrr.tidyverse.org/" target="_blank"><code>purrr</code></a> - Provides a complete set of tools for working with functions and vectors. (The <code>map()</code> family can efficiently replace for loops). A good place to start learning is <a href="https://r4ds.had.co.nz/iteration.html" target="_blank">here</a>.</li>
 </ul>
 <p><strong>Note</strong> There are more packages than this. Some other helpful ones to know about include: <code>httr</code>, <code>lubridate</code>, <code>glue</code>, <code>modelr</code>, <code>forcats</code>.</p>
 </section>
@@ -272,10 +277,10 @@ Tip
 <h3 class="anchored" data-anchor-id="toy-datasets">Toy datasets</h3>
 <p>It is useful to use toy datasets which come included when you install and import the relevant package. Some examples are:</p>
 <ul>
-<li><a href="https://ggplot2.tidyverse.org/reference/mpg.html"><code>mpg</code></a> from ggplot2</li>
-<li><a href="https://dplyr.tidyverse.org/reference/starwars.html"><code>starwars</code></a> from dplyr</li>
-<li><a href="https://dplyr.tidyverse.org/reference/storms.html"><code>storms</code></a> from dplyr</li>
-<li><a href="https://dplyr.tidyverse.org/reference/band_members.html"><code>band_members</code></a> from dplyr (a small dataset, it contains three tables useful for demonstrating joins)</li>
+<li><a href="https://ggplot2.tidyverse.org/reference/mpg.html" target="_blank"><code>mpg</code></a> from ggplot2</li>
+<li><a href="https://dplyr.tidyverse.org/reference/starwars.html" target="_blank"><code>starwars</code></a> from dplyr</li>
+<li><a href="https://dplyr.tidyverse.org/reference/storms.html" target="_blank"><code>storms</code></a> from dplyr</li>
+<li><a href="https://dplyr.tidyverse.org/reference/band_members.html" target="_blank"><code>band_members</code></a> from dplyr (a small dataset, it contains three tables useful for demonstrating joins)</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1">1</button><span id="annotated-cell-2-1" class="code-annotation-target"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
@@ -289,8 +294,12 @@ Tip
 <span id="annotated-cell-2-9"><a href="#annotated-cell-2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># see information rich summary</span></span>
 <span id="annotated-cell-2-10"><a href="#annotated-cell-2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># glimpse(df)</span></span>
 <span id="annotated-cell-2-11"><a href="#annotated-cell-2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-2-12"><a href="#annotated-cell-2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># see top n rows</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="3">3</button><span id="annotated-cell-2-13" class="code-annotation-target"><a href="#annotated-cell-2-13" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">5</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="annotated-cell-2-12"><a href="#annotated-cell-2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># see dimension of object </span></span>
+<span id="annotated-cell-2-13"><a href="#annotated-cell-2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># (number of rows and columns)</span></span>
+<span id="annotated-cell-2-14"><a href="#annotated-cell-2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># dim(df)</span></span>
+<span id="annotated-cell-2-15"><a href="#annotated-cell-2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-2-16"><a href="#annotated-cell-2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># see top n rows</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="3">3</button><span id="annotated-cell-2-17" class="code-annotation-target"><a href="#annotated-cell-2-17" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="at">n =</span> <span class="dv">5</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
@@ -303,7 +312,7 @@ Tip
 </dd>
 <dt data-target-cell="annotated-cell-2" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-2" data-code-lines="13" data-code-annotation="3">You can also use <code>tail()</code> to see the bottom n rows. Use <code>head()</code> to default to the top 6 rows.</span>
+<span data-code-cell="annotated-cell-2" data-code-lines="17" data-code-annotation="3">You can also use <code>tail()</code> to see the bottom n rows. Use <code>head()</code> to default to the top 6 rows.</span>
 </dd>
 </dl>
 </div>

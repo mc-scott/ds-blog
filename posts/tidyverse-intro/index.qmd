@@ -16,7 +16,7 @@ toc: true
 
 ## Tidyverse
 
-Tidyverse is a collection of [R packages](https://www.tidyverse.org/packages/) designed for data science. All packages share an underlying design philosophy, grammar, and data structures.
+Tidyverse is a collection of [R packages](https://www.tidyverse.org/packages/){target="_blank"} designed for data science. All packages share an underlying design philosophy, grammar, and data structures.
 
 **Installation** This can be done using  1) `install.packages("tidyverse")`; 2) `library(tidyverse)` to install and import all packages.
 
@@ -27,12 +27,12 @@ Installing tidyverse will result in (usually) a lot of libraries your code isn't
 
 ### Popular Tidyverse packages
 
-* [`dplyr`](https://dplyr.tidyverse.org/) - Solve the most common data manipulation challenges (**NB** `dbplyr` allows you to use remote database tables by converting dplyr code to SQL)
-* [`readr`](https://readr.tidyverse.org/) - Read and write tabular data like csv and tsv formats. (**NB** there are options like `readxl`, `writexl` for working with excel files and `googlesheets4` for Google sheets)
-* [`stringr`](https://stringr.tidyverse.org/) - Set of functions designed to make working with strings as easy as possible. It also incorporates Reg Ex patterns into its syntax. Many common data cleaning and preparation tasks involve string cleaning such as detecting matches, sub-setting strings, mutating strings, ordering, ...
-* [`tidyr`](https://tidyr.tidyverse.org/) - A set of functions to help tidy data (each column is a row, each row an observation, and each cell a single value). `separate_wider_delim()`, `hoist()`, `pivot_longer()`, ...
-* [`ggplot2`](https://ggplot2.tidyverse.org/) - A declarative package for making graphics. See also [R Graphics Cookbook](https://r-graphics.org/)
-* [`purrr`](https://purrr.tidyverse.org/) - Provides a complete set of tools for working with functions and vectors. (The `map()` family can efficiently replace for loops). A good place to start learning is [here](https://r4ds.had.co.nz/iteration.html).
+* [`dplyr`](https://dplyr.tidyverse.org/){target="_blank"} - Solve the most common data manipulation challenges (**NB** `dbplyr` allows you to use remote database tables by converting dplyr code to SQL)
+* [`readr`](https://readr.tidyverse.org/){target="_blank"} - Read and write tabular data like csv and tsv formats. (**NB** there are options like `readxl`, `writexl` for working with excel files and `googlesheets4` for Google sheets)
+* [`stringr`](https://stringr.tidyverse.org/){target="_blank"} - Set of functions designed to make working with strings as easy as possible. It also incorporates Reg Ex patterns into its syntax. Many common data cleaning and preparation tasks involve string cleaning such as detecting matches, sub-setting strings, mutating strings, ordering, ...
+* [`tidyr`](https://tidyr.tidyverse.org/){target="_blank"} - A set of functions to help tidy data (each column is a row, each row an observation, and each cell a single value). `separate_wider_delim()`, `hoist()`, `pivot_longer()`, ...
+* [`ggplot2`](https://ggplot2.tidyverse.org/){target="_blank"} - A declarative package for making graphics. See also [R Graphics Cookbook](https://r-graphics.org/){target="_blank"}
+* [`purrr`](https://purrr.tidyverse.org/){target="_blank"} - Provides a complete set of tools for working with functions and vectors. (The `map()` family can efficiently replace for loops). A good place to start learning is [here](https://r4ds.had.co.nz/iteration.html){target="_blank"}.
 
 **Note** There are more packages than this. Some other helpful ones to know about include: `httr`, `lubridate`, `glue`, `modelr`, `forcats`.
 
@@ -59,10 +59,10 @@ An essential first step in any data analytical task is inspecting your data visu
 
 It is useful to use toy datasets which come included when you install and import the relevant package. Some examples are:
 
-- [`mpg`](https://ggplot2.tidyverse.org/reference/mpg.html) from ggplot2
-- [`starwars`](https://dplyr.tidyverse.org/reference/starwars.html) from dplyr
-- [`storms`](https://dplyr.tidyverse.org/reference/storms.html) from dplyr
-- [`band_members`](https://dplyr.tidyverse.org/reference/band_members.html) from dplyr (a small dataset, it contains three tables useful for demonstrating joins)
+- [`mpg`](https://ggplot2.tidyverse.org/reference/mpg.html){target="_blank"} from ggplot2
+- [`starwars`](https://dplyr.tidyverse.org/reference/starwars.html){target="_blank"} from dplyr
+- [`storms`](https://dplyr.tidyverse.org/reference/storms.html){target="_blank"} from dplyr
+- [`band_members`](https://dplyr.tidyverse.org/reference/band_members.html){target="_blank"} from dplyr (a small dataset, it contains three tables useful for demonstrating joins)
 
 ```{r inspecting}
 #| eval: true
