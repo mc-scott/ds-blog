@@ -10,3 +10,8 @@ title-block-banner: false
 execute: 
   eval: false
   warning: false
+  
+# referencing
+bibliography: ../references.bib
+csl: ../plos.csl
+citations-hover: true

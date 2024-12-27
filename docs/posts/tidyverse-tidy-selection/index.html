@@ -57,7 +57,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -166,6 +185,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#with-environment-variables" id="toc-with-environment-variables" class="nav-link" data-scroll-target="#with-environment-variables">With environment variables</a></li>
   <li><a href="#in-functions" id="toc-in-functions" class="nav-link" data-scroll-target="#in-functions">In functions</a></li>
   </ul></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further Reading</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
@@ -223,7 +243,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Tidy selection is a principle that makes it easier to work with columns in a dataset. Behind the principle is the <code>tidyselect</code> package. This package is used by <code>dplyr</code> and <code>tidyr</code> and means you don’t have to use an exact column name to select it, you can use it’s <span class="text-warning"><strong>name</strong>, <strong>position</strong></span> or <span class="text-warning"><strong>type</strong></span>.</p>
+<p>Tidy selection is a principle that makes it easier to work with columns in a dataset. Behind the principle is the <code>tidyselect</code> package <span class="citation" data-cites="technicaltidyselectND">[<a href="#ref-technicaltidyselectND" role="doc-biblioref">1</a>]</span>. This package is used by <code>dplyr</code> and <code>tidyr</code> and means you don’t have to use an exact column name to select it, you can use it’s <span class="text-warning"><strong>name</strong>, <strong>position</strong></span> or <span class="text-warning"><strong>type</strong></span>.</p>
 <p>Tidy select can be used with <code>select()</code>, <code>rename()</code>, <code>relocate()</code>, <code>across()</code>, <code>pull()</code>, <code>where()</code>, <code>any_of()</code>, and <code>all_of()</code> in the dplyr package.</p>
 <p>What does this mean for your programming?</p>
 <p>Let’s use the <code>starwars</code> dataset to see how these helper functions can be useful. Expand the info box below to see the dataset:</p>
@@ -279,7 +299,7 @@ $ starships  &lt;list&gt; &lt;"X-wing", "Imperial shuttle"&gt;, &lt;&gt;, &lt;&g
 </div>
 </div>
 <p><strong>Or inexactly with the use of <span class="text-warning">helper functions</span>:</strong></p>
-<p><em>Note: See more helper function options in my <a href="../../posts/tidyverse-dplyr/index.html#select-rename">dplyr essentials blog</a></em></p>
+<p>For example, <code>starts_with()</code> or <code>contains()</code>. <em>Note: See more helper function options in my <a href="../../posts/tidyverse-dplyr/index.html#select-rename">dplyr essentials blog</a></em></p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true"><code>starts_with()</code></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false"><code>ends_with()</code></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false"><code>contains()</code></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false"><code>matches()</code></a></li></ul>
 <div class="tab-content">
@@ -366,7 +386,7 @@ $ starships  &lt;list&gt; &lt;"X-wing", "Imperial shuttle"&gt;, &lt;&gt;, &lt;&g
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-2" data-code-lines="3" data-code-annotation="1">use of <code>!</code> as ‘not’. Columns that end_with ‘color’ and don’t start with ‘h’. This excludes the column ‘hair_color’</span>
+<span data-code-cell="annotated-cell-2" data-code-lines="3" data-code-annotation="1">use of <code>!</code> as ‘not’. Columns that end with ‘color’ and don’t start with ‘h’. This excludes the column ‘hair_color’</span>
 </dd>
 </dl>
 </div>
@@ -391,7 +411,7 @@ $ starships  &lt;list&gt; &lt;"X-wing", "Imperial shuttle"&gt;, &lt;&gt;, &lt;&g
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="2" data-code-annotation="1">select the first, third, and cols 4, 5, 6, 7</span>
+<span data-code-cell="annotated-cell-3" data-code-lines="2" data-code-annotation="1">select the first, third, and 4th, 5th, 6th, 7th columns</span>
 </dd>
 </dl>
 </div>
@@ -471,10 +491,10 @@ $ starships  &lt;list&gt; &lt;"X-wing", "Imperial shuttle"&gt;, &lt;&gt;, &lt;&g
 </section>
 <section id="using-environment-variables-or-function-variables-with-tidyverse" class="level2">
 <h2 class="anchored" data-anchor-id="using-environment-variables-or-function-variables-with-tidyverse">Using environment variables or function variables with tidyverse</h2>
-<p>This is related to the data masking property that tidy evaluation employs, rather than its tidy select properties, but it still useful to know when extending tidy selection.</p>
+<p>This is related to the data masking property that tidy evaluation employs <span class="citation" data-cites="programmingdplyrNDdatamasking">[<a href="#ref-programmingdplyrNDdatamasking" role="doc-biblioref">2</a>]</span>, rather than its tidy select properties, but it still useful to know when extending tidy selection.</p>
 <section id="with-environment-variables" class="level3">
 <h3 class="anchored" data-anchor-id="with-environment-variables">With environment variables</h3>
-<p>In order to use a variable specified in the global environment (these are the variables you’ve assigned earlier in your script), you need to add the <code>!!</code> or <code>.env$</code> syntax around the variable to tell tidyselect to look outside of the dataframe variable</p>
+<p>In order to use a variable specified in the global environment (these are the variables you’ve assigned earlier in your script), you need to add the <code>!!</code> or <code>.env$</code> syntax around the variable to tell tidyselect to look outside of the dataframe variable <span class="citation" data-cites="technicaltidyselectNDenv">[<a href="#ref-technicaltidyselectNDenv" role="doc-biblioref">3</a>]</span>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"homeworld"</span>, <span class="st">"sex"</span>, <span class="st">"eye_color"</span>)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -491,7 +511,7 @@ $ starships  &lt;list&gt; &lt;"X-wing", "Imperial shuttle"&gt;, &lt;&gt;, &lt;&g
 </section>
 <section id="in-functions" class="level3">
 <h3 class="anchored" data-anchor-id="in-functions">In functions</h3>
-<p>You need to ‘embrace’ (<code>{{ var }}</code>) your tidyselect syntax when it is provided as an argument to a function:</p>
+<p>You need to ‘embrace’ (<code>{{ var }}</code>) your tidyselect syntax when it is provided as an argument to a function <span class="citation" data-cites="programmingdplyrNDindirection">[<a href="#ref-programmingdplyrNDindirection" role="doc-biblioref">4</a>]</span>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="annotated-cell-8"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-8-1"><a href="#annotated-cell-8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#' Select all characters that appear on the</span></span>
 <span id="annotated-cell-8-2"><a href="#annotated-cell-8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#' given homeworld and supply their numeric</span></span>
@@ -534,18 +554,35 @@ $ starships  &lt;list&gt; &lt;"X-wing", "Imperial shuttle"&gt;, &lt;&gt;, &lt;&g
 </div>
 </section>
 </section>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
+<section id="further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading">Further Reading</h2>
 <ol type="1">
 <li><a href="https://dplyr.tidyverse.org/articles/programming.html">Programming with dplyr</a></li>
 <li><a href="https://tidyselect.r-lib.org/articles/syntax.html">Technical description of tidyselect</a></li>
 <li><a href="https://tidyselect.r-lib.org/articles/syntax.html">Argument type: data masking</a></li>
 </ol>
+</section>
+<section id="references" class="level1">
+
+
 
 
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" role="list">
+<div id="ref-technicaltidyselectND" class="csl-entry" role="listitem">
+<div class="csl-left-margin">1. </div><div class="csl-right-inline">posit. Technical description of tidyselect. [cited 27 Dec 2024]. Available: <a href="https://tidyselect.r-lib.org/articles/syntax.html">https://tidyselect.r-lib.org/articles/syntax.html</a></div>
+</div>
+<div id="ref-programmingdplyrNDdatamasking" class="csl-entry" role="listitem">
+<div class="csl-left-margin">2. </div><div class="csl-right-inline">posit. Programming with dplyr. [cited 27 Dec 2024]. Available: <a href="https://dplyr.tidyverse.org/articles/programming.html#data-masking">https://dplyr.tidyverse.org/articles/programming.html#data-masking</a></div>
+</div>
+<div id="ref-technicaltidyselectNDenv" class="csl-entry" role="listitem">
+<div class="csl-left-margin">3. </div><div class="csl-right-inline">posit. Technical description of tidyselect. [cited 27 Dec 2024]. Available: <a href="https://tidyselect.r-lib.org/articles/syntax.html#data-expressions-and-env-expressions">https://tidyselect.r-lib.org/articles/syntax.html#data-expressions-and-env-expressions</a></div>
+</div>
+<div id="ref-programmingdplyrNDindirection" class="csl-entry" role="listitem">
+<div class="csl-left-margin">4. </div><div class="csl-right-inline">posit. Programming with dplyr. [cited 27 Dec 2024]. Available: <a href="https://dplyr.tidyverse.org/articles/programming.html#indirection-1">https://dplyr.tidyverse.org/articles/programming.html#indirection-1</a></div>
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

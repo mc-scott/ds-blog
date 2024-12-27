@@ -25,7 +25,7 @@ library(tidyr)
 
 ## Introduction
 
-Tidy selection is a principle that makes it easier to work with columns in a  dataset. Behind the principle is the `tidyselect` package. This package is used by `dplyr` and `tidyr` and means you don't have to use an exact column name to select it, you can use it's [**name**, **position**]{.text-warning} or [**type**]{.text-warning}.
+Tidy selection is a principle that makes it easier to work with columns in a  dataset. Behind the principle is the `tidyselect` package [@technicaltidyselectND]. This package is used by `dplyr` and `tidyr` and means you don't have to use an exact column name to select it, you can use it's [**name**, **position**]{.text-warning} or [**type**]{.text-warning}.
 
 Tidy select can be used with `select()`, `rename()`, `relocate()`, `across()`, `pull()`, `where()`, `any_of()`, and `all_of()` in the dplyr package.
 
@@ -52,7 +52,7 @@ starwars %>% select(name, height, mass) %>% head(3)
 
 **Or inexactly with the use of [helper functions]{.text-warning}:**
 
-*Note: See more helper function options in my [dplyr essentials blog](../tidyverse-dplyr/index.qmd#select-rename)*
+For example, `starts_with()` or `contains()`. *Note: See more helper function options in my [dplyr essentials blog](../tidyverse-dplyr/index.qmd#select-rename)*
 
 ::: panel-tabset
 ## `starts_with()`
@@ -97,7 +97,7 @@ starwars %>%
            !starts_with("h")) %>% # <1>
     head(3)
 ```
-1. use of `!` as 'not'. Columns that end_with 'color' and don't start with 'h'. This excludes the column 'hair_color'
+1. use of `!` as 'not'. Columns that end with 'color' and don't start with 'h'. This excludes the column 'hair_color'
 
 ## Position
 You don't have to use name, you can use the position of the column in the dataframe:
@@ -107,7 +107,7 @@ starwars %>%
     select(1, 3, 4:7) %>% # <1>
     head(3)
 ```
-1. select the first, third, and cols 4, 5, 6, 7
+1. select the first, third, and 4th, 5th, 6th, 7th columns
 
 You can also use `last_col()` which will automatically find the last column in the dataframe. (This saves you having to work out the length of the dataframe):
 ```{r}
@@ -141,10 +141,10 @@ starwars %>%
 1. If we have any integer columns slected by `is.numeric`, ensure they are mutated to doubles with `as.double`
 
 ## Using environment variables or function variables with tidyverse
-This is related to the data masking property that tidy evaluation employs, rather than its tidy select properties, but it still useful to know when extending tidy selection.
+This is related to the data masking property that tidy evaluation employs [@programmingdplyrNDdatamasking], rather than its tidy select properties, but it still useful to know when extending tidy selection.
 
 ### With environment variables
-In order to use a variable specified in the global environment (these are the variables you've assigned earlier in your script), you need to add the `!!` or `.env$` syntax around the variable to tell tidyselect to look outside of the dataframe variable
+In order to use a variable specified in the global environment (these are the variables you've assigned earlier in your script), you need to add the `!!` or `.env$` syntax around the variable to tell tidyselect to look outside of the dataframe variable [@technicaltidyselectNDenv]:
 
 ```{r}
 cols <- c("homeworld", "sex", "eye_color")
@@ -153,7 +153,7 @@ starwars %>% select(!!cols) %>% head(3)
 ```
 
 ### In functions
-You need to 'embrace' (`{{{ var }}}`) your tidyselect syntax when it is provided as an argument to a function:
+You need to 'embrace' (`{{{ var }}}`) your tidyselect syntax when it is provided as an argument to a function [@programmingdplyrNDindirection]:
 ```{r}
 #' Select all characters that appear on the
 #' given homeworld and supply their numeric
@@ -173,11 +173,11 @@ starwars_toptrumps(homeworld = "Naboo") # <3>
 2. Use tidyr function to check all numeric columns and only return rows that don't include NA using `drop_na()`
 3. Call function and feed a 'homeworld' into the filter argument of the function
 
-## References
+## Further Reading
 
 1. [Programming with dplyr](https://dplyr.tidyverse.org/articles/programming.html)
 2. [Technical description of tidyselect](https://tidyselect.r-lib.org/articles/syntax.html)
 3. [Argument type: data masking](https://tidyselect.r-lib.org/articles/syntax.html)
 
-
+# References
 
