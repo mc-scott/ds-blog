@@ -14,95 +14,53 @@
     "text": "Details\n\n\n\n\n\nTitle\nLearn Natural Language Processing Concepts\n\n\nHost\nStreamlit Community Cloud\n\n\nRepo\nMy University GitHub account\n\n\nURL\nApp\n\n\nNotes\nIf the app has been dormant, it may take up to 5 mins to boot up. It’s a free hosting service after all!"
   },
   {
-    "objectID": "posts/tidyverse-intro/index.html",
-    "href": "posts/tidyverse-intro/index.html",
-    "title": "Introduction to the tidyverse",
+    "objectID": "posts/tidyverse-tidy-selection/index.html",
+    "href": "posts/tidyverse-tidy-selection/index.html",
+    "title": "Tidy selection",
     "section": "",
-    "text": "Red brush strokes"
+    "text": "Maroon ribbon"
   },
   {
-    "objectID": "posts/tidyverse-intro/index.html#tidyverse",
-    "href": "posts/tidyverse-intro/index.html#tidyverse",
-    "title": "Introduction to the tidyverse",
-    "section": "Tidyverse",
-    "text": "Tidyverse\nTidyverse is a collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures.\nInstallation This can be done using 1) install.packages(\"tidyverse\"); 2) library(tidyverse) to install and import all packages.\n\n\n\n\n\n\nTip\n\n\n\nInstalling tidyverse will result in (usually) a lot of libraries your code isn’t using being installed, which is not efficient. It is best practice (and helps your learning) to install packages individually. See below for popular tidyverse packages.\n\n\n\nPopular Tidyverse packages\n\ndplyr - Solve the most common data manipulation challenges (NB dbplyr allows you to use remote database tables by converting dplyr code to SQL)\nreadr - Read and write tabular data like csv and tsv formats. (NB there are options like readxl, writexl for working with excel files and googlesheets4 for Google sheets)\nstringr - Set of functions designed to make working with strings as easy as possible. It also incorporates Reg Ex patterns into its syntax. Many common data cleaning and preparation tasks involve string cleaning such as detecting matches, sub-setting strings, mutating strings, ordering, …\ntidyr - A set of functions to help tidy data (each column is a row, each row an observation, and each cell a single value). separate_wider_delim(), hoist(), pivot_longer(), …\nggplot2 - A declarative package for making graphics. See also R Graphics Cookbook\npurrr - Provides a complete set of tools for working with functions and vectors. (The map() family can efficiently replace for loops). A good place to start learning is here.\n\nNote There are more packages than this. Some other helpful ones to know about include: httr, lubridate, glue, modelr, forcats."
+    "objectID": "posts/tidyverse-tidy-selection/index.html#introduction",
+    "href": "posts/tidyverse-tidy-selection/index.html#introduction",
+    "title": "Tidy selection",
+    "section": "Introduction",
+    "text": "Introduction\nTidy selection is a principle that makes it easier to work with columns in a dataset. Behind the principle is the tidyselect package [1]. This package is used by dplyr and tidyr and means you don’t have to use an exact column name to select it, you can use it’s name, position or type.\nTidy select can be used with select(), rename(), relocate(), across(), pull(), where(), any_of(), and all_of() in the dplyr package.\nWhat does this mean for your programming?\nLet’s use the starwars dataset to see how these helper functions can be useful. Expand the info box below to see the dataset:\n\n\n\n\n\n\nStarwars dataset\n\n\n\n\n\n\nglimpse(starwars)\n\nRows: 87\nColumns: 14\n$ name       &lt;chr&gt; \"Luke Skywalker\", \"C-3PO\", \"R2-D2\", \"Darth Vader\", \"Leia Or…\n$ height     &lt;int&gt; 172, 167, 96, 202, 150, 178, 165, 97, 183, 182, 188, 180, 2…\n$ mass       &lt;dbl&gt; 77.0, 75.0, 32.0, 136.0, 49.0, 120.0, 75.0, 32.0, 84.0, 77.…\n$ hair_color &lt;chr&gt; \"blond\", NA, NA, \"none\", \"brown\", \"brown, grey\", \"brown\", N…\n$ skin_color &lt;chr&gt; \"fair\", \"gold\", \"white, blue\", \"white\", \"light\", \"light\", \"…\n$ eye_color  &lt;chr&gt; \"blue\", \"yellow\", \"red\", \"yellow\", \"brown\", \"blue\", \"blue\",…\n$ birth_year &lt;dbl&gt; 19.0, 112.0, 33.0, 41.9, 19.0, 52.0, 47.0, NA, 24.0, 57.0, …\n$ sex        &lt;chr&gt; \"male\", \"none\", \"none\", \"male\", \"female\", \"male\", \"female\",…\n$ gender     &lt;chr&gt; \"masculine\", \"masculine\", \"masculine\", \"masculine\", \"femini…\n$ homeworld  &lt;chr&gt; \"Tatooine\", \"Tatooine\", \"Naboo\", \"Tatooine\", \"Alderaan\", \"T…\n$ species    &lt;chr&gt; \"Human\", \"Droid\", \"Droid\", \"Human\", \"Human\", \"Human\", \"Huma…\n$ films      &lt;list&gt; &lt;\"A New Hope\", \"The Empire Strikes Back\", \"Return of the J…\n$ vehicles   &lt;list&gt; &lt;\"Snowspeeder\", \"Imperial Speeder Bike\"&gt;, &lt;&gt;, &lt;&gt;, &lt;&gt;, \"Imp…\n$ starships  &lt;list&gt; &lt;\"X-wing\", \"Imperial shuttle\"&gt;, &lt;&gt;, &lt;&gt;, \"TIE Advanced x1\",…"
   },
   {
-    "objectID": "posts/tidyverse-intro/index.html#installing-importing-packages",
-    "href": "posts/tidyverse-intro/index.html#installing-importing-packages",
-    "title": "Introduction to the tidyverse",
-    "section": "Installing & importing packages",
-    "text": "Installing & importing packages\n\n# installing\ninstall.packages(\"tidyverse\")\n# or install specific packages\ninstall.packages(\"dplyr\")\ninstall.packages(\"ggplot2\")\n\n# now import them into your session\nlibrary(tidyverse)\nlibrary(dplyr)\nlibrary(ggplot2)"
+    "objectID": "posts/tidyverse-tidy-selection/index.html#selecting-by-name",
+    "href": "posts/tidyverse-tidy-selection/index.html#selecting-by-name",
+    "title": "Tidy selection",
+    "section": "Selecting by name",
+    "text": "Selecting by name\nThis can be done with the exact col name:\n\nstarwars %&gt;% select(name, height, mass) %&gt;% head(3)\n\n# A tibble: 3 × 3\n  name           height  mass\n  &lt;chr&gt;           &lt;int&gt; &lt;dbl&gt;\n1 Luke Skywalker    172    77\n2 C-3PO             167    75\n3 R2-D2              96    32\n\n\nOr inexactly with the use of helper functions:\nFor example, starts_with() or contains(). Note: See more helper function options in my dplyr essentials blog\n\nstarts_with()ends_with()contains()matches()\n\n\nThe column start with character(s)\n\nstarwars %&gt;% \n    select(starts_with(\"S\", ignore.case = T)) %&gt;% \n    head(3)\n\n# A tibble: 3 × 4\n  skin_color  sex   species starships\n  &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;   &lt;list&gt;   \n1 fair        male  Human   &lt;chr [2]&gt;\n2 gold        none  Droid   &lt;chr [0]&gt;\n3 white, blue none  Droid   &lt;chr [0]&gt;\n\n\n\n\nEnds with an exact suffix\n\nstarwars %&gt;% select(ends_with(\"s\")) %&gt;% head(3)\n\n# A tibble: 3 × 5\n   mass species films     vehicles  starships\n  &lt;dbl&gt; &lt;chr&gt;   &lt;list&gt;    &lt;list&gt;    &lt;list&gt;   \n1    77 Human   &lt;chr [5]&gt; &lt;chr [2]&gt; &lt;chr [2]&gt;\n2    75 Droid   &lt;chr [6]&gt; &lt;chr [0]&gt; &lt;chr [0]&gt;\n3    32 Droid   &lt;chr [7]&gt; &lt;chr [0]&gt; &lt;chr [0]&gt;\n\n\n\n\nContains a literal string\n\nstarwars %&gt;% select(contains(\"color\")) %&gt;% head(3)\n\n# A tibble: 3 × 3\n  hair_color skin_color  eye_color\n  &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;    \n1 blond      fair        blue     \n2 &lt;NA&gt;       gold        yellow   \n3 &lt;NA&gt;       white, blue red      \n\n\n\n\nMatches a regular expression or a stringr pattern\n\nstarwars %&gt;% \n1    select(matches(\"[s]{2}\")) %&gt;%\n    head(3)\n\n\n1\n\nwill match where ‘s’ appears twice in a row\n\n\n\n\n# A tibble: 3 × 1\n   mass\n  &lt;dbl&gt;\n1    77\n2    75\n3    32"
   },
   {
-    "objectID": "posts/tidyverse-intro/index.html#inspecting-a-dataset",
-    "href": "posts/tidyverse-intro/index.html#inspecting-a-dataset",
-    "title": "Introduction to the tidyverse",
-    "section": "Inspecting a dataset",
-    "text": "Inspecting a dataset\nAn essential first step in any data analytical task is inspecting your data visually. Some packages come with dataset you can work with so you’ll want to see what they look like, or you can inspect your own data.\n\nToy datasets\nIt is useful to use toy datasets which come included when you install and import the relevant package. Some examples are:\n\nmpg from ggplot2\nstarwars from dplyr\nstorms from dplyr\nband_members from dplyr (a small dataset, it contains three tables useful for demonstrating joins)\n\n\n1library(dplyr)\n\n# open ggplot2's data dictionary for this packages internal dataset\n# help(\"mpg\")\n\n# load the dataset into a variable\n2df &lt;- ggplot2::mpg\n\n# see information rich summary\n# glimpse(df)\n\n# see dimension of object \n# (number of rows and columns)\n# dim(df)\n\n# see top n rows\n3df %&gt;% head(n = 5)\n\n\n1\n\nWe need this package so we can access the %&gt;% ‘pipe’ operator\n\n2\n\nthis notation tells R to look in the ggplot2 package for the dataset mpg\n\n3\n\nYou can also use tail() to see the bottom n rows. Use head() to default to the top 6 rows.\n\n\n\n\n# A tibble: 5 × 11\n  manufacturer model displ  year   cyl trans      drv     cty   hwy fl    class \n  &lt;chr&gt;        &lt;chr&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;      &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; \n1 audi         a4      1.8  1999     4 auto(l5)   f        18    29 p     compa…\n2 audi         a4      1.8  1999     4 manual(m5) f        21    29 p     compa…\n3 audi         a4      2    2008     4 manual(m6) f        20    31 p     compa…\n4 audi         a4      2    2008     4 auto(av)   f        21    30 p     compa…\n5 audi         a4      2.8  1999     6 auto(l5)   f        16    26 p     compa…"
+    "objectID": "posts/tidyverse-tidy-selection/index.html#use-of-boolean-operators",
+    "href": "posts/tidyverse-tidy-selection/index.html#use-of-boolean-operators",
+    "title": "Tidy selection",
+    "section": "Use of boolean operators",
+    "text": "Use of boolean operators\nTidy selection allows you to use Boolean operators (&, |) to specify columns as well:\n\nstarwars %&gt;% \n    select(ends_with(\"color\") & \n1           !starts_with(\"h\")) %&gt;%\n    head(3)\n\n\n1\n\nuse of ! as ‘not’. Columns that end with ‘color’ and don’t start with ‘h’. This excludes the column ‘hair_color’\n\n\n\n\n# A tibble: 3 × 2\n  skin_color  eye_color\n  &lt;chr&gt;       &lt;chr&gt;    \n1 fair        blue     \n2 gold        yellow   \n3 white, blue red"
   },
   {
-    "objectID": "posts/quarto-tutorial/index.html",
-    "href": "posts/quarto-tutorial/index.html",
-    "title": "Quarto Demo",
-    "section": "",
-    "text": "Abstract River\nLast Modified: December 27, 2024\nClick the code tools icon in the banner to see all Quarto code used in this article: &lt;/&gt; Code\nAn example sentence - info\nAn example sentence - success\nAn example sentence - warning\nAn example sentence - danger\nThis is a demo using panels and code chunks:"
+    "objectID": "posts/tidyverse-tidy-selection/index.html#position",
+    "href": "posts/tidyverse-tidy-selection/index.html#position",
+    "title": "Tidy selection",
+    "section": "Position",
+    "text": "Position\nYou don’t have to use name, you can use the position of the column in the dataframe:\n\nstarwars %&gt;% \n1    select(1, 3, 4:7) %&gt;%\n    head(3)\n\n\n1\n\nselect the first, third, and 4th, 5th, 6th, 7th columns\n\n\n\n\n# A tibble: 3 × 6\n  name            mass hair_color skin_color  eye_color birth_year\n  &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;          &lt;dbl&gt;\n1 Luke Skywalker    77 blond      fair        blue              19\n2 C-3PO             75 &lt;NA&gt;       gold        yellow           112\n3 R2-D2             32 &lt;NA&gt;       white, blue red               33\n\n\nYou can also use last_col() which will automatically find the last column in the dataframe. (This saves you having to work out the length of the dataframe):\n\n# this:\nstarwars %&gt;% select(1, length(starwars))\n\n# is the same as this:\n1starwars %&gt;% select(1, last_col())\n\n\n1\n\nThis is more explicit - it’s meaning is easier to infer from plain English"
   },
   {
-    "objectID": "posts/quarto-tutorial/index.html#link-icons",
-    "href": "posts/quarto-tutorial/index.html#link-icons",
-    "title": "Quarto Demo",
-    "section": "Link icons",
-    "text": "Link icons\nOther link icons you can generate using header yaml include, info-circle, download, book, postcard, rss. We already use the github and linkedin link icons in about.qmd.\nSee the info yaml in the Ibis Quarto website for examples.\n\n\n\n\n\n\nIcons\n\n\n\nYou should be able to use any of the standard Bootstrap 5 icons. And there are a lot of them! See the Quarto docs for details of how to implement this."
+    "objectID": "posts/tidyverse-tidy-selection/index.html#type",
+    "href": "posts/tidyverse-tidy-selection/index.html#type",
+    "title": "Tidy selection",
+    "section": "Type",
+    "text": "Type\nTidyselect means you can specify columns based on their datatype as well:\n\nstarwars %&gt;% \n1    select(name, where(is.list)) %&gt;%\n    head(3)\n\n\n1\n\nUse where() to make it more explicit what you’re selecting (although not mandatory)\n\n\n\n\n# A tibble: 3 × 4\n  name           films     vehicles  starships\n  &lt;chr&gt;          &lt;list&gt;    &lt;list&gt;    &lt;list&gt;   \n1 Luke Skywalker &lt;chr [5]&gt; &lt;chr [2]&gt; &lt;chr [2]&gt;\n2 C-3PO          &lt;chr [6]&gt; &lt;chr [0]&gt; &lt;chr [0]&gt;\n3 R2-D2          &lt;chr [7]&gt; &lt;chr [0]&gt; &lt;chr [0]&gt;\n\n\nIn this case we can use the columns data type to ensure every numeric column is a double (maybe we need this for machine learning purposes):\n\nstarwars %&gt;% \n    select(name, where(is.numeric)) %&gt;% \n1    mutate_if(is.integer, as.double) %&gt;%\n    head(3)\n\n\n1\n\nIf we have any integer columns slected by is.numeric, ensure they are mutated to doubles with as.double\n\n\n\n\n# A tibble: 3 × 4\n  name           height  mass birth_year\n  &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;\n1 Luke Skywalker    172    77         19\n2 C-3PO             167    75        112\n3 R2-D2              96    32         33"
   },
   {
-    "objectID": "posts/quarto-tutorial/index.html#fenced-divs",
-    "href": "posts/quarto-tutorial/index.html#fenced-divs",
-    "title": "Quarto Demo",
-    "section": "Fenced divs",
-    "text": "Fenced divs\nYou can add classes, attributes, and other identifiers to regions of content using divs and spans:\n\nBorders\n\nThis content can be styled with a border\n\n\n\nCallout notes\n\n\n\n\n\n\nNote\n\n\n\nNote that there are five types of callouts, including: note, tip, warning, caution, and important.\n\n\n\n\n\n\n\n\nTip with caption\n\n\n\nLeave a tip in a caption box like this!\n\n\n\n\n\n\n\n\nWarning without icon\n\n\n\n\n\nThis one is collapsed and has no icon\n\n\n\n\n\n\n\n\n\nImportant with custom caption\n\n\n\nA simplified callout note"
-  },
-  {
-    "objectID": "posts/quarto-tutorial/index.html#in-the-margin",
-    "href": "posts/quarto-tutorial/index.html#in-the-margin",
-    "title": "Quarto Demo",
-    "section": "In the margin",
-    "text": "In the margin\nLook right\n\n\nCheck out this YouTube playlist with great talks on blogging!"
-  },
-  {
-    "objectID": "posts/quarto-tutorial/index.html#linking-internally",
-    "href": "posts/quarto-tutorial/index.html#linking-internally",
-    "title": "Quarto Demo",
-    "section": "Linking internally",
-    "text": "Linking internally\nQuite easy, just specify the relative folder path to get there from here: ../../about.qmd"
-  },
-  {
-    "objectID": "posts/quarto-tutorial/index.html#embed-content-as-html",
-    "href": "posts/quarto-tutorial/index.html#embed-content-as-html",
-    "title": "Quarto Demo",
-    "section": "Embed content as HTML",
-    "text": "Embed content as HTML"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Posts",
-    "section": "",
-    "text": "You have found my personal data science focused learning blog. I post content I find useful to reinforce my learning and refer back to. You might find it useful as well. Search the filter bar or select a category.\n\n\n\n\n\n\n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nTidy selection\n\n\nA powerful tool when working with columns\n\n\n\nr\n\n\ntidyverse\n\n\ndplyr\n\n\n\nMake programming with the tidyverse easier\n\n\n\n\n\n10 August 2024\n\n\nMatthew Scott\n\n\n\n\n\n\n\n\n\n\n\n\nTidyverse Essentials - dplyr\n\n\nThe grammar of data wrangling\n\n\n\ntutorial\n\n\nr\n\n\ntidyverse\n\n\ndplyr\n\n\nintro\n\n\n\nData wrangling: solve the most common data manipulation challenges\n\n\n\n\n\n24 July 2024\n\n\nMatthew Scott\n\n\n\n\n\n\n\n\n\n\n\n\nIntroduction to the tidyverse\n\n\nData Science flavoured R\n\n\n\ntutorial\n\n\nr\n\n\ntidyverse\n\n\nintro\n\n\n\nTidyverse is a collection of R packages designed for data science\n\n\n\n\n\n20 July 2024\n\n\nMatthew Scott\n\n\n\n\n\n\n\n\n\n\n\n\nQuarto Demo\n\n\nA how-to of syntax\n\n\n\ntutorial\n\n\nquarto\n\n\nr\n\n\n\nThe art of the possible\n\n\n\n\n\n19 July 2024\n\n\nMatthew Scott\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "Matthew Scott",
-    "section": "",
-    "text": "Junior Data Scientist at The Pensions Regulator | Resume"
-  },
-  {
-    "objectID": "license.html",
-    "href": "license.html",
-    "title": "License",
-    "section": "",
-    "text": "© Copyright Matthew Scott\nThis is my personal website. Nothing here is endorsed by my employer or any organizations of which I am a part. Content on this site is provided under a Creative Commons (CC-BY) 4.0 license. You may reuse this content as long as you indicate my authorship and provide a link back to the original material. Source code of the site is provided under the MIT license and may be reused without restriction.\nAll images created using Procreate unless otherwise specified."
+    "objectID": "posts/tidyverse-tidy-selection/index.html#using-environment-variables-or-function-variables-with-tidyverse",
+    "href": "posts/tidyverse-tidy-selection/index.html#using-environment-variables-or-function-variables-with-tidyverse",
+    "title": "Tidy selection",
+    "section": "Using environment variables or function variables with tidyverse",
+    "text": "Using environment variables or function variables with tidyverse\nThis is related to the data masking property that tidy evaluation employs [2], rather than its tidy select properties, but it still useful to know when extending tidy selection.\n\nWith environment variables\nIn order to use a variable specified in the global environment (these are the variables you’ve assigned earlier in your script), you need to add the !! or .env$ syntax around the variable to tell tidyselect to look outside of the dataframe variable [3]:\n\ncols &lt;- c(\"homeworld\", \"sex\", \"eye_color\")\n\nstarwars %&gt;% select(!!cols) %&gt;% head(3)\n\n# A tibble: 3 × 3\n  homeworld sex   eye_color\n  &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;    \n1 Tatooine  male  blue     \n2 Tatooine  none  yellow   \n3 Naboo     none  red      \n\n\n\n\nIn functions\nYou need to ‘embrace’ ({{ var }}) your tidyselect syntax when it is provided as an argument to a function [4]:\n\n#' Select all characters that appear on the\n#' given homeworld and supply their numeric\n#' stats.\n#' Only return rows where all numeric columns \n#' aren't NA.\nstarwars_toptrumps &lt;- function(df = starwars, homeworld){\n    df %&gt;% \n        select(name, homeworld, where(is.numeric)) %&gt;% \n1        filter(homeworld == {{ homeworld }}) %&gt;%\n2        tidyr::drop_na(where(is.numeric))\n}\n\n3starwars_toptrumps(homeworld = \"Naboo\")\n\n\n1\n\nSpecify the use of a function argument in filter\n\n2\n\nUse tidyr function to check all numeric columns and only return rows that don’t include NA using drop_na()\n\n3\n\nCall function and feed a ‘homeworld’ into the filter argument of the function\n\n\n\n\n# A tibble: 4 × 5\n  name          homeworld height  mass birth_year\n  &lt;chr&gt;         &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;\n1 R2-D2         Naboo         96    32         33\n2 Palpatine     Naboo        170    75         82\n3 Padmé Amidala Naboo        185    45         46\n4 Jar Jar Binks Naboo        196    66         52"
   },
   {
     "objectID": "posts/tidyverse-dplyr/index.html",
@@ -154,53 +112,95 @@
     "text": "distinct()\ndistinct([df], [col_a], [col_b], ...)\n\nRemoves rows with duplicate values\nSpecify columns in distinct to select only those column\n\n\n# will create a table where the combination \n# of manufacturer and model is distinct\nmpg %&gt;% \n  select(manufacturer, model) %&gt;% \n1  distinct()\n\n\n1\n\nBecause no columns are specified, distinct returns all columns\n\n\n\n\n# A tibble: 38 × 2\n   manufacturer model             \n   &lt;chr&gt;        &lt;chr&gt;             \n 1 audi         a4                \n 2 audi         a4 quattro        \n 3 audi         a6 quattro        \n 4 chevrolet    c1500 suburban 2wd\n 5 chevrolet    corvette          \n 6 chevrolet    k1500 tahoe 4wd   \n 7 chevrolet    malibu            \n 8 dodge        caravan 2wd       \n 9 dodge        dakota pickup 4wd \n10 dodge        durango 4wd       \n# ℹ 28 more rows\n\n\n\nmpg %&gt;% \n1    group_by(model) %&gt;%\n2    distinct(manufacturer, .keep_all = T) %&gt;%\n    head()\n\n\n1\n\ndistinct will respect group_by and return distinct values for each group\n\n2\n\nkeep_all will keep the first row of values from all other columns\n\n\n\n\n# A tibble: 6 × 11\n# Groups:   model [6]\n  manufacturer model       displ  year   cyl trans drv     cty   hwy fl    class\n  &lt;chr&gt;        &lt;chr&gt;       &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;\n1 audi         a4            1.8  1999     4 auto… f        18    29 p     comp…\n2 audi         a4 quattro    1.8  1999     4 manu… 4        18    26 p     comp…\n3 audi         a6 quattro    2.8  1999     6 auto… 4        15    24 p     mids…\n4 chevrolet    c1500 subu…   5.3  2008     8 auto… r        14    20 r     suv  \n5 chevrolet    corvette      5.7  1999     8 manu… r        16    26 p     2sea…\n6 chevrolet    k1500 taho…   5.3  2008     8 auto… 4        14    19 r     suv"
   },
   {
-    "objectID": "posts/tidyverse-tidy-selection/index.html",
-    "href": "posts/tidyverse-tidy-selection/index.html",
-    "title": "Tidy selection",
+    "objectID": "license.html",
+    "href": "license.html",
+    "title": "License",
     "section": "",
-    "text": "Maroon ribbon"
+    "text": "© Copyright Matthew Scott\nThis is my personal website. Nothing here is endorsed by my employer or any organizations of which I am a part. Content on this site is provided under a Creative Commons (CC-BY) 4.0 license. You may reuse this content as long as you indicate my authorship and provide a link back to the original material. Source code of the site is provided under the MIT license and may be reused without restriction.\nAll images created using Procreate unless otherwise specified."
   },
   {
-    "objectID": "posts/tidyverse-tidy-selection/index.html#introduction",
-    "href": "posts/tidyverse-tidy-selection/index.html#introduction",
-    "title": "Tidy selection",
-    "section": "Introduction",
-    "text": "Introduction\nTidy selection is a principle that makes it easier to work with columns in a dataset. Behind the principle is the tidyselect package [1]. This package is used by dplyr and tidyr and means you don’t have to use an exact column name to select it, you can use it’s name, position or type.\nTidy select can be used with select(), rename(), relocate(), across(), pull(), where(), any_of(), and all_of() in the dplyr package.\nWhat does this mean for your programming?\nLet’s use the starwars dataset to see how these helper functions can be useful. Expand the info box below to see the dataset:\n\n\n\n\n\n\nStarwars dataset\n\n\n\n\n\n\nglimpse(starwars)\n\nRows: 87\nColumns: 14\n$ name       &lt;chr&gt; \"Luke Skywalker\", \"C-3PO\", \"R2-D2\", \"Darth Vader\", \"Leia Or…\n$ height     &lt;int&gt; 172, 167, 96, 202, 150, 178, 165, 97, 183, 182, 188, 180, 2…\n$ mass       &lt;dbl&gt; 77.0, 75.0, 32.0, 136.0, 49.0, 120.0, 75.0, 32.0, 84.0, 77.…\n$ hair_color &lt;chr&gt; \"blond\", NA, NA, \"none\", \"brown\", \"brown, grey\", \"brown\", N…\n$ skin_color &lt;chr&gt; \"fair\", \"gold\", \"white, blue\", \"white\", \"light\", \"light\", \"…\n$ eye_color  &lt;chr&gt; \"blue\", \"yellow\", \"red\", \"yellow\", \"brown\", \"blue\", \"blue\",…\n$ birth_year &lt;dbl&gt; 19.0, 112.0, 33.0, 41.9, 19.0, 52.0, 47.0, NA, 24.0, 57.0, …\n$ sex        &lt;chr&gt; \"male\", \"none\", \"none\", \"male\", \"female\", \"male\", \"female\",…\n$ gender     &lt;chr&gt; \"masculine\", \"masculine\", \"masculine\", \"masculine\", \"femini…\n$ homeworld  &lt;chr&gt; \"Tatooine\", \"Tatooine\", \"Naboo\", \"Tatooine\", \"Alderaan\", \"T…\n$ species    &lt;chr&gt; \"Human\", \"Droid\", \"Droid\", \"Human\", \"Human\", \"Human\", \"Huma…\n$ films      &lt;list&gt; &lt;\"A New Hope\", \"The Empire Strikes Back\", \"Return of the J…\n$ vehicles   &lt;list&gt; &lt;\"Snowspeeder\", \"Imperial Speeder Bike\"&gt;, &lt;&gt;, &lt;&gt;, &lt;&gt;, \"Imp…\n$ starships  &lt;list&gt; &lt;\"X-wing\", \"Imperial shuttle\"&gt;, &lt;&gt;, &lt;&gt;, \"TIE Advanced x1\",…"
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Matthew Scott",
+    "section": "",
+    "text": "Junior Data Scientist at The Pensions Regulator | Resume"
   },
   {
-    "objectID": "posts/tidyverse-tidy-selection/index.html#selecting-by-name",
-    "href": "posts/tidyverse-tidy-selection/index.html#selecting-by-name",
-    "title": "Tidy selection",
-    "section": "Selecting by name",
-    "text": "Selecting by name\nThis can be done with the exact col name:\n\nstarwars %&gt;% select(name, height, mass) %&gt;% head(3)\n\n# A tibble: 3 × 3\n  name           height  mass\n  &lt;chr&gt;           &lt;int&gt; &lt;dbl&gt;\n1 Luke Skywalker    172    77\n2 C-3PO             167    75\n3 R2-D2              96    32\n\n\nOr inexactly with the use of helper functions:\nFor example, starts_with() or contains(). Note: See more helper function options in my dplyr essentials blog\n\nstarts_with()ends_with()contains()matches()\n\n\nThe column start with character(s)\n\nstarwars %&gt;% \n    select(starts_with(\"S\", ignore.case = T)) %&gt;% \n    head(3)\n\n# A tibble: 3 × 4\n  skin_color  sex   species starships\n  &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;   &lt;list&gt;   \n1 fair        male  Human   &lt;chr [2]&gt;\n2 gold        none  Droid   &lt;chr [0]&gt;\n3 white, blue none  Droid   &lt;chr [0]&gt;\n\n\n\n\nEnds with an exact suffix\n\nstarwars %&gt;% select(ends_with(\"s\")) %&gt;% head(3)\n\n# A tibble: 3 × 5\n   mass species films     vehicles  starships\n  &lt;dbl&gt; &lt;chr&gt;   &lt;list&gt;    &lt;list&gt;    &lt;list&gt;   \n1    77 Human   &lt;chr [5]&gt; &lt;chr [2]&gt; &lt;chr [2]&gt;\n2    75 Droid   &lt;chr [6]&gt; &lt;chr [0]&gt; &lt;chr [0]&gt;\n3    32 Droid   &lt;chr [7]&gt; &lt;chr [0]&gt; &lt;chr [0]&gt;\n\n\n\n\nContains a literal string\n\nstarwars %&gt;% select(contains(\"color\")) %&gt;% head(3)\n\n# A tibble: 3 × 3\n  hair_color skin_color  eye_color\n  &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;    \n1 blond      fair        blue     \n2 &lt;NA&gt;       gold        yellow   \n3 &lt;NA&gt;       white, blue red      \n\n\n\n\nMatches a regular expression or a stringr pattern\n\nstarwars %&gt;% \n1    select(matches(\"[s]{2}\")) %&gt;%\n    head(3)\n\n\n1\n\nwill match where ‘s’ appears twice in a row\n\n\n\n\n# A tibble: 3 × 1\n   mass\n  &lt;dbl&gt;\n1    77\n2    75\n3    32"
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Posts",
+    "section": "",
+    "text": "You have found my personal data science focused learning blog. I post content I find useful to reinforce my learning and refer back to. You might find it useful as well. Search the filter bar or select a category.\n\n\n\n\n\n\n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nTidy selection\n\n\nA powerful tool when working with columns\n\n\n\nr\n\n\ntidyverse\n\n\ndplyr\n\n\n\nMake programming with the tidyverse easier\n\n\n\n\n\n10 August 2024\n\n\nMatthew Scott\n\n\n\n\n\n\n\n\n\n\n\n\nTidyverse Essentials - dplyr\n\n\nThe grammar of data wrangling\n\n\n\ntutorial\n\n\nr\n\n\ntidyverse\n\n\ndplyr\n\n\nintro\n\n\n\nData wrangling: solve the most common data manipulation challenges\n\n\n\n\n\n24 July 2024\n\n\nMatthew Scott\n\n\n\n\n\n\n\n\n\n\n\n\nIntroduction to the tidyverse\n\n\nData Science flavoured R\n\n\n\ntutorial\n\n\nr\n\n\ntidyverse\n\n\nintro\n\n\n\nTidyverse is a collection of R packages designed for data science\n\n\n\n\n\n20 July 2024\n\n\nMatthew Scott\n\n\n\n\n\n\n\n\n\n\n\n\nQuarto Demo\n\n\nA how-to of syntax\n\n\n\ntutorial\n\n\nquarto\n\n\nr\n\n\n\nThe art of the possible\n\n\n\n\n\n19 July 2024\n\n\nMatthew Scott\n\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "posts/tidyverse-tidy-selection/index.html#use-of-boolean-operators",
-    "href": "posts/tidyverse-tidy-selection/index.html#use-of-boolean-operators",
-    "title": "Tidy selection",
-    "section": "Use of boolean operators",
-    "text": "Use of boolean operators\nTidy selection allows you to use Boolean operators (&, |) to specify columns as well:\n\nstarwars %&gt;% \n    select(ends_with(\"color\") & \n1           !starts_with(\"h\")) %&gt;%\n    head(3)\n\n\n1\n\nuse of ! as ‘not’. Columns that end with ‘color’ and don’t start with ‘h’. This excludes the column ‘hair_color’\n\n\n\n\n# A tibble: 3 × 2\n  skin_color  eye_color\n  &lt;chr&gt;       &lt;chr&gt;    \n1 fair        blue     \n2 gold        yellow   \n3 white, blue red"
+    "objectID": "posts/quarto-tutorial/index.html",
+    "href": "posts/quarto-tutorial/index.html",
+    "title": "Quarto Demo",
+    "section": "",
+    "text": "Abstract River\nLast Modified: December 27, 2024\nClick the code tools icon in the banner to see all Quarto code used in this article: &lt;/&gt; Code\nAn example sentence - info\nAn example sentence - success\nAn example sentence - warning\nAn example sentence - danger\nThis is a demo using panels and code chunks:"
   },
   {
-    "objectID": "posts/tidyverse-tidy-selection/index.html#position",
-    "href": "posts/tidyverse-tidy-selection/index.html#position",
-    "title": "Tidy selection",
-    "section": "Position",
-    "text": "Position\nYou don’t have to use name, you can use the position of the column in the dataframe:\n\nstarwars %&gt;% \n1    select(1, 3, 4:7) %&gt;%\n    head(3)\n\n\n1\n\nselect the first, third, and 4th, 5th, 6th, 7th columns\n\n\n\n\n# A tibble: 3 × 6\n  name            mass hair_color skin_color  eye_color birth_year\n  &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;          &lt;dbl&gt;\n1 Luke Skywalker    77 blond      fair        blue              19\n2 C-3PO             75 &lt;NA&gt;       gold        yellow           112\n3 R2-D2             32 &lt;NA&gt;       white, blue red               33\n\n\nYou can also use last_col() which will automatically find the last column in the dataframe. (This saves you having to work out the length of the dataframe):\n\n# this:\nstarwars %&gt;% select(1, length(starwars))\n\n# is the same as this:\n1starwars %&gt;% select(1, last_col())\n\n\n1\n\nThis is more explicit - it’s meaning is easier to infer from plain English"
+    "objectID": "posts/quarto-tutorial/index.html#link-icons",
+    "href": "posts/quarto-tutorial/index.html#link-icons",
+    "title": "Quarto Demo",
+    "section": "Link icons",
+    "text": "Link icons\nOther link icons you can generate using header yaml include, info-circle, download, book, postcard, rss. We already use the github and linkedin link icons in about.qmd.\nSee the info yaml in the Ibis Quarto website for examples.\n\n\n\n\n\n\nIcons\n\n\n\nYou should be able to use any of the standard Bootstrap 5 icons. And there are a lot of them! See the Quarto docs for details of how to implement this."
   },
   {
-    "objectID": "posts/tidyverse-tidy-selection/index.html#type",
-    "href": "posts/tidyverse-tidy-selection/index.html#type",
-    "title": "Tidy selection",
-    "section": "Type",
-    "text": "Type\nTidyselect means you can specify columns based on their datatype as well:\n\nstarwars %&gt;% \n1    select(name, where(is.list)) %&gt;%\n    head(3)\n\n\n1\n\nUse where() to make it more explicit what you’re selecting (although not mandatory)\n\n\n\n\n# A tibble: 3 × 4\n  name           films     vehicles  starships\n  &lt;chr&gt;          &lt;list&gt;    &lt;list&gt;    &lt;list&gt;   \n1 Luke Skywalker &lt;chr [5]&gt; &lt;chr [2]&gt; &lt;chr [2]&gt;\n2 C-3PO          &lt;chr [6]&gt; &lt;chr [0]&gt; &lt;chr [0]&gt;\n3 R2-D2          &lt;chr [7]&gt; &lt;chr [0]&gt; &lt;chr [0]&gt;\n\n\nIn this case we can use the columns data type to ensure every numeric column is a double (maybe we need this for machine learning purposes):\n\nstarwars %&gt;% \n    select(name, where(is.numeric)) %&gt;% \n1    mutate_if(is.integer, as.double) %&gt;%\n    head(3)\n\n\n1\n\nIf we have any integer columns slected by is.numeric, ensure they are mutated to doubles with as.double\n\n\n\n\n# A tibble: 3 × 4\n  name           height  mass birth_year\n  &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;\n1 Luke Skywalker    172    77         19\n2 C-3PO             167    75        112\n3 R2-D2              96    32         33"
+    "objectID": "posts/quarto-tutorial/index.html#fenced-divs",
+    "href": "posts/quarto-tutorial/index.html#fenced-divs",
+    "title": "Quarto Demo",
+    "section": "Fenced divs",
+    "text": "Fenced divs\nYou can add classes, attributes, and other identifiers to regions of content using divs and spans:\n\nBorders\n\nThis content can be styled with a border\n\n\n\nCallout notes\n\n\n\n\n\n\nNote\n\n\n\nNote that there are five types of callouts, including: note, tip, warning, caution, and important.\n\n\n\n\n\n\n\n\nTip with caption\n\n\n\nLeave a tip in a caption box like this!\n\n\n\n\n\n\n\n\nWarning without icon\n\n\n\n\n\nThis one is collapsed and has no icon\n\n\n\n\n\n\n\n\n\nImportant with custom caption\n\n\n\nA simplified callout note"
   },
   {
-    "objectID": "posts/tidyverse-tidy-selection/index.html#using-environment-variables-or-function-variables-with-tidyverse",
-    "href": "posts/tidyverse-tidy-selection/index.html#using-environment-variables-or-function-variables-with-tidyverse",
-    "title": "Tidy selection",
-    "section": "Using environment variables or function variables with tidyverse",
-    "text": "Using environment variables or function variables with tidyverse\nThis is related to the data masking property that tidy evaluation employs [2], rather than its tidy select properties, but it still useful to know when extending tidy selection.\n\nWith environment variables\nIn order to use a variable specified in the global environment (these are the variables you’ve assigned earlier in your script), you need to add the !! or .env$ syntax around the variable to tell tidyselect to look outside of the dataframe variable [3]:\n\ncols &lt;- c(\"homeworld\", \"sex\", \"eye_color\")\n\nstarwars %&gt;% select(!!cols) %&gt;% head(3)\n\n# A tibble: 3 × 3\n  homeworld sex   eye_color\n  &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;    \n1 Tatooine  male  blue     \n2 Tatooine  none  yellow   \n3 Naboo     none  red      \n\n\n\n\nIn functions\nYou need to ‘embrace’ ({{ var }}) your tidyselect syntax when it is provided as an argument to a function [4]:\n\n#' Select all characters that appear on the\n#' given homeworld and supply their numeric\n#' stats.\n#' Only return rows where all numeric columns \n#' aren't NA.\nstarwars_toptrumps &lt;- function(df = starwars, homeworld){\n    df %&gt;% \n        select(name, homeworld, where(is.numeric)) %&gt;% \n1        filter(homeworld == {{ homeworld }}) %&gt;%\n2        tidyr::drop_na(where(is.numeric))\n}\n\n3starwars_toptrumps(homeworld = \"Naboo\")\n\n\n1\n\nSpecify the use of a function argument in filter\n\n2\n\nUse tidyr function to check all numeric columns and only return rows that don’t include NA using drop_na()\n\n3\n\nCall function and feed a ‘homeworld’ into the filter argument of the function\n\n\n\n\n# A tibble: 4 × 5\n  name          homeworld height  mass birth_year\n  &lt;chr&gt;         &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;\n1 R2-D2         Naboo         96    32         33\n2 Palpatine     Naboo        170    75         82\n3 Padmé Amidala Naboo        185    45         46\n4 Jar Jar Binks Naboo        196    66         52"
+    "objectID": "posts/quarto-tutorial/index.html#in-the-margin",
+    "href": "posts/quarto-tutorial/index.html#in-the-margin",
+    "title": "Quarto Demo",
+    "section": "In the margin",
+    "text": "In the margin\nLook right\n\n\nCheck out this YouTube playlist with great talks on blogging!"
+  },
+  {
+    "objectID": "posts/quarto-tutorial/index.html#linking-internally",
+    "href": "posts/quarto-tutorial/index.html#linking-internally",
+    "title": "Quarto Demo",
+    "section": "Linking internally",
+    "text": "Linking internally\nQuite easy, just specify the relative folder path to get there from here: ../../about.qmd"
+  },
+  {
+    "objectID": "posts/quarto-tutorial/index.html#embed-content-as-html",
+    "href": "posts/quarto-tutorial/index.html#embed-content-as-html",
+    "title": "Quarto Demo",
+    "section": "Embed content as HTML",
+    "text": "Embed content as HTML"
+  },
+  {
+    "objectID": "posts/tidyverse-intro/index.html",
+    "href": "posts/tidyverse-intro/index.html",
+    "title": "Introduction to the tidyverse",
+    "section": "",
+    "text": "Red brush strokes"
+  },
+  {
+    "objectID": "posts/tidyverse-intro/index.html#tidyverse",
+    "href": "posts/tidyverse-intro/index.html#tidyverse",
+    "title": "Introduction to the tidyverse",
+    "section": "Tidyverse",
+    "text": "Tidyverse\nTidyverse is a collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures.\nInstallation This can be done using 1) install.packages(\"tidyverse\"); 2) library(tidyverse) to install and import all packages.\n\n\n\n\n\n\nTip\n\n\n\nInstalling tidyverse will result in (usually) a lot of libraries your code isn’t using being installed, which is not efficient. It is best practice (and helps your learning) to install packages individually. See below for popular tidyverse packages.\n\n\n\nPopular Tidyverse packages\n\ndplyr - Solve the most common data manipulation challenges (NB dbplyr allows you to use remote database tables by converting dplyr code to SQL)\nreadr - Read and write tabular data like csv and tsv formats. (NB there are options like readxl, writexl for working with excel files and googlesheets4 for Google sheets)\nstringr - Set of functions designed to make working with strings as easy as possible. It also incorporates Reg Ex patterns into its syntax. Many common data cleaning and preparation tasks involve string cleaning such as detecting matches, sub-setting strings, mutating strings, ordering, …\ntidyr - A set of functions to help tidy data (each column is a row, each row an observation, and each cell a single value). separate_wider_delim(), hoist(), pivot_longer(), …\nggplot2 - A declarative package for making graphics. See also R Graphics Cookbook\npurrr - Provides a complete set of tools for working with functions and vectors. (The map() family can efficiently replace for loops). A good place to start learning is here.\n\nNote There are more packages than this. Some other helpful ones to know about include: httr, lubridate, glue, modelr, forcats."
+  },
+  {
+    "objectID": "posts/tidyverse-intro/index.html#installing-importing-packages",
+    "href": "posts/tidyverse-intro/index.html#installing-importing-packages",
+    "title": "Introduction to the tidyverse",
+    "section": "Installing & importing packages",
+    "text": "Installing & importing packages\n\n# installing\ninstall.packages(\"tidyverse\")\n# or install specific packages\ninstall.packages(\"dplyr\")\ninstall.packages(\"ggplot2\")\n\n# now import them into your session\nlibrary(tidyverse)\nlibrary(dplyr)\nlibrary(ggplot2)"
+  },
+  {
+    "objectID": "posts/tidyverse-intro/index.html#inspecting-a-dataset",
+    "href": "posts/tidyverse-intro/index.html#inspecting-a-dataset",
+    "title": "Introduction to the tidyverse",
+    "section": "Inspecting a dataset",
+    "text": "Inspecting a dataset\nAn essential first step in any data analytical task is inspecting your data visually. Some packages come with dataset you can work with so you’ll want to see what they look like, or you can inspect your own data.\n\nToy datasets\nIt is useful to use toy datasets which come included when you install and import the relevant package. Some examples are:\n\nmpg from ggplot2\nstarwars from dplyr\nstorms from dplyr\nband_members from dplyr (a small dataset, it contains three tables useful for demonstrating joins)\n\n\n1library(dplyr)\n\n# open ggplot2's data dictionary for this packages internal dataset\n# help(\"mpg\")\n\n# load the dataset into a variable\n2df &lt;- ggplot2::mpg\n\n# see information rich summary\n# glimpse(df)\n\n# see dimension of object \n# (number of rows and columns)\n# dim(df)\n\n# see top n rows\n3df %&gt;% head(n = 5)\n\n\n1\n\nWe need this package so we can access the %&gt;% ‘pipe’ operator\n\n2\n\nthis notation tells R to look in the ggplot2 package for the dataset mpg\n\n3\n\nYou can also use tail() to see the bottom n rows. Use head() to default to the top 6 rows.\n\n\n\n\n# A tibble: 5 × 11\n  manufacturer model displ  year   cyl trans      drv     cty   hwy fl    class \n  &lt;chr&gt;        &lt;chr&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;      &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; \n1 audi         a4      1.8  1999     4 auto(l5)   f        18    29 p     compa…\n2 audi         a4      1.8  1999     4 manual(m5) f        21    29 p     compa…\n3 audi         a4      2    2008     4 manual(m6) f        20    31 p     compa…\n4 audi         a4      2    2008     4 auto(av)   f        21    30 p     compa…\n5 audi         a4      2.8  1999     6 auto(l5)   f        16    26 p     compa…"
   },
   {
     "objectID": "projects/pdf-text-explorer-tool/index.html",

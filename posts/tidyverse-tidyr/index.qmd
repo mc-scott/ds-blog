@@ -1,0 +1,63 @@
+---
+title: "Tidyverse Essentials - `tidyr`"
+subtitle: "Create tidy data"
+author: "Matthew Scott"
+date: "2025-01-02"
+description: "Structuring datasets to facilitate analysis"
+categories: [tutorial, r, tidyverse, tidyr, intro]
+#image: "abstract-art.png"
+#image-alt: "An abstract sketch whos colours bleed into the canvas"
+code-annotations: hover
+draft: true
+toc: true
+execute: 
+  eval: true
+  echo: true
+---
+
+```{r setup}
+#| echo: false
+
+library(dplyr)
+library(tidyr)
+```
+
+## Introduction
+
+R has a designated package for ensuring tidy data [@Wickham2014]. Tidy data can be defined as follows using three principles [@tidyDataNDtidydata]:
+
+1. Each variable is a column; each column is a variable
+2. Each observation is a row; each row is an observation
+3. Each value is a cell; each cell is a single value
+
+:::{.callout-note icon="true" collapse="true"}
+## Billboard dataset
+
+Columns `wk1` - `wk76` represent the rank of a song each week after it entered the charts.
+```{r dataset}
+glimpse(billboard |> select(1:6, last_col()))
+```
+We can see this dataset is not a 'tidy' one because each column is not a seperate variable. 
+:::
+
+## `pivot_wider`
+
+Wide = more columns (analogous to a 'pivot' in excel).
+
+### Structure
+
+```{r pivot-wider-example}
+#| eval: false
+
+pivot_wider(df,
+   names_from = ..., # column with our col names in
+   values_from = ... # column(s) with the values in
+) 
+# or
+df |> pivot_wider(
+    names_from = ...,
+    values_from = ...
+)
+```
+
+## References

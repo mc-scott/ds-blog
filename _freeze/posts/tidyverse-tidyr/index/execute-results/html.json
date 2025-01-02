@@ -1,0 +1,15 @@
+{
+  "hash": "cdbad9e262d94d7abf0bc85846f4d7b2",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Tidyverse Essentials - `tidyr`\"\nsubtitle: \"Create tidy data\"\nauthor: \"Matthew Scott\"\ndate: \"2025-01-02\"\ndescription: \"Structuring datasets to facilitate analysis\"\ncategories: [tutorial, r, tidyverse, tidyr, intro]\n#image: \"abstract-art.png\"\n#image-alt: \"An abstract sketch whos colours bleed into the canvas\"\ncode-annotations: hover\ndraft: true\ntoc: true\nexecute: \n  eval: true\n  echo: true\n---\n\n::: {.cell}\n\n:::\n\n\n\n## Introduction\n\nR has a designated package for ensuring tidy data [@Wickham2014]. Tidy data can be defined as follows using three principles [@tidyDataNDtidydata]:\n\n1. Each variable is a column; each column is a variable\n2. Each observation is a row; each row is an observation\n3. Each value is a cell; each cell is a single value\n\n:::{.callout-note icon=\"true\" collapse=\"true\"}\n## Billboard dataset\n\nColumns `wk1` - `wk76` represent the rank of a song each week after it entered the charts.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nglimpse(billboard |> select(1:6, last_col()))\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\nRows: 317\nColumns: 7\n$ artist       <chr> \"2 Pac\", \"2Ge+her\", \"3 Doors Down\", \"3 Doors Down\", \"504 …\n$ track        <chr> \"Baby Don't Cry (Keep...\", \"The Hardest Part Of ...\", \"Kr…\n$ date.entered <date> 2000-02-26, 2000-09-02, 2000-04-08, 2000-10-21, 2000-04-…\n$ wk1          <dbl> 87, 91, 81, 76, 57, 51, 97, 84, 59, 76, 84, 57, 50, 71, 7…\n$ wk2          <dbl> 82, 87, 70, 76, 34, 39, 97, 62, 53, 76, 84, 47, 39, 51, 6…\n$ wk3          <dbl> 72, 92, 68, 72, 25, 34, 96, 51, 38, 74, 75, 45, 30, 28, 5…\n$ wk76         <lgl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N…\n```\n\n\n:::\n:::\n\n\nWe can see this dataset is not a 'tidy' one because each column is not a seperate variable. \n:::\n\n## `pivot_wider`\n\nWide = more columns (analogous to a 'pivot' in excel).\n\n### Structure\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\npivot_wider(df,\n   names_from = ..., # column with our col names in\n   values_from = ... # column(s) with the values in\n) \n# or\ndf |> pivot_wider(\n    names_from = ...,\n    values_from = ...\n)\n```\n:::\n\n\n\n## References",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
