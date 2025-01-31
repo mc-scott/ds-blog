@@ -23,7 +23,7 @@ library(ggplot2)
 
 ## Introduction
 
-dplyr helps manipulate datasets. That is, it can be used to change their shape - the number of rows, columns, as well as verbs to create new columns.
+dplyr helps manipulate datasets. That is, it can be used to change their shape - the number of rows, columns. As well as having verbs to create new columns.
 
 ### Dataset used in this tutorial
 
@@ -191,11 +191,11 @@ mpg %>%
 
 # mutate with na_if() to replace values with NA
 mpg %>% 
-    mutate(year = na_if(year, NaN)) # <1>
+    mutate(year = na_if(year, "NaN")) # <1>
 
 
 ```
-1. if NaN present, replace it with NA to help clean the column
+1. if "NaN" present, replace it with NA to help clean the column
 
 
 ### Other mutate verbs
@@ -395,5 +395,33 @@ mpg %>%
 1. distinct will respect `group_by` and return distinct values for each group
 2. `keep_all` will keep the first row of values from all other columns
 
+## `lag()`
 
+- This verb is used to find the previous or next value in a vector
+- Use it with mutate to create a new column with this comparison
+
+`lag( [vector/column], n = [int] )`
+
+A scenario where this is useful would be when we have a column of dates and want to filter on only instances where there is an increase from the precious instance (this can be done on integers, dates, time).
+
+We can:
+1. use `lag()` in a mutate argument to create a new columns
+2. use filter to compare the two columns
+
+In the example below we order the storms dataset by year, month, day & hour to get sequential storms throughout the year. We can then see only storms that occur at a higher latitude throughout the year to help answer a specific question.
+
+```{r}
+
+storms |> 
+    summarise(year = min(year),
+              month = min(month),
+              day = min(day),
+              hour = min(hour),
+              .by = name) |> 
+    arrange(year, month, day, hour) |> 
+    mutate(previous_storm = lag(name),
+           .keep = "used") |> 
+    head(5)
+
+```
 
