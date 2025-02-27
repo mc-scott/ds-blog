@@ -20,3 +20,22 @@ Ideally you're looking for the rise-and-rise of your data projects but this is f
 ## Modular Jounralism
 - [Modular Journalism](https://modularjournalism.com/)
 - [How the Guardian approaches quote extraction with NLP](https://explosion.ai/blog/guardian)
+
+## Machine Learning life cycle
+- [Book: Kordon (2020)](https://link.springer.com/book/10.1007/978-3-030-36375-8)
+
+```{mermaid}
+graph TD
+    A[Data Collection] --> B[Data Preprocessing]
+    B --> C[Train-Test Split]
+    C --> D[Model Selection]
+    D --> E[Model Training]
+    E --> F[Model Evaluation]
+    F --> G{Is performance <br> acceptable?}
+    G -->|Yes| H[Model Deployment]
+    G -->|No| I[Hyperparameter Tuning]
+    I --> D
+    H --> J[Model Monitoring]
+
+```
+
