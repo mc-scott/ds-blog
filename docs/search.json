@@ -112,11 +112,11 @@
     "text": "distinct()\ndistinct([df], [col_a], [col_b], ...)\n\nRemoves rows with duplicate values\nSpecify columns in distinct to select only those column\n\n\n# will create a table where the combination \n# of manufacturer and model is distinct\nmpg %&gt;% \n  select(manufacturer, model) %&gt;% \n1  distinct()\n\n\n1\n\nBecause no columns are specified, distinct returns all columns\n\n\n\n\n# A tibble: 38 × 2\n   manufacturer model             \n   &lt;chr&gt;        &lt;chr&gt;             \n 1 audi         a4                \n 2 audi         a4 quattro        \n 3 audi         a6 quattro        \n 4 chevrolet    c1500 suburban 2wd\n 5 chevrolet    corvette          \n 6 chevrolet    k1500 tahoe 4wd   \n 7 chevrolet    malibu            \n 8 dodge        caravan 2wd       \n 9 dodge        dakota pickup 4wd \n10 dodge        durango 4wd       \n# ℹ 28 more rows\n\n\n\nmpg %&gt;% \n1    group_by(model) %&gt;%\n2    distinct(manufacturer, .keep_all = T) %&gt;%\n    head()\n\n\n1\n\ndistinct will respect group_by and return distinct values for each group\n\n2\n\nkeep_all will keep the first row of values from all other columns\n\n\n\n\n# A tibble: 6 × 11\n# Groups:   model [6]\n  manufacturer model       displ  year   cyl trans drv     cty   hwy fl    class\n  &lt;chr&gt;        &lt;chr&gt;       &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;\n1 audi         a4            1.8  1999     4 auto… f        18    29 p     comp…\n2 audi         a4 quattro    1.8  1999     4 manu… 4        18    26 p     comp…\n3 audi         a6 quattro    2.8  1999     6 auto… 4        15    24 p     mids…\n4 chevrolet    c1500 subu…   5.3  2008     8 auto… r        14    20 r     suv  \n5 chevrolet    corvette      5.7  1999     8 manu… r        16    26 p     2sea…\n6 chevrolet    k1500 taho…   5.3  2008     8 auto… 4        14    19 r     suv"
   },
   {
-    "objectID": "license.html",
-    "href": "license.html",
-    "title": "License",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Posts",
     "section": "",
-    "text": "© Copyright Matthew Scott\nThis is my personal website. Nothing here is endorsed by my employer or any organizations of which I am a part. Content on this site is provided under a Creative Commons (CC-BY) 4.0 license. You may reuse this content as long as you indicate my authorship and provide a link back to the original material. Source code of the site is provided under the MIT license and may be reused without restriction.\nAll images created using Procreate unless otherwise specified."
+    "text": "You have found my personal data science focused learning blog. I post content I find useful to reinforce my learning and refer back to. You might find it useful as well. Search the filter bar or select a category.\n\n\n\n\n\n\n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nTidy selection\n\n\nA powerful tool when working with columns\n\n\n\nr\n\n\ntidyverse\n\n\ndplyr\n\n\n\nMake programming with the tidyverse easier\n\n\n\n\n\n10 August 2024\n\n\nMatthew Scott\n\n\n\n\n\n\n\n\n\n\n\n\nTidyverse Essentials - dplyr\n\n\nThe grammar of data wrangling\n\n\n\ntutorial\n\n\nr\n\n\ntidyverse\n\n\ndplyr\n\n\nintro\n\n\n\nData wrangling: solve the most common data manipulation challenges\n\n\n\n\n\n24 July 2024\n\n\nMatthew Scott\n\n\n\n\n\n\n\n\n\n\n\n\nIntroduction to the tidyverse\n\n\nData Science flavoured R\n\n\n\ntutorial\n\n\nr\n\n\ntidyverse\n\n\nintro\n\n\n\nTidyverse is a collection of R packages designed for data science\n\n\n\n\n\n20 July 2024\n\n\nMatthew Scott\n\n\n\n\n\n\n\n\n\n\n\n\nQuarto Demo\n\n\nA how-to of syntax\n\n\n\ntutorial\n\n\nquarto\n\n\nr\n\n\n\nThe art of the possible\n\n\n\n\n\n19 July 2024\n\n\nMatthew Scott\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
@@ -126,11 +126,11 @@
     "text": "Junior Data Scientist at The Pensions Regulator | Resume"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Posts",
+    "objectID": "license.html",
+    "href": "license.html",
+    "title": "License",
     "section": "",
-    "text": "You have found my personal data science focused learning blog. I post content I find useful to reinforce my learning and refer back to. You might find it useful as well. Search the filter bar or select a category.\n\n\n\n\n\n\n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nTidy selection\n\n\nA powerful tool when working with columns\n\n\n\nr\n\n\ntidyverse\n\n\ndplyr\n\n\n\nMake programming with the tidyverse easier\n\n\n\n\n\n10 August 2024\n\n\nMatthew Scott\n\n\n\n\n\n\n\n\n\n\n\n\nTidyverse Essentials - dplyr\n\n\nThe grammar of data wrangling\n\n\n\ntutorial\n\n\nr\n\n\ntidyverse\n\n\ndplyr\n\n\nintro\n\n\n\nData wrangling: solve the most common data manipulation challenges\n\n\n\n\n\n24 July 2024\n\n\nMatthew Scott\n\n\n\n\n\n\n\n\n\n\n\n\nIntroduction to the tidyverse\n\n\nData Science flavoured R\n\n\n\ntutorial\n\n\nr\n\n\ntidyverse\n\n\nintro\n\n\n\nTidyverse is a collection of R packages designed for data science\n\n\n\n\n\n20 July 2024\n\n\nMatthew Scott\n\n\n\n\n\n\n\n\n\n\n\n\nQuarto Demo\n\n\nA how-to of syntax\n\n\n\ntutorial\n\n\nquarto\n\n\nr\n\n\n\nThe art of the possible\n\n\n\n\n\n19 July 2024\n\n\nMatthew Scott\n\n\n\n\n\n\nNo matching items"
+    "text": "© Copyright Matthew Scott\nThis is my personal website. Nothing here is endorsed by my employer or any organizations of which I am a part. Content on this site is provided under a Creative Commons (CC-BY) 4.0 license. You may reuse this content as long as you indicate my authorship and provide a link back to the original material. Source code of the site is provided under the MIT license and may be reused without restriction.\nAll images created using Procreate unless otherwise specified."
   },
   {
     "objectID": "posts/quarto-tutorial/index.html",

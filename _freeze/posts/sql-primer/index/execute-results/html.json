@@ -1,0 +1,12 @@
+{
+  "hash": "de2f56d6d05f9e39b1649d637315b0d5",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"Useful SQL Functions\"\nsubtitle: \"\"\nauthor: \"Matthew Scott\"\ndate: \"2025-02-28\"\ndescription: \"\"\ncategories: [tutorial, r, tidyverse, dplyr, intro]\nimage: \"\"\nimage-alt: \"\"\ncode-annotations: hover\ndraft: false\ntoc: true\n---\n\n\n## Single Row functions\n\n\n```{sql}\n-- case conversion functions\nUPPER()\nLOWER()\nINITCAP()\n\n-- character manipulation functions\nSUBSTR()\nINSTR()\nLENGTH()\nLPAD()/RPAD()\nLTRIM()/RTRIM()\nREPLACE()\nTRANSLATE()\nCONCAT()\n\n-- numeric functions\nROUND(<numeric_expression>, <length>)\nTRUNC()\nMOD()\nABS(<numeric_expression>) -- return the absolute value\nPOWER(<float_expression>, <power>) -- return the numeric expression to the specified power\n\n-- date functions\nMONTHS_BETWEEN()\nADD_MONTHS()\nNEXT_DAY()\nLAST_DAY()\nTO_DATE()\nROUND()\nTRUNC()\nCURRENT_DATE()\n\n-- regular expressions\nREGEXP_LIKE()\nREGEXP_SUBSTR()\n\n-- other functions\nNVL()\nNVL2()\nNULLIF()\nTO_CHAR()\nDECODE()\nCASE()\nSOUNDEX()\nTO_NUMBER()\n\n```\n\n\nCase conversion functions can be used in SELECT or WHERE clauses.\n\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

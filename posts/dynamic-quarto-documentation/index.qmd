@@ -1,0 +1,35 @@
+---
+title: "Dynamic Documentaion with Quarto"
+subtitle: "A common pattern to create dynamic documation"
+author: "Matthew Scott"
+date: "2025-03-08"
+description: "Make use of quarto's integration with mermaid diagrams and create dynamic and asthetic documentation"
+categories: [blog, r, quarto, mermaid]
+#image: "abstract-art.png"
+#image-alt: "An abstract sketch whos colours bleed into the canvas"
+code-annotations: hover
+draft: true
+toc: true
+---
+
+# Intro
+
+Visual documentation is great for ... but keeping it up to date can be a pain. Often due to the overhead of this task your documentation can drift from the reality of a project and over time go out of fashion. Now no one is using the documentation you spent so long creating because it does not reflect the current state of the code - inaccuracies or incompleteness means other developers (and yourself) have left it behind. You now rely on *tacit* knowledge^[knowledge kept inside someone's head] to keep your project alive. If you want to continue to receive vindication for all the hard hours that have been spent creating this software, that person better not leave the organisation.
+
+But there is light at the end of the tunnel - in recent years there has been a real push to create *dynamic* documentation - as your code evolves, so does the documentation; automatically. Packages like [Sphinx](https://www.sphinx-doc.org/en/master/) in the *pythonic* world are used often (see the [Numpy](https://numpy.org/doc/stable/) documentation), and Quarto is already used by libraries to create thorough and visually intuitive documentation - see [Ibis](https://ibis-project.org/) or [FastHTML](https://fastht.ml/docs/). I will show you a pattern to create dynamic documentation that takes advantage of Quarto's integration with Mermaid diagrams and can be used to render HTML documentation that, when refreshed, will update to reflect the current state of a project.
+
+# An example
+
+Let's focus in on a specific example to give some clarity to this process. Fundamentally though, this is the pattern:
+
+```{mermaid}
+%%| eval: true
+flowchart LR
+    A(Run script to access data)
+    B(Use string methods to create a marmaid-compliant string)
+    C(Save string to .mmd file)
+    D(Call file in mermaid cell block of quarto document)
+    A --> B --> C --> D
+```
+
+Ok, say you want to use mermaid to map an ERD of a database schema you have created as part of a project. You can use `dbplyr` to query the information schema of this database. Use `stringr` and `purrr` to iterate through the resulting dataframe to create a long mermaid-compliant string. This can then be written to a `.mmd` file and referenced in your Quarto-rendered HTML file.
