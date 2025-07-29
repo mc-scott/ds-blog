@@ -2,34 +2,124 @@
 title: "Dynamic Documentaion with Quarto"
 subtitle: "A common pattern to create dynamic documation"
 author: "Matthew Scott"
-date: "2025-03-08"
+date: "2025-07-29"
 description: "Make use of quarto's integration with mermaid diagrams and create dynamic and asthetic documentation"
 categories: [blog, r, quarto, mermaid]
 #image: "abstract-art.png"
 #image-alt: "An abstract sketch whos colours bleed into the canvas"
 code-annotations: hover
-draft: true
+draft: false
 toc: true
 ---
 
-# Intro
+# Introduction
 
-Visual documentation is great for ... but keeping it up to date can be a pain. Often due to the overhead of this task your documentation can drift from the reality of a project and over time go out of fashion. Now no one is using the documentation you spent so long creating because it does not reflect the current state of the code - inaccuracies or incompleteness means other developers (and yourself) have left it behind. You now rely on *tacit* knowledge^[knowledge kept inside someone's head] to keep your project alive. If you want to continue to receive vindication for all the hard hours that have been spent creating this software, that person better not leave the organisation.
+Visual documentation is great for grabbing your readers attention but keeping it up to date can be a pain. Often due to the overhead of this task your documentation can drift from the reality of a project and over time go out of fashion. Now no one is using the documentation you spent so long creating because it does not reflect the current state of the code - inaccuracies or incompleteness means other developers (and yourself) have left it behind. You now rely on *tacit* knowledge^[knowledge kept inside someones head] to keep your project alive. If you want to continue to receive vindication for all the hard hours that have been spent creating this software, that person better not leave the organisation.
 
 But there is light at the end of the tunnel - in recent years there has been a real push to create *dynamic* documentation - as your code evolves, so does the documentation; automatically. Packages like [Sphinx](https://www.sphinx-doc.org/en/master/) in the *pythonic* world are used often (see the [Numpy](https://numpy.org/doc/stable/) documentation), and Quarto is already used by libraries to create thorough and visually intuitive documentation - see [Ibis](https://ibis-project.org/) or [FastHTML](https://fastht.ml/docs/). I will show you a pattern to create dynamic documentation that takes advantage of Quarto's integration with Mermaid diagrams and can be used to render HTML documentation that, when refreshed, will update to reflect the current state of a project.
 
-# An example
+# The process
 
-Let's focus in on a specific example to give some clarity to this process. Fundamentally though, this is the pattern:
+For this example we will create a couple of toy tables to demonstrate how an entity relationship diagram can be displayed in your quarto-rendered documentation. You would want to replace this step with a dynamic call to return a dataframe from your underlying database schema. For example, using a DBI connection to a SQL database, you could run 
+
+```{{sql}}
+SELECT 
+    table_name,
+    column_name,
+    data_type,
+
+FROM information_schema.columns
+```
+
+This is what the process looks like from a high level:
 
 ```{mermaid}
 %%| eval: true
-flowchart LR
-    A(Run script to access data)
-    B(Use string methods to create a marmaid-compliant string)
+flowchart TD
+    A(Return schema)
+    B(Use string methods to create a <br> marmaid-compliant string <br> from your dataframe)
     C(Save string to .mmd file)
     D(Call file in mermaid cell block of quarto document)
-    A --> B --> C --> D
+    E(Delete .mmd file after it is rendered)
+    A --> B --> C --> D --> E
 ```
 
-Ok, say you want to use mermaid to map an ERD of a database schema you have created as part of a project. You can use `dbplyr` to query the information schema of this database. Use `stringr` and `purrr` to iterate through the resulting dataframe to create a long mermaid-compliant string. This can then be written to a `.mmd` file and referenced in your Quarto-rendered HTML file.
+Let's focus in on a specific example to give some clarity
+
+Ok, say you want to use mermaid to map an ERD of a database schema you have created as part of a project. You can use `dbplyr` to query the information schema of this database. Use `glue` and `dplyr` to iterate through the resulting dataframe to create a mermaid-compliant string. This can then be written to a `.mmd` file and referenced in your Quarto-rendered HTML file.
+
+:::{.callout-note icon="true" collapse="true"}
+## Sample data
+
+I will use a toy dataset similar to what you could return with the above SQL call:
+```{r}
+#| eval: true
+
+library(dplyr)
+
+df <- tibble(
+    table_name = c("Table1", "Table1", "Table2", "Table2"),
+    column_name = c("col1", "col2", "col3", "col4"),
+    data_type = rep("string", 4)
+)
+
+```
+
+:::
+
+## Reshape data & save `.mmd` file
+Below we are reshaping our dataframe into a mermaid-compliant string and saving a `.mmd` file out to our working directory
+
+```{r}
+#| eval: true
+
+library(glue)
+
+# Build Mermaid blocks for each table
+er_blocks <- df |>
+    group_by(table_name) |>
+    reframe(
+        block = glue(" {data_type} {column_name}")
+    ) |>
+    group_by(table_name) |>
+    summarise(
+        table_block = glue("{first(table_name)} {{{paste(block, collapse = ' ')}}}"),
+        .groups = "drop"
+    ) |>
+    pull(table_block)
+
+# Combine all table blocks into one Mermaid diagram
+er_diagram <- glue("erDiagram {paste(er_blocks, collapse = ' ')}")
+
+# write string to a mermaid file using .mmd suffix
+write(er_diagram, "erd.mmd")
+```
+
+## Create mermaid ERD
+Call the file by including in a mermaid code block using the `file` argument:
+
+```{{mermaid}}
+%%| eval: true
+%%| file: "erd.mmd"
+```
+Which renders an ERD in your quarto output:
+
+```{mermaid}
+%%| eval: true
+%%| file: "erd.mmd"
+```
+
+## Delete file
+
+Delete the file after it is rendered to maintain a clean directory:
+
+```{r}
+unlink("erd.mmd")
+```
+
+# Improvements to this workflow
+
+- Expand on the EDR by adding [relationships](https://mermaid.js.org/syntax/entityRelationshipDiagram.html) between tables
+- Create other types of mermaid diagram
+    - A [Gantt chart](https://mermaid.js.org/syntax/gantt.html) that dynamically updates with task timelines
+    - [Flowcharts](https://mermaid.js.org/syntax/flowchart.html) are also cool for conveying high level information (and used in this article)
