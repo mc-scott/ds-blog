@@ -5,8 +5,8 @@ author: "Matthew Scott"
 date: "2025-07-29"
 description: "Make use of quarto's integration with mermaid diagrams and create dynamic and asthetic documentation"
 categories: [blog, r, quarto, mermaid]
-#image: "abstract-art.png"
-#image-alt: "An abstract sketch whos colours bleed into the canvas"
+image: "spiral.png"
+image-alt: "An abtract wagon's wheel"
 code-annotations: hover
 draft: false
 toc: true
@@ -28,7 +28,7 @@ SELECT
     column_name,
     data_type,
 
-FROM information_schema.columns
+FROM  INFORMATION_SCHEMA.COLUMNS
 ```
 
 This is what the process looks like from a high level:
@@ -40,8 +40,7 @@ flowchart TD
     B(Use string methods to create a <br> marmaid-compliant string <br> from your dataframe)
     C(Save string to .mmd file)
     D(Call file in mermaid cell block of quarto document)
-    E(Delete .mmd file after it is rendered)
-    A --> B --> C --> D --> E
+    A --> B --> C --> D 
 ```
 
 Let's focus in on a specific example to give some clarity
@@ -51,17 +50,26 @@ Ok, say you want to use mermaid to map an ERD of a database schema you have crea
 :::{.callout-note icon="true" collapse="true"}
 ## Sample data
 
-I will use a toy dataset similar to what you could return with the above SQL call:
+I will use a toy dataset similar to what you could return with the above SQL call to the information schema:
 ```{r}
 #| eval: true
 
+# use band data that ships with dplyr
 library(dplyr)
 
-df <- tibble(
-    table_name = c("Table1", "Table1", "Table2", "Table2"),
-    column_name = c("col1", "col2", "col3", "col4"),
-    data_type = rep("string", 4)
-)
+# create a tibble of table metadata for band_members
+# & band_instruments tables similar to what you'd get
+# querying a database tables information schema
+tables <- c("band_members", "band_instruments") |>
+    purrr::map_df(
+        ~ tibble(
+            table_name = .,
+            column_name = names(get(.)),
+            data_type = purrr::map_chr(get(.), class)
+        )
+    )
+
+tables
 
 ```
 
@@ -76,7 +84,7 @@ Below we are reshaping our dataframe into a mermaid-compliant string and saving 
 library(glue)
 
 # Build Mermaid blocks for each table
-er_blocks <- df |>
+er_blocks <- tables |>
     group_by(table_name) |>
     reframe(
         block = glue(" {data_type} {column_name}")
@@ -109,17 +117,10 @@ Which renders an ERD in your quarto output:
 %%| file: "erd.mmd"
 ```
 
-## Delete file
-
-Delete the file after it is rendered to maintain a clean directory:
-
-```{r}
-unlink("erd.mmd")
-```
-
 # Improvements to this workflow
 
 - Expand on the EDR by adding [relationships](https://mermaid.js.org/syntax/entityRelationshipDiagram.html) between tables
 - Create other types of mermaid diagram
     - A [Gantt chart](https://mermaid.js.org/syntax/gantt.html) that dynamically updates with task timelines
     - [Flowcharts](https://mermaid.js.org/syntax/flowchart.html) are also cool for conveying high level information (and used in this article)
+- There could be scope for a package that transforms dataframes into mermaid-compliant strings. I'm not sure if one already exists.

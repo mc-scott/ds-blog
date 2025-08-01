@@ -123,14 +123,14 @@
     "href": "posts/dynamic-quarto-documentation/index.html#reshape-data-save-.mmd-file",
     "title": "Dynamic Documentaion with Quarto",
     "section": "Reshape data & save .mmd file",
-    "text": "Reshape data & save .mmd file\nBelow we are reshaping our dataframe into a mermaid-compliant string and saving a .mmd file out to our working directory\n\nlibrary(glue)\n\n# Build Mermaid blocks for each table\ner_blocks &lt;- df |&gt;\n    group_by(table_name) |&gt;\n    reframe(\n        block = glue(\" {data_type} {column_name}\")\n    ) |&gt;\n    group_by(table_name) |&gt;\n    summarise(\n        table_block = glue(\"{first(table_name)} {{{paste(block, collapse = ' ')}}}\"),\n        .groups = \"drop\"\n    ) |&gt;\n    pull(table_block)\n\n# Combine all table blocks into one Mermaid diagram\ner_diagram &lt;- glue(\"erDiagram {paste(er_blocks, collapse = ' ')}\")\n\n# write string to a mermaid file using .mmd suffix\nwrite(er_diagram, \"erd.mmd\")"
+    "text": "Reshape data & save .mmd file\nBelow we are reshaping our dataframe into a mermaid-compliant string and saving a .mmd file out to our working directory\n\nlibrary(glue)\n\n# Build Mermaid blocks for each table\ner_blocks &lt;- tables |&gt;\n    group_by(table_name) |&gt;\n    reframe(\n        block = glue(\" {data_type} {column_name}\")\n    ) |&gt;\n    group_by(table_name) |&gt;\n    summarise(\n        table_block = glue(\"{first(table_name)} {{{paste(block, collapse = ' ')}}}\"),\n        .groups = \"drop\"\n    ) |&gt;\n    pull(table_block)\n\n# Combine all table blocks into one Mermaid diagram\ner_diagram &lt;- glue(\"erDiagram {paste(er_blocks, collapse = ' ')}\")\n\n# write string to a mermaid file using .mmd suffix\nwrite(er_diagram, \"erd.mmd\")"
   },
   {
     "objectID": "posts/dynamic-quarto-documentation/index.html#create-mermaid-erd",
     "href": "posts/dynamic-quarto-documentation/index.html#create-mermaid-erd",
     "title": "Dynamic Documentaion with Quarto",
     "section": "Create mermaid ERD",
-    "text": "Create mermaid ERD\nCall the file by including in a mermaid code block using the file argument:\n```{mermaid}\n%%| eval: true\n%%| file: \"erd.mmd\"\n```\nWhich renders an ERD in your quarto output:\n\n\n\n\n\nerDiagram Table1 { string col1  string col2} Table2 { string col3  string col4}"
+    "text": "Create mermaid ERD\nCall the file by including in a mermaid code block using the file argument:\n```{mermaid}\n%%| eval: true\n%%| file: \"erd.mmd\"\n```\nWhich renders an ERD in your quarto output:\n\n\n\n\n\nerDiagram band_instruments { character name  character plays} band_members { character name  character band}"
   },
   {
     "objectID": "posts/dynamic-quarto-documentation/index.html#delete-file",

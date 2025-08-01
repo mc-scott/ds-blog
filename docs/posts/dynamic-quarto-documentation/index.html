@@ -171,7 +171,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#reshape-data-save-.mmd-file" id="toc-reshape-data-save-.mmd-file" class="nav-link" data-scroll-target="#reshape-data-save-.mmd-file">Reshape data &amp; save <code>.mmd</code> file</a></li>
   <li><a href="#create-mermaid-erd" id="toc-create-mermaid-erd" class="nav-link" data-scroll-target="#create-mermaid-erd">Create mermaid ERD</a></li>
-  <li><a href="#delete-file" id="toc-delete-file" class="nav-link" data-scroll-target="#delete-file">Delete file</a></li>
   </ul></li>
   <li><a href="#improvements-to-this-workflow" id="toc-improvements-to-this-workflow" class="nav-link" data-scroll-target="#improvements-to-this-workflow">Improvements to this workflow</a></li>
   </ul>
@@ -237,7 +236,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    column_name,</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    data_type,</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> information_schema<span class="ch">.</span><span class="kw">columns</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span>  INFORMATION_SCHEMA<span class="ch">.</span><span class="kw">COLUMNS</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This is what the process looks like from a high level:</p>
 <div class="cell" data-eval="true" data-layout-align="default">
@@ -250,8 +249,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     B(Use string methods to create a &lt;br&gt; marmaid-compliant string &lt;br&gt; from your dataframe)
     C(Save string to .mmd file)
     D(Call file in mermaid cell block of quarto document)
-    E(Delete .mmd file after it is rendered)
-    A --&gt; B --&gt; C --&gt; D --&gt; E
+    A --&gt; B --&gt; C --&gt; D 
 </pre>
 </div>
 <p></p></figure><p></p>
@@ -274,13 +272,31 @@ Sample data
 <div class="callout-body-container callout-body">
 <p>I will use a toy dataset similar to what you could return with the above SQL call:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">table_name =</span> <span class="fu">c</span>(<span class="st">"Table1"</span>, <span class="st">"Table1"</span>, <span class="st">"Table2"</span>, <span class="st">"Table2"</span>),</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">column_name =</span> <span class="fu">c</span>(<span class="st">"col1"</span>, <span class="st">"col2"</span>, <span class="st">"col3"</span>, <span class="st">"col4"</span>),</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">data_type =</span> <span class="fu">rep</span>(<span class="st">"string"</span>, <span class="dv">4</span>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use data that ships with dplyr</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># create a tibble of table metadata for band_members</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># &amp; band_instruments tables similar to what you'd get</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># querying a database tables information schema</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>tables <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"band_members"</span>, <span class="st">"band_instruments"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    purrr<span class="sc">::</span><span class="fu">map_df</span>(</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="sc">~</span> <span class="fu">tibble</span>(</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">table_name =</span> .,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">column_name =</span> <span class="fu">names</span>(<span class="fu">get</span>(.)),</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">data_type =</span> purrr<span class="sc">::</span><span class="fu">map_chr</span>(<span class="fu">get</span>(.), class)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>tables</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  table_name       column_name data_type
+  &lt;chr&gt;            &lt;chr&gt;       &lt;chr&gt;    
+1 band_members     name        character
+2 band_members     band        character
+3 band_instruments name        character
+4 band_instruments plays       character</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -289,54 +305,47 @@ Sample data
 <h2 class="anchored" data-anchor-id="reshape-data-save-.mmd-file">Reshape data &amp; save <code>.mmd</code> file</h2>
 <p>Below we are reshaping our dataframe into a mermaid-compliant string and saving a <code>.mmd</code> file out to our working directory</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glue)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Build Mermaid blocks for each table</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>er_blocks <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(table_name) <span class="sc">|&gt;</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">reframe</span>(</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">block =</span> <span class="fu">glue</span>(<span class="st">" {data_type} {column_name}"</span>)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(table_name) <span class="sc">|&gt;</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">table_block =</span> <span class="fu">glue</span>(<span class="st">"{first(table_name)} {{{paste(block, collapse = ' ')}}}"</span>),</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">.groups =</span> <span class="st">"drop"</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(table_block)</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine all table blocks into one Mermaid diagram</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>er_diagram <span class="ot">&lt;-</span> <span class="fu">glue</span>(<span class="st">"erDiagram {paste(er_blocks, collapse = ' ')}"</span>)</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co"># write string to a mermaid file using .mmd suffix</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="fu">write</span>(er_diagram, <span class="st">"erd.mmd"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glue)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Build Mermaid blocks for each table</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>er_blocks <span class="ot">&lt;-</span> tables <span class="sc">|&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(table_name) <span class="sc">|&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">reframe</span>(</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">block =</span> <span class="fu">glue</span>(<span class="st">" {data_type} {column_name}"</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(table_name) <span class="sc">|&gt;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">table_block =</span> <span class="fu">glue</span>(<span class="st">"{first(table_name)} {{{paste(block, collapse = ' ')}}}"</span>),</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(table_block)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine all table blocks into one Mermaid diagram</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>er_diagram <span class="ot">&lt;-</span> <span class="fu">glue</span>(<span class="st">"erDiagram {paste(er_blocks, collapse = ' ')}"</span>)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co"># write string to a mermaid file using .mmd suffix</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="fu">write</span>(er_diagram, <span class="st">"erd.mmd"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="create-mermaid-erd" class="level2">
 <h2 class="anchored" data-anchor-id="create-mermaid-erd">Create mermaid ERD</h2>
 <p>Call the file by including in a mermaid code block using the <code>file</code> argument:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{mermaid}</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>%%| <span class="fu">eval</span>: true</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>%%| file: <span class="ot">"</span><span class="st">erd.mmd</span><span class="ot">"</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{mermaid}</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>%%| <span class="fu">eval</span>: true</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>%%| file: <span class="ot">"</span><span class="st">erd.mmd</span><span class="ot">"</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Which renders an ERD in your quarto output:</p>
 <div class="cell" data-eval="true" data-file="erd.mmd" data-layout-align="default">
 <div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
-<pre class="mermaid mermaid-js">erDiagram Table1 { string col1  string col2} Table2 { string col3  string col4}
+<pre class="mermaid mermaid-js">erDiagram band_instruments { character name  character plays} band_members { character name  character band}
 </pre>
 </div>
 <p></p></figure><p></p>
 </div>
 </div>
-</div>
-</section>
-<section id="delete-file" class="level2">
-<h2 class="anchored" data-anchor-id="delete-file">Delete file</h2>
-<p>Delete the file after it is rendered to maintain a clean directory:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unlink</span>(<span class="st">"erd.mmd"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -349,6 +358,7 @@ Sample data
 <li>A <a href="https://mermaid.js.org/syntax/gantt.html">Gantt chart</a> that dynamically updates with task timelines</li>
 <li><a href="https://mermaid.js.org/syntax/flowchart.html">Flowcharts</a> are also cool for conveying high level information (and used in this article)</li>
 </ul></li>
+<li>There could be scope for a package that transforms dataframes into mermaid-compliant strings. I’m not sure if one already exists.</li>
 </ul>
 
 
