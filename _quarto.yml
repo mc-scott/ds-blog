@@ -3,11 +3,11 @@ project:
   output-dir: docs
 
 website:
-  title: "As-yet-undecided"
-  description: "Matthew Scott's personal website. Undecided on the content."
+  title: "Matt's Data Science Blog"
+  description: "Matthew Scott's personal website. Data science related content."
   reader-mode: true
   navbar:
-    title: "As-yet-undecided"
+    title: "Matt's Data Science Blog"
     background: "#096367"
     pinned: true
     #left:
