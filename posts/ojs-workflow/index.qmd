@@ -74,7 +74,7 @@ Plot.rectY(filtered,
 ```
 
 ```{ojs}
-data = FileAttachment("penguins.csv").csv({ typed: true })
+data = await FileAttachment("https://raw.githubusercontent.com/mc-scott/ds-blog/refs/heads/main/posts/ojs-workflow/penguins.csv").csv()
 ```
 
 ```{ojs}
