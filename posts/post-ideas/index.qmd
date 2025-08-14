@@ -39,3 +39,12 @@ graph TD
 
 ```
 
+## PoC for observable JS workflow to create dynamic visualisations
+
+```{mermaid}
+graph TD
+    A[Create dataset] --> B[Upload dataset to github]
+    B --> C[Reference dataset in ojs cells]
+    C --> D[Use ojs to create input sliders or <br> check boxes to control visual filtering]
+    D --> E[Show dynamic filtering works in a rendered qmd document]
+```

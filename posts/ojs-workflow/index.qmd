@@ -1,0 +1,80 @@
+---
+title: "Observable JS Demo"
+subtitle: "A how-to of syntax"
+author: "Matthew Scott"
+date: "2025-08-14"
+description: "Creating reactive visuals using Quarto"
+categories: [tutorial, observable js, r]
+#image: "abstract-river.png"
+#image-alt: "An abstract river sketch"
+code-annotations: hover
+draft: false
+execute:
+    eval: true
+
+---
+
+# Workflow
+
+```{mermaid}
+graph LR
+    B[Host dataset on GitHub]
+    B --> C[Reference dataset in OJS cells]
+    C --> D[Use OJS to create input sliders or <br> check boxes to control visual filtering]
+    D --> E[Demonstrate dynamic filtering works in a rendered Quarto document]
+
+```
+
+# Steps
+## Host dataset on GitHub
+Provided your dataset is not massive and also not too sensitive, you can host it as a CSV file on GitHub in the same directory as your quarto file.
+
+:::{.callout-note icon="false" collapse="true"}
+## TODO
+
+Does this work when hosting JSON or Arrow files on GitHub? 
+
+:::
+
+## Reference dataset location to load it in
+
+```{ojs}
+
+viewof bill_length_min = Inputs.range(
+  [32, 50], 
+  {value: 35, step: 1, label: "Bill length (min):"}
+)
+viewof islands = Inputs.checkbox(
+  ["Torgersen", "Biscoe", "Dream"], 
+  { value: ["Torgersen", "Biscoe"], 
+    label: "Islands:"
+  }
+)
+
+Plot.rectY(filtered, 
+  Plot.binX(
+    {y: "count"}, 
+    {x: "body_mass_g", fill: "species", thresholds: 20}
+  ))
+  .plot({
+    facet: {
+      data: filtered,
+      x: "sex",
+      y: "species",
+      marginRight: 80
+    },
+    marks: [
+      Plot.frame(),
+    ]
+  }
+)
+
+data = FileAttachment("penguins.csv").csv({ typed: true })
+
+filtered = data.filter(function(penguin) {
+  return bill_length_min < penguin.bill_length_mm &&
+         islands.includes(penguin.island);
+})
+
+```
+

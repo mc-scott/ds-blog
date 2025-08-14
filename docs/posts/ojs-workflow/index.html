@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Matthew Scott">
-<meta name="dcterms.date" content="2024-08-10">
-<meta name="description" content="Make programming with the tidyverse easier">
+<meta name="dcterms.date" content="2025-08-14">
+<meta name="description" content="Creating reactive visuals using Quarto">
 
-<title>Tidy selection – As-yet-undecided</title>
+<title>Observable JS Demo – As-yet-undecided</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -58,26 +58,7 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -127,11 +108,16 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
+<script type="module" src="../../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="../../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+<script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
 
-<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-fixed fullcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -344,43 +330,25 @@ div.csl-indent {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#selecting-by-name" id="toc-selecting-by-name" class="nav-link" data-scroll-target="#selecting-by-name">Selecting by name</a></li>
-  <li><a href="#use-of-boolean-operators" id="toc-use-of-boolean-operators" class="nav-link" data-scroll-target="#use-of-boolean-operators">Use of boolean operators</a></li>
-  <li><a href="#position" id="toc-position" class="nav-link" data-scroll-target="#position">Position</a></li>
-  <li><a href="#type" id="toc-type" class="nav-link" data-scroll-target="#type">Type</a></li>
-  <li><a href="#using-environment-variables-or-function-variables-with-tidyverse" id="toc-using-environment-variables-or-function-variables-with-tidyverse" class="nav-link" data-scroll-target="#using-environment-variables-or-function-variables-with-tidyverse">Using environment variables or function variables with tidyverse</a>
-  <ul class="collapse">
-  <li><a href="#with-environment-variables" id="toc-with-environment-variables" class="nav-link" data-scroll-target="#with-environment-variables">With environment variables</a></li>
-  <li><a href="#in-functions" id="toc-in-functions" class="nav-link" data-scroll-target="#in-functions">In functions</a></li>
-  </ul></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Tidy selection</h1>
-<p class="subtitle lead">A powerful tool when working with columns</p>
+<h1 class="title">Observable JS Demo</h1>
+<p class="subtitle lead">A how-to of syntax</p>
   <div class="quarto-categories">
+    <div class="quarto-category">tutorial</div>
+    <div class="quarto-category">observable js</div>
     <div class="quarto-category">r</div>
-    <div class="quarto-category">tidyverse</div>
-    <div class="quarto-category">dplyr</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    Make programming with the tidyverse easier
+    Creating reactive visuals using Quarto
   </div>
 </div>
 
@@ -397,7 +365,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 10, 2024</p>
+      <p class="date">August 14, 2025</p>
     </div>
   </div>
   
@@ -409,346 +377,138 @@ div.csl-indent {
 </header>
 
 
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="maroon-ribbon-cropped.png" class="img-fluid figure-img" alt="A maroon ribbon snakes across the page"></p>
-<figcaption>Maroon ribbon</figcaption>
-</figure>
+<section id="workflow" class="level1">
+<h1>Workflow</h1>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph LR
+    B[Host dataset on GitHub]
+    B --&gt; C[Reference dataset in OJS cells]
+    C --&gt; D[Use OJS to create input sliders or &lt;br&gt; check boxes to control visual filtering]
+    D --&gt; E[Demonstrate dynamic filtering works in a rendered Quarto document]
+
+</pre>
 </div>
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Tidy selection is a principle that makes it easier to work with columns in a dataset. Behind the principle is the <code>tidyselect</code> package <span class="citation" data-cites="technicaltidyselectND">[<a href="#ref-technicaltidyselectND" role="doc-biblioref">1</a>]</span>. This package is used by <code>dplyr</code> and <code>tidyr</code> and means you don’t have to use an exact column name to select it, you can use it’s <span class="text-warning"><strong>name</strong>, <strong>position</strong></span> or <span class="text-warning"><strong>type</strong></span>.</p>
-<p>Tidy select can be used with <code>select()</code>, <code>rename()</code>, <code>relocate()</code>, <code>across()</code>, <code>pull()</code>, <code>where()</code>, <code>any_of()</code>, and <code>all_of()</code> in the dplyr package.</p>
-<p>What does this mean for your programming?</p>
-<p>Let’s use the <code>starwars</code> dataset to see how these helper functions can be useful. Expand the info box below to see the dataset:</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="steps" class="level1">
+<h1>Steps</h1>
+<section id="host-dataset-on-github" class="level2">
+<h2 class="anchored" data-anchor-id="host-dataset-on-github">Host dataset on GitHub</h2>
+<p>Provided your dataset is not massive and also not too sensitive, you can host it as a CSV file on GitHub in the same directory as your quarto file.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
-<i class="callout-icon"></i>
+<i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Starwars dataset
+TODO
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(starwars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 87
-Columns: 14
-$ name       &lt;chr&gt; "Luke Skywalker", "C-3PO", "R2-D2", "Darth Vader", "Leia Or…
-$ height     &lt;int&gt; 172, 167, 96, 202, 150, 178, 165, 97, 183, 182, 188, 180, 2…
-$ mass       &lt;dbl&gt; 77.0, 75.0, 32.0, 136.0, 49.0, 120.0, 75.0, 32.0, 84.0, 77.…
-$ hair_color &lt;chr&gt; "blond", NA, NA, "none", "brown", "brown, grey", "brown", N…
-$ skin_color &lt;chr&gt; "fair", "gold", "white, blue", "white", "light", "light", "…
-$ eye_color  &lt;chr&gt; "blue", "yellow", "red", "yellow", "brown", "blue", "blue",…
-$ birth_year &lt;dbl&gt; 19.0, 112.0, 33.0, 41.9, 19.0, 52.0, 47.0, NA, 24.0, 57.0, …
-$ sex        &lt;chr&gt; "male", "none", "none", "male", "female", "male", "female",…
-$ gender     &lt;chr&gt; "masculine", "masculine", "masculine", "masculine", "femini…
-$ homeworld  &lt;chr&gt; "Tatooine", "Tatooine", "Naboo", "Tatooine", "Alderaan", "T…
-$ species    &lt;chr&gt; "Human", "Droid", "Droid", "Human", "Human", "Human", "Huma…
-$ films      &lt;list&gt; &lt;"A New Hope", "The Empire Strikes Back", "Return of the J…
-$ vehicles   &lt;list&gt; &lt;"Snowspeeder", "Imperial Speeder Bike"&gt;, &lt;&gt;, &lt;&gt;, &lt;&gt;, "Imp…
-$ starships  &lt;list&gt; &lt;"X-wing", "Imperial shuttle"&gt;, &lt;&gt;, &lt;&gt;, "TIE Advanced x1",…</code></pre>
-</div>
-</div>
+<p>Does this work when hosting JSON or Arrow files on GitHub?</p>
 </div>
 </div>
 </div>
 </section>
-<section id="selecting-by-name" class="level2">
-<h2 class="anchored" data-anchor-id="selecting-by-name">Selecting by name</h2>
-<p><strong>This can be done with the exact col name:</strong></p>
+<section id="reference-dataset-location-to-load-it-in" class="level2">
+<h2 class="anchored" data-anchor-id="reference-dataset-location-to-load-it-in">Reference dataset location to load it in</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> <span class="fu">select</span>(name, height, mass) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 3
-  name           height  mass
-  &lt;chr&gt;           &lt;int&gt; &lt;dbl&gt;
-1 Luke Skywalker    172    77
-2 C-3PO             167    75
-3 R2-D2              96    32</code></pre>
-</div>
-</div>
-<p><strong>Or inexactly with the use of <span class="text-warning">helper functions</span>:</strong></p>
-<p>For example, <code>starts_with()</code> or <code>contains()</code>. <em>Note: See more helper function options in my <a href="../../posts/tidyverse-dplyr/index.html#select-rename" target="_blank">dplyr essentials blog</a></em></p>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true"><code>starts_with()</code></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false"><code>ends_with()</code></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false"><code>contains()</code></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false"><code>matches()</code></a></li></ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<p>The column start with character(s)</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"S"</span>, <span class="at">ignore.case =</span> T)) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 4
-  skin_color  sex   species starships
-  &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;   &lt;list&gt;   
-1 fair        male  Human   &lt;chr [2]&gt;
-2 gold        none  Droid   &lt;chr [0]&gt;
-3 white, blue none  Droid   &lt;chr [0]&gt;</code></pre>
-</div>
-</div>
-</div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<p>Ends with an exact suffix</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">ends_with</span>(<span class="st">"s"</span>)) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 5
-   mass species films     vehicles  starships
-  &lt;dbl&gt; &lt;chr&gt;   &lt;list&gt;    &lt;list&gt;    &lt;list&gt;   
-1    77 Human   &lt;chr [5]&gt; &lt;chr [2]&gt; &lt;chr [2]&gt;
-2    75 Droid   &lt;chr [6]&gt; &lt;chr [0]&gt; &lt;chr [0]&gt;
-3    32 Droid   &lt;chr [7]&gt; &lt;chr [0]&gt; &lt;chr [0]&gt;</code></pre>
-</div>
-</div>
-</div>
-<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
-<p>Contains a literal string</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">"color"</span>)) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 3
-  hair_color skin_color  eye_color
-  &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;    
-1 blond      fair        blue     
-2 &lt;NA&gt;       gold        yellow   
-3 &lt;NA&gt;       white, blue red      </code></pre>
-</div>
-</div>
-</div>
-<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
-<p>Matches a regular expression or a <strong>stringr</strong> <a href="https://github.com/rstudio/cheatsheets/blob/main/strings.pdf" target="_blank">pattern</a></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-18"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-18-1"><a href="#annotated-cell-18-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-18" data-target-annotation="1">1</button><span id="annotated-cell-18-2" class="code-annotation-target"><a href="#annotated-cell-18-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="fu">matches</span>(<span class="st">"[s]{2}"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="annotated-cell-18-3"><a href="#annotated-cell-18-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">3</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-annotation">
-<dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-18" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-18" data-code-lines="2" data-code-annotation="1">will match where ‘s’ appears twice in a row</span>
-</dd>
-</dl>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 1
-   mass
-  &lt;dbl&gt;
-1    77
-2    75
-3    32</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="use-of-boolean-operators" class="level2">
-<h2 class="anchored" data-anchor-id="use-of-boolean-operators">Use of boolean operators</h2>
-<p>Tidy selection allows you to use Boolean operators (<code>&amp;</code>, <code>|</code>) to specify columns as well:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
-<span id="annotated-cell-2-2"><a href="#annotated-cell-2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="fu">ends_with</span>(<span class="st">"color"</span>) <span class="sc">&amp;</span> </span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1">1</button><span id="annotated-cell-2-3" class="code-annotation-target"><a href="#annotated-cell-2-3" aria-hidden="true" tabindex="-1"></a>           <span class="sc">!</span><span class="fu">starts_with</span>(<span class="st">"h"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="annotated-cell-2-4"><a href="#annotated-cell-2-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">3</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-annotation">
-<dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-2" data-code-lines="3" data-code-annotation="1">use of <code>!</code> as ‘not’. Columns that end with ‘color’ and don’t start with ‘h’. This excludes the column ‘hair_color’</span>
-</dd>
-</dl>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 2
-  skin_color  eye_color
-  &lt;chr&gt;       &lt;chr&gt;    
-1 fair        blue     
-2 gold        yellow   
-3 white, blue red      </code></pre>
-</div>
-</div>
-</section>
-<section id="position" class="level2">
-<h2 class="anchored" data-anchor-id="position">Position</h2>
-<p>You don’t have to use name, you can use the position of the column in the dataframe:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-3"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-3-1"><a href="#annotated-cell-3-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-3" data-target-annotation="1">1</button><span id="annotated-cell-3-2" class="code-annotation-target"><a href="#annotated-cell-3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span><span class="sc">:</span><span class="dv">7</span>) <span class="sc">%&gt;%</span></span>
-<span id="annotated-cell-3-3"><a href="#annotated-cell-3-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">3</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-annotation">
-<dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-3" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-3" data-code-lines="2" data-code-annotation="1">select the first, third, and 4th, 5th, 6th, 7th columns</span>
-</dd>
-</dl>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 6
-  name            mass hair_color skin_color  eye_color birth_year
-  &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;          &lt;dbl&gt;
-1 Luke Skywalker    77 blond      fair        blue              19
-2 C-3PO             75 &lt;NA&gt;       gold        yellow           112
-3 R2-D2             32 &lt;NA&gt;       white, blue red               33</code></pre>
-</div>
-</div>
-<p>You can also use <code>last_col()</code> which will automatically find the last column in the dataframe. (This saves you having to work out the length of the dataframe):</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-4"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-4-1"><a href="#annotated-cell-4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># this:</span></span>
-<span id="annotated-cell-4-2"><a href="#annotated-cell-4-2" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="dv">1</span>, <span class="fu">length</span>(starwars))</span>
-<span id="annotated-cell-4-3"><a href="#annotated-cell-4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="annotated-cell-4-4"><a href="#annotated-cell-4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># is the same as this:</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-4" data-target-annotation="1">1</button><span id="annotated-cell-4-5" class="code-annotation-target"><a href="#annotated-cell-4-5" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="dv">1</span>, <span class="fu">last_col</span>())</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-annotation">
-<dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-4" data-code-lines="5" data-code-annotation="1">This is more explicit - it’s meaning is easier to infer from plain English</span>
-</dd>
-</dl>
-</div>
-</div>
-</section>
-<section id="type" class="level2">
-<h2 class="anchored" data-anchor-id="type">Type</h2>
-<p>Tidyselect means you can specify columns based on their datatype as well:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-5"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-5-1"><a href="#annotated-cell-5-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1">1</button><span id="annotated-cell-5-2" class="code-annotation-target"><a href="#annotated-cell-5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(name, <span class="fu">where</span>(is.list)) <span class="sc">%&gt;%</span></span>
-<span id="annotated-cell-5-3"><a href="#annotated-cell-5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">3</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-annotation">
-<dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-5" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-5" data-code-lines="2" data-code-annotation="1">Use <code>where()</code> to make it more explicit what you’re selecting (although not mandatory)</span>
-</dd>
-</dl>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 4
-  name           films     vehicles  starships
-  &lt;chr&gt;          &lt;list&gt;    &lt;list&gt;    &lt;list&gt;   
-1 Luke Skywalker &lt;chr [5]&gt; &lt;chr [2]&gt; &lt;chr [2]&gt;
-2 C-3PO          &lt;chr [6]&gt; &lt;chr [0]&gt; &lt;chr [0]&gt;
-3 R2-D2          &lt;chr [7]&gt; &lt;chr [0]&gt; &lt;chr [0]&gt;</code></pre>
-</div>
-</div>
-<p>In this case we can use the columns data type to ensure every numeric column is a double (maybe we need this for machine learning purposes):</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-6"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-6-1"><a href="#annotated-cell-6-1" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
-<span id="annotated-cell-6-2"><a href="#annotated-cell-6-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(name, <span class="fu">where</span>(is.numeric)) <span class="sc">%&gt;%</span> </span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="1">1</button><span id="annotated-cell-6-3" class="code-annotation-target"><a href="#annotated-cell-6-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate_if</span>(is.integer, as.double) <span class="sc">%&gt;%</span></span>
-<span id="annotated-cell-6-4"><a href="#annotated-cell-6-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">3</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-annotation">
-<dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-6" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-6" data-code-lines="3" data-code-annotation="1">If we have any integer columns slected by <code>is.numeric</code>, ensure they are mutated to doubles with <code>as.double</code></span>
-</dd>
-</dl>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 4
-  name           height  mass birth_year
-  &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
-1 Luke Skywalker    172    77         19
-2 C-3PO             167    75        112
-3 R2-D2              96    32         33</code></pre>
-</div>
-</div>
-</section>
-<section id="using-environment-variables-or-function-variables-with-tidyverse" class="level2">
-<h2 class="anchored" data-anchor-id="using-environment-variables-or-function-variables-with-tidyverse">Using environment variables or function variables with tidyverse</h2>
-<p>This is related to the data masking property that tidy evaluation employs <span class="citation" data-cites="programmingdplyrNDdatamasking">[<a href="#ref-programmingdplyrNDdatamasking" role="doc-biblioref">2</a>]</span>, rather than its tidy select properties, but it still useful to know when extending tidy selection.</p>
-<section id="with-environment-variables" class="level3">
-<h3 class="anchored" data-anchor-id="with-environment-variables">With environment variables</h3>
-<p>In order to use a variable specified in the global environment (these are the variables you’ve assigned earlier in your script), you need to add the <code>!!</code> or <code>.env$</code> syntax around the variable to tell tidyselect to look outside of the dataframe variable <span class="citation" data-cites="technicaltidyselectNDenv">[<a href="#ref-technicaltidyselectNDenv" role="doc-biblioref">3</a>]</span>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"homeworld"</span>, <span class="st">"sex"</span>, <span class="st">"eye_color"</span>)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">!!</span>cols) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 3
-  homeworld sex   eye_color
-  &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;    
-1 Tatooine  male  blue     
-2 Tatooine  none  yellow   
-3 Naboo     none  red      </code></pre>
-</div>
-</div>
-</section>
-<section id="in-functions" class="level3">
-<h3 class="anchored" data-anchor-id="in-functions">In functions</h3>
-<p>You need to ‘embrace’ (<code>{{ var }}</code>) your tidyselect syntax when it is provided as an argument to a function <span class="citation" data-cites="programmingdplyrNDindirection">[<a href="#ref-programmingdplyrNDindirection" role="doc-biblioref">4</a>]</span>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-8"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-8-1"><a href="#annotated-cell-8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#' Select all characters that appear on the</span></span>
-<span id="annotated-cell-8-2"><a href="#annotated-cell-8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#' given homeworld and supply their numeric</span></span>
-<span id="annotated-cell-8-3"><a href="#annotated-cell-8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#' stats.</span></span>
-<span id="annotated-cell-8-4"><a href="#annotated-cell-8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#' Only return rows where all numeric columns </span></span>
-<span id="annotated-cell-8-5"><a href="#annotated-cell-8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#' aren't NA.</span></span>
-<span id="annotated-cell-8-6"><a href="#annotated-cell-8-6" aria-hidden="true" tabindex="-1"></a>starwars_toptrumps <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">df =</span> starwars, homeworld){</span>
-<span id="annotated-cell-8-7"><a href="#annotated-cell-8-7" aria-hidden="true" tabindex="-1"></a>    df <span class="sc">%&gt;%</span> </span>
-<span id="annotated-cell-8-8"><a href="#annotated-cell-8-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(name, homeworld, <span class="fu">where</span>(is.numeric)) <span class="sc">%&gt;%</span> </span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="1">1</button><span id="annotated-cell-8-9" class="code-annotation-target"><a href="#annotated-cell-8-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(homeworld <span class="sc">==</span> {{ homeworld }}) <span class="sc">%&gt;%</span></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="2">2</button><span id="annotated-cell-8-10" class="code-annotation-target"><a href="#annotated-cell-8-10" aria-hidden="true" tabindex="-1"></a>        tidyr<span class="sc">::</span><span class="fu">drop_na</span>(<span class="fu">where</span>(is.numeric))</span>
-<span id="annotated-cell-8-11"><a href="#annotated-cell-8-11" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="annotated-cell-8-12"><a href="#annotated-cell-8-12" aria-hidden="true" tabindex="-1"></a></span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-8" data-target-annotation="3">3</button><span id="annotated-cell-8-13" class="code-annotation-target"><a href="#annotated-cell-8-13" aria-hidden="true" tabindex="-1"></a><span class="fu">starwars_toptrumps</span>(<span class="at">homeworld =</span> <span class="st">"Naboo"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-annotation">
-<dl class="code-annotation-container-hidden code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-8" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-8" data-code-lines="9" data-code-annotation="1">Specify the use of a function argument in filter</span>
-</dd>
-<dt data-target-cell="annotated-cell-8" data-target-annotation="2">2</dt>
-<dd>
-<span data-code-cell="annotated-cell-8" data-code-lines="10" data-code-annotation="2">Use tidyr function to check all numeric columns and only return rows that don’t include NA using <code>drop_na()</code></span>
-</dd>
-<dt data-target-cell="annotated-cell-8" data-target-annotation="3">3</dt>
-<dd>
-<span data-code-cell="annotated-cell-8" data-code-lines="13" data-code-annotation="3">Call function and feed a ‘homeworld’ into the filter argument of the function</span>
-</dd>
-</dl>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 5
-  name          homeworld height  mass birth_year
-  &lt;chr&gt;         &lt;chr&gt;      &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;
-1 R2-D2         Naboo         96    32         33
-2 Palpatine     Naboo        170    75         82
-3 Padmé Amidala Naboo        185    45         46
-4 Jar Jar Binks Naboo        196    66         52</code></pre>
-</div>
-</div>
-</section>
-</section>
-<section id="references" class="level1">
+<div class="sourceCode cell-code" id="cb1" data-startfrom="43" data-source-offset="-2"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 42;"><span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>viewof bill_length_min <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>(</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">32</span><span class="op">,</span> <span class="dv">50</span>]<span class="op">,</span> </span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">value</span><span class="op">:</span> <span class="dv">35</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Bill length (min):"</span>}</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>viewof islands <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">checkbox</span>(</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>  [<span class="st">"Torgersen"</span><span class="op">,</span> <span class="st">"Biscoe"</span><span class="op">,</span> <span class="st">"Dream"</span>]<span class="op">,</span> </span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>  { <span class="dt">value</span><span class="op">:</span> [<span class="st">"Torgersen"</span><span class="op">,</span> <span class="st">"Biscoe"</span>]<span class="op">,</span> </span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">"Islands:"</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">rectY</span>(filtered<span class="op">,</span> </span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>  Plot<span class="op">.</span><span class="fu">binX</span>(</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>    {<span class="dt">y</span><span class="op">:</span> <span class="st">"count"</span>}<span class="op">,</span> </span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>    {<span class="dt">x</span><span class="op">:</span> <span class="st">"body_mass_g"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"species"</span><span class="op">,</span> <span class="dt">thresholds</span><span class="op">:</span> <span class="dv">20</span>}</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>    <span class="dt">facet</span><span class="op">:</span> {</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>      <span class="dt">data</span><span class="op">:</span> filtered<span class="op">,</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>      <span class="dt">x</span><span class="op">:</span> <span class="st">"sex"</span><span class="op">,</span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>      <span class="dt">y</span><span class="op">:</span> <span class="st">"species"</span><span class="op">,</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>      <span class="dt">marginRight</span><span class="op">:</span> <span class="dv">80</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>    <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">frame</span>()<span class="op">,</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-1" data-nodetype="declaration">
 
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-2" data-nodetype="declaration">
 
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-3" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb2" data-startfrom="72" data-source-offset="-545"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 71;"><span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> <span class="fu">FileAttachment</span>(<span class="st">"penguins.csv"</span>)<span class="op">.</span><span class="fu">csv</span>({ <span class="dt">typed</span><span class="op">:</span> <span class="kw">true</span> })</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>filtered <span class="op">=</span> data<span class="op">.</span><span class="fu">filter</span>(<span class="kw">function</span>(penguin) {</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> bill_length_min <span class="op">&lt;</span> penguin<span class="op">.</span><span class="at">bill_length_mm</span> <span class="op">&amp;&amp;</span></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>         islands<span class="op">.</span><span class="fu">includes</span>(penguin<span class="op">.</span><span class="at">island</span>)<span class="op">;</span></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-5" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
 
 
 </section>
+</section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body" role="list">
-<div id="ref-technicaltidyselectND" class="csl-entry" role="listitem">
-<div class="csl-left-margin">1. </div><div class="csl-right-inline">posit. Technical description of tidyselect. [cited 27 Dec 2024]. Available: <a href="https://tidyselect.r-lib.org/articles/syntax.html">https://tidyselect.r-lib.org/articles/syntax.html</a></div>
-</div>
-<div id="ref-programmingdplyrNDdatamasking" class="csl-entry" role="listitem">
-<div class="csl-left-margin">2. </div><div class="csl-right-inline">posit. Programming with dplyr. [cited 27 Dec 2024]. Available: <a href="https://dplyr.tidyverse.org/articles/programming.html#data-masking">https://dplyr.tidyverse.org/articles/programming.html#data-masking</a></div>
-</div>
-<div id="ref-technicaltidyselectNDenv" class="csl-entry" role="listitem">
-<div class="csl-left-margin">3. </div><div class="csl-right-inline">posit. Technical description of tidyselect. [cited 27 Dec 2024]. Available: <a href="https://tidyselect.r-lib.org/articles/syntax.html#data-expressions-and-env-expressions">https://tidyselect.r-lib.org/articles/syntax.html#data-expressions-and-env-expressions</a></div>
-</div>
-<div id="ref-programmingdplyrNDindirection" class="csl-entry" role="listitem">
-<div class="csl-left-margin">4. </div><div class="csl-right-inline">posit. Programming with dplyr. [cited 27 Dec 2024]. Available: <a href="https://dplyr.tidyverse.org/articles/programming.html#indirection-1">https://dplyr.tidyverse.org/articles/programming.html#indirection-1</a></div>
-</div>
-</div></section></div></main> <!-- /main -->
+</main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IlxyXG52aWV3b2YgYmlsbF9sZW5ndGhfbWluID0gSW5wdXRzLnJhbmdlKFxyXG4gIFszMiwgNTBdLCBcclxuICB7dmFsdWU6IDM1LCBzdGVwOiAxLCBsYWJlbDogXCJCaWxsIGxlbmd0aCAobWluKTpcIn1cclxuKVxyXG52aWV3b2YgaXNsYW5kcyA9IElucHV0cy5jaGVja2JveChcclxuICBbXCJUb3JnZXJzZW5cIiwgXCJCaXNjb2VcIiwgXCJEcmVhbVwiXSwgXHJcbiAgeyB2YWx1ZTogW1wiVG9yZ2Vyc2VuXCIsIFwiQmlzY29lXCJdLCBcclxuICAgIGxhYmVsOiBcIklzbGFuZHM6XCJcclxuICB9XHJcbilcclxuXHJcblBsb3QucmVjdFkoZmlsdGVyZWQsIFxyXG4gIFBsb3QuYmluWChcclxuICAgIHt5OiBcImNvdW50XCJ9LCBcclxuICAgIHt4OiBcImJvZHlfbWFzc19nXCIsIGZpbGw6IFwic3BlY2llc1wiLCB0aHJlc2hvbGRzOiAyMH1cclxuICApKVxyXG4gIC5wbG90KHtcclxuICAgIGZhY2V0OiB7XHJcbiAgICAgIGRhdGE6IGZpbHRlcmVkLFxyXG4gICAgICB4OiBcInNleFwiLFxyXG4gICAgICB5OiBcInNwZWNpZXNcIixcclxuICAgICAgbWFyZ2luUmlnaHQ6IDgwXHJcbiAgICB9LFxyXG4gICAgbWFya3M6IFtcclxuICAgICAgUGxvdC5mcmFtZSgpLFxyXG4gICAgXVxyXG4gIH1cclxuKVxyXG5cclxuZGF0YSA9IEZpbGVBdHRhY2htZW50KFwicGVuZ3VpbnMuY3N2XCIpLmNzdih7IHR5cGVkOiB0cnVlIH0pXHJcblxyXG5maWx0ZXJlZCA9IGRhdGEuZmlsdGVyKGZ1bmN0aW9uKHBlbmd1aW4pIHtcclxuICByZXR1cm4gYmlsbF9sZW5ndGhfbWluIDwgcGVuZ3Vpbi5iaWxsX2xlbmd0aF9tbSAmJlxyXG4gICAgICAgICBpc2xhbmRzLmluY2x1ZGVzKHBlbmd1aW4uaXNsYW5kKTtcclxufSlcclxuXHJcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnYmlsbF9sZW5ndGhfbWluJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ2lzbGFuZHMnKSJ9XX0=
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../../posts/ojs-workflow";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "../..";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right

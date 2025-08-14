@@ -31,10 +31,9 @@ website:
 
 format:
   html:
-    #code-overflow: wrap # this doesn't seem to render correctly
     highlight-style: atom-one
     code-block-bg: true
     code-block-border-left: "#096367"
     theme: 
       light: flatly
-      #dark: darkly # add a second dark theme & toggle
+      dark: darkly

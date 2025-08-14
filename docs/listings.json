@@ -9,6 +9,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/ojs-workflow/index.html",
       "/posts/dynamic-quarto-documentation/index.html",
       "/posts/tidyverse-tidy-selection/index.html",
       "/posts/tidyverse-dplyr/index.html",
