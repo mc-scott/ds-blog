@@ -8,6 +8,7 @@ categories: [tutorial, observable js, r]
 #image: "abstract-river.png"
 #image-alt: "An abstract river sketch"
 code-annotations: hover
+code-tools: true
 draft: false
 execute:
     eval: true
@@ -18,9 +19,9 @@ execute:
 # Workflow
 
 ```{mermaid}
-graph LR
+graph TD
     B[Host dataset on GitHub]
-    B --> C[Reference dataset in OJS cells]
+    B --> C[Reference raw dataset in OJS cells]
     C --> D[Use OJS to create input sliders or <br> check boxes to control visual filtering]
     D --> E[Demonstrate dynamic filtering works in a rendered Quarto document]
 
@@ -33,7 +34,7 @@ Provided your dataset is not massive and also not too sensitive, you can host it
 :::{.callout-note icon="false" collapse="true"}
 ## TODO
 
-Does this work when hosting JSON or Arrow files on GitHub? 
+Does this work when hosting JSON or Arrow files on GitHub? It should.
 
 :::
 

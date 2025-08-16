@@ -165,14 +165,14 @@
     "href": "posts/ojs-workflow/index.html",
     "title": "Observable JS Demo",
     "section": "",
-    "text": "graph LR\n    B[Host dataset on GitHub]\n    B --&gt; C[Reference dataset in OJS cells]\n    C --&gt; D[Use OJS to create input sliders or &lt;br&gt; check boxes to control visual filtering]\n    D --&gt; E[Demonstrate dynamic filtering works in a rendered Quarto document]"
+    "text": "graph TD\n    B[Host dataset on GitHub]\n    B --&gt; C[Reference raw dataset in OJS cells]\n    C --&gt; D[Use OJS to create input sliders or &lt;br&gt; check boxes to control visual filtering]\n    D --&gt; E[Demonstrate dynamic filtering works in a rendered Quarto document]"
   },
   {
     "objectID": "posts/ojs-workflow/index.html#host-dataset-on-github",
     "href": "posts/ojs-workflow/index.html#host-dataset-on-github",
     "title": "Observable JS Demo",
     "section": "Host dataset on GitHub",
-    "text": "Host dataset on GitHub\nProvided your dataset is not massive and also not too sensitive, you can host it as a CSV file on GitHub in the same directory as your quarto file.\n\n\n\n\n\n\nTODO\n\n\n\n\n\nDoes this work when hosting JSON or Arrow files on GitHub?"
+    "text": "Host dataset on GitHub\nProvided your dataset is not massive and also not too sensitive, you can host it as a CSV file on GitHub in the same directory as your quarto file.\n\n\n\n\n\n\nTODO\n\n\n\n\n\nDoes this work when hosting JSON or Arrow files on GitHub? It should."
   },
   {
     "objectID": "posts/ojs-workflow/index.html#reference-dataset-location-to-load-it-in",
